@@ -1,0 +1,147 @@
+.header{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.login{
+    position: absolute;
+    right: 0.5%;
+    top: 1%;
+    width: 8%;
+    height: 5%;
+    background: #ff9800;
+    color: white;
+    padding: 12px 24px;
+    font-size: 16px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    box-shadow: 0 5px #c77700;
+    transition: 0.2s;
+}
+
+.login:hover {
+    opacity: 0.8;
+}
+
+.login:active {
+    box-shadow: 0 2px #c77700;
+    transform: translateY(3px);
+}
+
+.verwalten{
+    position: absolute;
+    right: 0.5%;
+    top: 7%;
+    width: 8%;
+    height: 5%;
+    background: #ff9800;
+    color: white;
+    padding: 12px 24px;
+    font-size: 16px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    box-shadow: 0 5px #c77700;
+    transition: 0.2s;
+}
+
+.verwalten:hover {
+    opacity: 0.8;
+}
+
+.verwalten:active {
+    box-shadow: 0 2px #c77700;
+    transform: translateY(3px);
+}
+
+h1{
+    border: 2px solid black;
+    border-radius: 8px;
+    padding: 100px 190px;
+    text-align: center;
+    display: inline-block;
+    background-image: url("../img/hotel.png");
+    background-position: 50% 75%;
+    background-repeat: no-repeat;
+    background-size: 700px 700px;
+    align-content: center;
+    margin: 0;
+}
+
+p{
+    background-color: white;
+    margin: auto;
+    font-family: Arial, serif;
+}
+.funrest{
+    font-size: 40px;
+    border-radius: 10px;
+    padding: 0 10px ;
+}
+
+.berlin{
+    width: 120px;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+}
+
+
+.bild{
+    width: 70%;
+    height: auto;
+    border-radius: 8px;
+    border: 2px solid black;
+}
+
+.zimmer{
+    display: grid;
+    grid-template-columns: 33% 33% 33%;
+    gap: 10px;
+    margin-top: 30px;
+}
+
+.zimmer > div{
+    text-align: center;
+}
+
+.buchen{
+    font-family: Arial, serif;
+    font-size: large;
+    margin: 0;
+}
+
+.bewerten{
+    font-family: Arial, serif;
+    font-size: large;
+    margin: 0;
+}
+
+.art{
+    font-family: Arial, serif;
+    font-size: 80px;
+}
+
+.weiterButton {
+    width: 35%;
+    height: 10%;
+    background: #ff9800;
+    color: white;
+    padding: 12px 24px;
+    font-size: 16px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    box-shadow: 0 5px #c77700;
+    transition: 0.2s;
+}
+
+.weiterButton:hover {
+    opacity: 0.8;
+}
+
+.weiterButton:active {
+    box-shadow: 0 2px #c77700;
+    transform: translateY(3px);
+}
