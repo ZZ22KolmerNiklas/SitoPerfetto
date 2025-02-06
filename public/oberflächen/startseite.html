@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PHP + JavaScript in IntelliJ</title>
-    <script defer src="../js/startseite.js"></script>
+    <script defer src="../js/startseite1.js"></script>
     <link rel="stylesheet" href="../css/startseite2.css">
 </head>
 <body>
@@ -13,8 +13,22 @@
             <p class="funrest">FUNREST Hotel</p>
             <p class="berlin">Berlin</p>
         </h1>
-        <button class="login" type="submit">Login</button>
+        <button class="login" onclick="login('show')" type="submit">Login</button>
         <button class="verwalten" type="submit">Verwalten</button>
+    </div>
+
+    <div class="popup" id="popuplogin">
+        <form name="loginForm">
+            <label>E-Mail:</label>
+            <input name="email" id="email" size="14" required />
+            <br>
+            <label>Passwort:</label>
+            <input name="passwort" id="pw" type="password" size="14" required />
+            <br>
+            <button type="submit">Registrieren</button>
+            <button type="submit">Login</button>
+            <button type="button" onclick="login('hide')">Schließen</button>
+        </form>
     </div>
 
     <div class="zimmer">
