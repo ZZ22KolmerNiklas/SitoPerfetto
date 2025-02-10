@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PHP + JavaScript in IntelliJ</title>
-    <script defer src="../js/startseite1.js"></script>
-    <link rel="stylesheet" href="../css/startseite2.css">
+    <script defer src="../js/startseite2.js"></script>
+    <link rel="stylesheet" href="../css/startseite4.css">
 </head>
 <body>
     <div class="header">
@@ -49,24 +49,25 @@
                 <label>Land:</label><br>
                 <label>Geburtsdatum:</label><br>
                 <label>E-Mail:</label><br>
-                <label>Passwort:</label>
+                <label>Passwort:</label><br>
+                <button type="button" onclick="register('hide')">Schließen</button>
             </div>
             <div class="inputdaten">
-                <form name="registerForm">
+                <form name="registerForm" id="registerForm">
                     <input name="vorname" id="vorname" size="14" required /><br>
                     <input name="nachname" id="nachname" size="14" required /><br>
                     <div class="geschlecht">
                         <div>
                             <label>M</label>
-                            <input style="margin-left: 0" type="radio" id="maennlich" onclick="changeGeschlecht('m')"/>
+                            <input style="margin-left: 0" type="radio" id="maennlich" name="maennlich" onclick="changeGeschlecht('m')"/>
                         </div>
                         <div>
                             <label>W</label>
-                            <input style="margin-left: 0" type="radio" id="weiblich" onclick="changeGeschlecht('w')"/>
+                            <input style="margin-left: 0" type="radio" id="weiblich" name="weiblich" onclick="changeGeschlecht('w')"/>
                         </div>
                         <div>
                             <label>D</label>
-                            <input style="margin-left: 0" type="radio" id="divers" onclick="changeGeschlecht('d')"/>
+                            <input style="margin-left: 0" type="radio" id="divers" name="divers" onclick="changeGeschlecht('d')"/>
                         </div>
                     </div>
                     <input name="straße" id="straße" size="14" required />
@@ -74,15 +75,12 @@
                     <input name="plz" id="plz" size="14" required />
                     <input name="ort" id="ort" size="14" required />
                     <input name="land" id="land" size="14" required />
-                    <input name="gebdate" id="gebdate" size="14" required />
+                    <input class="reginput" type="date" name="gebdate" id="gebdate" size="14" required />
                     <input name="registeremail" id="registeremail" size="14" required />
                     <input name="passwort" id="registerpw" type="password" size="14" required />
+                    <button type="submit">Registrieren</button>
                 </form>
             </div>
-        </div>
-        <div class="popupregisterbutton">
-            <button type="submit">Registrieren</button>
-            <button type="button" onclick="register('hide')">Schließen</button>
         </div>
     </div>
 

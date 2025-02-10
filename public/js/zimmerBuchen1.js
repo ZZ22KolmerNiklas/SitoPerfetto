@@ -23,5 +23,5 @@ function checkbox(gecheckt){
 }
 
 function home() {
-    window.location.href = "../oberflächen/startseite.html";
+    window.location.href = "../oberflächen/startseite1.html";
 }
