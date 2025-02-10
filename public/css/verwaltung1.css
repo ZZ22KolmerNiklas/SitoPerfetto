@@ -57,3 +57,26 @@ h1{
     padding: 0;
     word-wrap:break-word;
 }
+
+.table-container {
+    width: 100%;
+    max-width: 800px;
+    max-height: 250px;
+    overflow-y: auto;
+    overflow-x: auto;
+    border: 1px solid #ddd;
+    display: block;
+}
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+th, td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+    white-space: nowrap;
+}
+th {
+    background-color: #f4f4f4;
+}
