@@ -4,17 +4,68 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PHP + JavaScript in IntelliJ</title>
-    <script defer src="app.js"></script>
-    <link rel="stylesheet" href="../css/zimmerBuchen.css">
+    <script defer src="../js/zimmerBuchen1.js"></script>
+    <link rel="stylesheet" href="../css/zimmerBuchen2.css">
 </head>
 <body>
 <div class="header">
+    <button class="back" onclick="home()"><img class="backImg" src="../img/haus.png" ></button>
     <h1>
         <p class="funrest">FUNREST Hotel</p>
         <p class="berlin">Berlin</p>
     </h1>
+    <p class="name">Maximilian Braun</p>
 </div>
 
 
+<div class="grid">
+    <div>
+        <img class="zimmerImg" src="../img/luxurious%20hotel%20room.png" alt="Bild nicht gefunden.">
+        <p class="art" id="art">k</p>
+    </div>
+
+    <div>
+        <div class="infos">
+            <label class="checkContainer">Einzelzimmer
+                <input class="check" type="checkbox" id="einzelzimmer" checked="checked" onclick="checkbox('einzel')">
+                <span class="checkmark"></span>
+            </label>
+            <label class="checkContainer">Doppelzimmer
+                <input class="check" type="checkbox" id="doppelzimmer" onclick="checkbox('doppel')">
+                <span class="checkmark"></span>
+            </label>
+            <label>
+                <p style="margin: 20px 0 0 0">Ankunft</p>
+                <input class="datum" type="date" id="vonDatum" value="2025-02-06"
+                       min="2025-02-06"/>
+
+                <p style="margin: 20px 0 0 0">Abreise</p>
+                <input class="datum" type="date" id="bisDatum" value="2025-02-07"
+                       min="2025-02-07"/>
+            </label>
+            <p> Preis: <label class="ausgabeLbl">70000€</label></p>
+            <p> Verfügbare Zimmer: <label class="ausgabeLbl">8</label></p>
+            <button class="buchenBtn" onclick="buchen('show')" type="submit">Buchen</button>
+        </div>
+    </div>
+
+</div>
+<span class="rezesionContainer">
+    <textarea class="rezesionen">&#11088&#11088&#11088&#11088
+Bernd dieter
+Gutes Hotel 4/5 sterne
+
+
+&#11088&#11088&#11088
+dieter bernd
+mittelgut
+    </textarea>
+</span>
+<div class="popup" id="popupBuchung">
+    <form name="buchungForm">
+        <label>Buchung erfolgeich. Die Rechnung wird an Ihre E-mail geschickt<br></label>
+        <button style="margin-left: 45%" type="button" onclick="buchen('hide')">Ok</button>
+    </form>
+</div>
 </body>
 </html>
