@@ -1,0 +1,166 @@
+.header{
+    display: flex;
+    justify-content: center;  /* Zentriert horizontal */
+    align-items: center;  /* Zentriert vertikal */
+}
+h1{
+    border: 2px solid black;
+    border-radius: 8px;
+    padding: 100px 190px;
+    text-align: center;
+    display: inline-block;
+    background-image: url("../img/hotel.png");
+    background-position: 50% 75%;
+    background-repeat: no-repeat;
+    background-size: 700px 700px;
+    align-content: center;
+    margin: 0 auto 10px auto;
+}
+
+.funrest{
+    background-color: white;
+    margin: auto;
+    font-family: Arial, serif;
+    font-size: 40px;
+    border-radius: 10px;
+    padding: 0 10px ;
+}
+.berlin{
+    background-color: white;
+    margin: auto;
+    font-family: Arial, serif;
+    width: 120px;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+}
+
+.back{
+    background-color: white;
+    margin: 0 96px auto 0;
+    padding: 0;
+    width: 54px;
+    height: 54px;
+}
+
+.backImg{
+    width: 50px;
+    height: 50px;
+}
+
+.name{
+    background-color: white;
+    border: 2px solid black;
+    width: 150px;
+    margin: 0 0 auto 0 ;
+    font-family: Arial, serif;
+    font-size: 20px;
+    padding: 0;
+    word-wrap:break-word;
+}
+
+.grid{
+    display: grid;
+    grid-template-columns: 50% 50%;
+}
+.grid > div {
+    text-align: left;
+    padding: 20px;
+}
+.zimmerImg {
+    width: 60%;
+    margin-left: 20%;
+    border-radius: 8px;
+}
+
+.art{
+    border: 1px solid black;
+    border-radius: 8px;
+    margin: auto;
+    font-family: Arial, serif;
+    padding: 5px;
+    font-size: 20px;
+    width: 59%;
+    background-color: gray;
+}
+
+.infos{
+    background-color: gray;
+    border-radius: 8px;
+    padding: 10px;
+    margin:  auto 20px auto 10px;
+    font-family: Arial, serif;
+    font-size: 25px;
+}
+
+.checkContainer {
+    display: block;
+    position: relative;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.check{
+    width: 20px;
+    height: 20px;
+}
+
+.datum{
+    font-size: 20px;;
+}
+
+.ausgabeLbl{
+    background-color: white;
+    padding:0 4px 0 4px;
+}
+
+.buchenBtn {
+    width: 35%;
+    height: 10%;
+    background: rgb(171 216 210);
+    color: white;
+    padding: 12px 24px;
+    font-size: 16px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    box-shadow: 0 5px rgb(140 179 174);
+    transition: 0.2s;
+    margin-bottom: 10px;
+    margin-left: 5px;
+}
+.buchenBtn:hover {
+    opacity: 0.8;
+}
+.buchenBtn:active {
+    box-shadow: 0 2px rgb(140 179 174);
+    transform: translateY(3px);
+}
+
+.rezesionContainer{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.rezesionen{
+    width: 60%;
+    max-height: 6000px;
+    min-height: 500px;
+}
+
+.popup{
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: white;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+    z-index: 1000;
+    font-family: Arial, serif;
+}
