@@ -159,3 +159,20 @@ p{
     z-index: 1000;
     font-family: Arial, serif;
 }
+
+.popupinput{
+    display: grid;
+    grid-template-columns:max-content min-content;
+    gap: 10px;
+}
+
+.geschlecht{
+    display: grid;
+    grid-template-columns: 33% 33% 33%;
+}
+
+.inputdaten{
+    line-height: 150%;
+    font-family: Arial, serif;
+    font-size: 16px;
+}

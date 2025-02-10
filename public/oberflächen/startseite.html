@@ -18,17 +18,72 @@
     </div>
 
     <div class="popup" id="popuplogin">
-        <form name="loginForm">
-            <label>E-Mail:</label>
-            <input name="email" id="email" size="14" required />
-            <br>
-            <label>Passwort:</label>
-            <input name="passwort" id="pw" type="password" size="14" required />
-            <br>
+        <div class="popupinput">
+            <div class="inputdaten">
+                <label>E-Mail:</label><br>
+                <label>Passwort:</label><br>
+                <button type="submit" onclick="register('show')">Registrieren</button>
+            </div>
+            <div class="inputdaten">
+                <form name="loginForm">
+                    <input name="loginemail" id="loginemail" size="14" required />
+                    <input name="loginpw" id="loginpw" type="password" size="14" required />
+                    <button type="submit">Login</button>
+                    <button type="button" onclick="login('hide')">Schließen</button>
+                </form>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="popup" id="popupregister">
+        <div class="popupinput">
+            <div class="inputdaten">
+                <label>Vorname:</label><br>
+                <label>Nachname:</label><br>
+                <label>Geschlecht:</label><br>
+                <label>Straße:</label><br>
+                <label>Hausnummer:</label><br>
+                <label>PLZ:</label><br>
+                <label>Ort:</label><br>
+                <label>Land:</label><br>
+                <label>Geburtsdatum:</label><br>
+                <label>E-Mail:</label><br>
+                <label>Passwort:</label>
+            </div>
+            <div class="inputdaten">
+                <form name="registerForm">
+                    <input name="vorname" id="vorname" size="14" required /><br>
+                    <input name="nachname" id="nachname" size="14" required /><br>
+                    <div class="geschlecht">
+                        <div>
+                            <label>M</label>
+                            <input style="margin-left: 0" type="radio" id="maennlich" onclick="changeGeschlecht('m')"/>
+                        </div>
+                        <div>
+                            <label>W</label>
+                            <input style="margin-left: 0" type="radio" id="weiblich" onclick="changeGeschlecht('w')"/>
+                        </div>
+                        <div>
+                            <label>D</label>
+                            <input style="margin-left: 0" type="radio" id="divers" onclick="changeGeschlecht('d')"/>
+                        </div>
+                    </div>
+                    <input name="straße" id="straße" size="14" required />
+                    <input name="hausnr" id="hausnr" size="14" required />
+                    <input name="plz" id="plz" size="14" required />
+                    <input name="ort" id="ort" size="14" required />
+                    <input name="land" id="land" size="14" required />
+                    <input name="gebdate" id="gebdate" size="14" required />
+                    <input name="registeremail" id="registeremail" size="14" required />
+                    <input name="passwort" id="registerpw" type="password" size="14" required />
+                </form>
+            </div>
+        </div>
+        <div class="popupregisterbutton">
             <button type="submit">Registrieren</button>
-            <button type="submit">Login</button>
-            <button type="button" onclick="login('hide')">Schließen</button>
-        </form>
+            <button type="button" onclick="register('hide')">Schließen</button>
+        </div>
     </div>
 
     <div class="zimmer" id="zimmerBtn">
