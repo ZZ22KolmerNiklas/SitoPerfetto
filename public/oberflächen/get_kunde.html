@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Benutzer anzeigen</title>
+</head>
+<body>
+<h2>Benutzerliste</h2>
+<ul id="benutzerListe"></ul>
+
+<script>
+  fetch("../../php/get_kunde.php")
+          .then(response => response.json())
+          .then(data => {
+            let liste = document.getElementById("benutzerListe");
+            data.forEach(user => {
+              let li = document.createElement("li");
+              li.textContent = `${user.vorname} - ${user.email}`;
+              liste.appendChild(li);
+            });
+          })
+          .catch(error => console.error("Fehler:", error));
+</script>
+</body>
+</html>
