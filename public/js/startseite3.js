@@ -53,6 +53,39 @@ function changeGeschlecht(action) {
     }
 }
 
+document.getElementById("loginForm").addEventListener("submit", async function (event){
+    event.preventDefault(); // Verhindert das Standard-Formular-Absenden
+
+    let email = document.getElementById("loginemail").value;
+    let passwort = document.getElementById("loginpw").value;
+
+    let data = {
+        email: email,
+        passwort: passwort
+    };
+
+    // Fetch-POST an PHP senden
+    fetch("../../php/login.php", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(data) // JSON-Daten senden
+    })
+        .then(response => response.json())
+        .then(result => {
+            if(result.success){
+                document.getElementById('name').style.display = 'block';
+                document.getElementById('name').innerText = result.name;
+                document.getElementById('popuplogin').style.display = 'none';
+                document.getElementById('login').style.display = 'none';
+                if(result.admin === 1){
+                    document.getElementById('verwalten').style.display = "block";
+                }
+            }
+        });
+});
+
 document.getElementById("registerForm").addEventListener("submit", async function (event) {
     event.preventDefault(); // Verhindert das Standard-Formular-Absenden
 
@@ -67,8 +100,7 @@ document.getElementById("registerForm").addEventListener("submit", async functio
     let land = document.getElementById("land").value;
     let gebdate = document.getElementById("gebdate").value;
     let email = document.getElementById("registeremail").value;
-    let passwort = await generateHash(document.getElementById("registerpw").value);
-    console.log(passwort);
+    let passwort = document.getElementById("registerpw").value;
 
     if (document.getElementById('maennlich').checked) {
         geschlecht = 'm';
@@ -92,7 +124,6 @@ document.getElementById("registerForm").addEventListener("submit", async functio
         email: email,
         passwort: passwort
     };
-    console.log(data);
 
     // Fetch-POST an PHP senden
     fetch("../../php/insert_kunde.php", {
@@ -104,13 +135,5 @@ document.getElementById("registerForm").addEventListener("submit", async functio
     })
         .then(response => response.text())
         .catch(error => console.error("Fehler:", error));
+    register('hide');
 });
-
-async function generateHash(input) {
-    const encoder = new TextEncoder();
-    const data = encoder.encode(input);
-    const hashBuffer = await crypto.subtle.digest('SHA-256', data);
-    const hashArray = Array.from(new Uint8Array(hashBuffer));
-    const hashHex = hashArray.map(byte => byte.toString(16).padStart(2, '0')).join('');
-    return hashHex;
-}

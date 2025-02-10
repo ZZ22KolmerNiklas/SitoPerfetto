@@ -16,7 +16,7 @@ if ($data) {
     $land = $data["land"];
     $gebdate = $data["gebdate"];
     $email = $data["email"];
-    $passwort = $data["passwort"];
+    $passwort = password_hash($data["passwort"], PASSWORD_DEFAULT);
     $stammkunde = 0;
     $mitarbeiter = 0;
 
@@ -41,7 +41,5 @@ if ($data) {
 
     $stmt->close();
     $conn->close();
-} else {
-    die;
 }
 ?>
