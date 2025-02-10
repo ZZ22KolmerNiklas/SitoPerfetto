@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PHP + JavaScript in IntelliJ</title>
-    <script defer src="../js/startseite1.js"></script>
+    <script defer src="../js/startseite.js"></script>
     <link rel="stylesheet" href="../css/startseite2.css">
 </head>
 <body>
@@ -31,26 +31,26 @@
         </form>
     </div>
 
-    <div class="zimmer">
+    <div class="zimmer" id="zimmerBtn">
         <div class="standard">
             <div class="art">Standard</div>
             <img class="standardzimmer bild" src="../img/standard%20hotel%20room.png" alt="standard">
             <p></p>
-            <button class="buchen weiterButton" type="submit">Standard</button>
+            <button class="buchen weiterButton" onclick="zimmerWahl('s')">Buchen</button>
             <button class="bewerten weiterButton" type="submit">Bewerten</button>
         </div>
         <div class="premium">
             <div class="art">Premium</div>
             <img class="premiumzimmer bild" src="../img/premium%20hotel%20room.png" alt="premium">
             <p></p>
-            <button class="buchen weiterButton" type="submit">Premium</button>
+            <button class="buchen weiterButton" onclick="zimmerWahl('p')">Buchen</button>
             <button class="bewerten weiterButton" type="submit">Bewerten</button>
         </div>
         <div class="luxus">
             <div class="art">Luxus</div>
             <img class="luxuszimmer bild" src="../img/luxurious%20hotel%20room.png" alt="luxus">
             <p></p>
-            <button class="buchen weiterButton" type="submit">Luxus</button>
+            <button class="buchen weiterButton" onclick="zimmerWahl('l')">Buchen</button>
             <button class="bewerten weiterButton" type="submit">Bewerten</button>
         </div>
     </div>
