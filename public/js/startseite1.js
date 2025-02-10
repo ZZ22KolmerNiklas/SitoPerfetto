@@ -9,12 +9,14 @@ function login(action){
 }
 
 function register(action){
-    let popup = document.getElementById("popupregister");
+    let popupReg = document.getElementById("popupregister");
+    let popupLog = document.getElementById("popuplogin");
 
     if (action === "show") {
-        popup.style.display = "block";
+        popupReg.style.display = "block";
+        popupLog.style.display = "none"
     } else if (action === "hide") {
-        popup.style.display = "none";
+        popupReg.style.display = "none";
     }
 }
 
