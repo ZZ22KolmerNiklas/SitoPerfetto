@@ -12,7 +12,16 @@ function buchen(action){
         popup.style.display = "none";
     }
 }
+function checkbox(gecheckt){
+    if(gecheckt === 'einzel'){
+        document.getElementById("einzelzimmer").checked = true;
+        document.getElementById("doppelzimmer").checked = false;
+    }else if(gecheckt === 'doppel'){
+        document.getElementById("einzelzimmer").checked = false;
+        document.getElementById("doppelzimmer").checked = true;
+    }
+}
 
-function test() {
+function home() {
     window.location.href = "../oberflächen/startseite.html";
 }

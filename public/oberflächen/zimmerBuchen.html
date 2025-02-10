@@ -9,7 +9,7 @@
 </head>
 <body>
 <div class="header">
-    <button class="back" onclick="test()"><img class="backImg" src="../img/haus.png" ></button>
+    <button class="back" onclick="home()"><img class="backImg" src="../img/haus.png" ></button>
     <h1>
         <p class="funrest">FUNREST Hotel</p>
         <p class="berlin">Berlin</p>
@@ -27,11 +27,11 @@
     <div>
         <div class="infos">
             <label class="checkContainer">Einzelzimmer
-                <input class="check" type="checkbox" id="einzelzimmer" checked="checked">
+                <input class="check" type="checkbox" id="einzelzimmer" checked="checked" onclick="checkbox('einzel')">
                 <span class="checkmark"></span>
             </label>
             <label class="checkContainer">Doppelzimmer
-                <input class="check" type="checkbox" id="doppelzimmer">
+                <input class="check" type="checkbox" id="doppelzimmer" onclick="checkbox('doppel')">
                 <span class="checkmark"></span>
             </label>
             <label>
