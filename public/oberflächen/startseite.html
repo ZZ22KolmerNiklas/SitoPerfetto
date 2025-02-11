@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PHP + JavaScript in IntelliJ</title>
-    <script defer src="../js/startseite.js"></script>
-    <link rel="stylesheet" href="../css/startseite2.css">
+    <script defer src="../js/startseite2.js"></script>
+    <link rel="stylesheet" href="../css/startseite.css">
 </head>
 <body>
     <div class="header">
@@ -13,8 +13,9 @@
             <p class="funrest">FUNREST Hotel</p>
             <p class="berlin">Berlin</p>
         </h1>
-        <button class="login" onclick="login('show')" type="submit">Login</button>
-        <button class="verwalten" onclick="verwalten()" type="submit">Verwalten</button>
+        <button class="login" id="login" onclick="login('show')" type="submit">Login</button>
+        <p class="name" id="name">Maximilian Braun</p>
+        <button id="verwalten" class="verwalten" type="submit">Verwalten</button>
     </div>
 
     <div class="popup" id="popuplogin">
@@ -25,7 +26,7 @@
                 <button type="submit" onclick="register('show')">Registrieren</button>
             </div>
             <div class="inputdaten">
-                <form name="loginForm">
+                <form name="loginForm" id="loginForm">
                     <input name="loginemail" id="loginemail" size="14" required />
                     <input name="loginpw" id="loginpw" type="password" size="14" required />
                     <button type="submit">Login</button>
@@ -33,7 +34,11 @@
                 </form>
             </div>
         </div>
+    </div>
 
+    <div class="popup" id="popuperror" style="z-index: 1001">
+        <label id="errornachricht"></label><br>
+        <button onclick="schliessen()">OK</button>
     </div>
 
     <div class="popup" id="popupregister">
@@ -49,24 +54,26 @@
                 <label>Land:</label><br>
                 <label>Geburtsdatum:</label><br>
                 <label>E-Mail:</label><br>
-                <label>Passwort:</label>
+                <label>Passwort:</label><br>
+                <label>Passwort Wdh:</label><br>
+                <button type="button" onclick="register('hide')">Schließen</button>
             </div>
             <div class="inputdaten">
-                <form name="registerForm">
+                <form name="registerForm" id="registerForm">
                     <input name="vorname" id="vorname" size="14" required /><br>
                     <input name="nachname" id="nachname" size="14" required /><br>
                     <div class="geschlecht">
                         <div>
                             <label>M</label>
-                            <input style="margin-left: 0" type="radio" id="maennlich" onclick="changeGeschlecht('m')"/>
+                            <input style="margin-left: 0" type="radio" id="maennlich" name="maennlich" onclick="changeGeschlecht('m')"/>
                         </div>
                         <div>
                             <label>W</label>
-                            <input style="margin-left: 0" type="radio" id="weiblich" onclick="changeGeschlecht('w')"/>
+                            <input style="margin-left: 0" type="radio" id="weiblich" name="weiblich" onclick="changeGeschlecht('w')"/>
                         </div>
                         <div>
                             <label>D</label>
-                            <input style="margin-left: 0" type="radio" id="divers" onclick="changeGeschlecht('d')"/>
+                            <input style="margin-left: 0" type="radio" id="divers" name="divers" onclick="changeGeschlecht('d')"/>
                         </div>
                     </div>
                     <input name="straße" id="straße" size="14" required />
@@ -74,15 +81,13 @@
                     <input name="plz" id="plz" size="14" required />
                     <input name="ort" id="ort" size="14" required />
                     <input name="land" id="land" size="14" required />
-                    <input name="gebdate" id="gebdate" size="14" required />
+                    <input class="reginput" type="date" name="gebdate" id="gebdate" size="14" required />
                     <input name="registeremail" id="registeremail" size="14" required />
                     <input name="passwort" id="registerpw" type="password" size="14" required />
+                    <input name="passwortwdh" id="registerpwwdh" type="password" size="14" required />
+                    <button type="submit">Registrieren</button>
                 </form>
             </div>
-        </div>
-        <div class="popupregisterbutton">
-            <button type="submit">Registrieren</button>
-            <button type="button" onclick="register('hide')">Schließen</button>
         </div>
     </div>
 
@@ -92,22 +97,40 @@
             <img class="standardzimmer bild" src="../img/standard%20hotel%20room.png" alt="standard">
             <p></p>
             <button class="buchen weiterButton" onclick="zimmerWahl('s')">Buchen</button>
-            <button class="bewerten weiterButton" type="submit">Bewerten</button>
+            <button class="bewerten weiterButton" onclick="bewertung('show')" type="submit">Bewerten</button>
         </div>
         <div class="premium">
             <div class="art">Premium</div>
             <img class="premiumzimmer bild" src="../img/premium%20hotel%20room.png" alt="premium">
             <p></p>
             <button class="buchen weiterButton" onclick="zimmerWahl('p')">Buchen</button>
-            <button class="bewerten weiterButton" type="submit">Bewerten</button>
+            <button class="bewerten weiterButton" onclick="bewertung('show')" type="submit">Bewerten</button>
         </div>
         <div class="luxus">
             <div class="art">Luxus</div>
             <img class="luxuszimmer bild" src="../img/luxurious%20hotel%20room.png" alt="luxus">
             <p></p>
             <button class="buchen weiterButton" onclick="zimmerWahl('l')">Buchen</button>
-            <button class="bewerten weiterButton" type="submit">Bewerten</button>
+            <button class="bewerten weiterButton" onclick="bewertung('show')" type="submit">Bewerten</button>
         </div>
     </div>
+
+    <div class="bewertungen" id="bewertungPopup">
+        <label>Deine Erfahrungen:<br><br></label>
+        <span class="star-rating">
+  <input type="radio" name="rating" value="1" onclick="sterne(1)"><i></i>
+  <input type="radio" name="rating" value="2" onclick="sterne(2)"><i></i>
+  <input type="radio" name="rating" value="3" onclick="sterne(3)"><i></i>
+  <input type="radio" name="rating" value="4" onclick="sterne(4)"><i></i>
+  <input type="radio" name="rating" value="5" onclick="sterne(5)"><i></i>
+</span>
+        <label style="color: white"><br>  Mixmax</label>
+        <textarea class="bewertungArea" maxlength="255"></textarea>
+        <br><br>
+        <button type="button" onclick="bewertung('hide', 'senden')" style="font-size: 20px; float: right">Abschicken</button>
+        <button type="button" onclick="bewertung('hide')" style="font-size: 20px; float: right; margin-right: 10px">Abbrechen</button>
+    </div>
+
+
 </body>
 </html>
