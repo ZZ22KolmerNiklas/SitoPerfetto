@@ -150,3 +150,20 @@ document.getElementById("registerForm").addEventListener("submit", async functio
 function schliessen() {
     document.getElementById('popuperror').style.display = "none";
 }
+
+function bewertung(action, senden){
+    let bewertung = document.getElementById("bewertungPopup");
+    if(action === 'show'){
+        bewertung.style.display = "block";
+    }else if (action === 'hide') {
+        bewertung.style.display = "none";
+    }
+    if(senden === "senden"){
+        /*an DB übergeben*/
+    }
+}
+
+function sterne(anzahl){
+    console.log(anzahl);
+}
+
