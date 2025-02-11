@@ -7,3 +7,7 @@ function confirmReview() {
 function rejectReview() {
     alert("Rezension abgelehnt!");
 }
+
+function test(){
+    console.log('klappt');
+}
