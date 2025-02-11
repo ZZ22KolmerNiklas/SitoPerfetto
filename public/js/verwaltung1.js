@@ -29,14 +29,34 @@ window.onload = function(){
         })
         .catch(error => console.error("Fehler:", error));
 }
-function preisVerwalten(action, senden){
-    let verwaltung = document.getElementById("preisVerwaltungPopup");
-    if(action === 'show'){
-        verwaltung.style.display = "block";
-    }else if (action === 'hide') {
-        verwaltung.style.display = "none";
-    }
-    if(senden === "senden"){
-        /*an DB übergeben*/
-    }
+async function generateInvoice() {
+    const {jsPDF} = window.jspdf;
+    const doc = new jsPDF();
+
+    doc.text("FUNREST Hotel", 10, 10);
+    doc.text("Funstraße 1, 12345 Berlin", 10, 20);
+    doc.text("RechnungNr: ___", 10, 40);
+    doc.text("Von: __/__/____", 10, 50);
+    doc.text("Bis: __/__/____", 10, 60);
+    doc.text("Zeitraum: ___ Nächte", 10, 70);
+    doc.text("Zimmerart: 'Luxus'", 10, 80);
+    doc.text("Zimmernummer: '301'", 10, 90);
+    doc.text("Preis: ___€", 10, 100);
+
+    const pdfData = doc.output("blob");
+
+    const formData = new FormData();
+    formData.append("file", pdfData, "rechnung.pdf");
 }
+
+    function preisVerwalten(action, senden) {
+        let verwaltung = document.getElementById("preisVerwaltungPopup");
+        if (action === 'show') {
+            verwaltung.style.display = "block";
+        } else if (action === 'hide') {
+            verwaltung.style.display = "none";
+        }
+        if (senden === "senden") {
+            /*an DB übergeben*/
+        }
+    }
