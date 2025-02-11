@@ -1,5 +1,4 @@
 function login(action){
-    console.log('testtezudfius');
     let popup = document.getElementById("popuplogin");
 
     if (action === "show") {
@@ -53,3 +52,21 @@ function changeGeschlecht(action) {
         divers.checked = true;
     }
 }
+
+function bewertung(action, senden){
+    let bewertung = document.getElementById("bewertungPopup");
+    if(action === 'show'){
+        bewertung.style.display = "block";
+    }else if (action === 'hide') {
+        bewertung.style.display = "none";
+    }
+    if(senden === "senden"){
+        /*an DB übergeben*/
+    }
+}
+
+function sterne(anzahl){
+    console.log(anzahl);
+}
+
+

@@ -4,8 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PHP + JavaScript in IntelliJ</title>
-    <script defer src="../js/startseite1.js"></script>
-    <link rel="stylesheet" href="../css/startseite2.css">
+    <script defer src="../js/startseite2.js"></script>
+    <link rel="stylesheet" href="../css/startseite.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 <body>
     <div class="header">
@@ -106,8 +107,26 @@
             <img class="luxuszimmer bild" src="../img/luxurious%20hotel%20room.png" alt="luxus">
             <p></p>
             <button class="buchen weiterButton" onclick="zimmerWahl('l')">Buchen</button>
-            <button class="bewerten weiterButton" type="submit">Bewerten</button>
+            <button class="bewerten weiterButton" onclick="bewertung('show')" type="submit">Bewerten</button>
         </div>
     </div>
+
+    <div class="bewertungen" id="bewertungPopup">
+        <label>Deine Erfahrungen:<br><br></label>
+        <span class="star-rating">
+  <input type="radio" name="rating" value="1" onclick="sterne(1)"><i></i>
+  <input type="radio" name="rating" value="2" onclick="sterne(2)"><i></i>
+  <input type="radio" name="rating" value="3" onclick="sterne(3)"><i></i>
+  <input type="radio" name="rating" value="4" onclick="sterne(4)"><i></i>
+  <input type="radio" name="rating" value="5" onclick="sterne(5)"><i></i>
+</span>
+        <label style="color: white"><br>  Mixmax</label>
+        <textarea class="bewertungArea" maxlength="255"></textarea>
+        <br><br>
+        <button type="button" onclick="bewertung('hide', 'senden')" style="font-size: 20px; float: right">Abschicken</button>
+        <button type="button" onclick="bewertung('hide')" style="font-size: 20px; float: right; margin-right: 10px">Abbrechen</button>
+    </div>
+
+
 </body>
 </html>
