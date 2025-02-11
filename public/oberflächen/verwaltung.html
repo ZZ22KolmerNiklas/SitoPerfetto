@@ -20,7 +20,7 @@
     <table id="dataTable">
         <thead>
         <tr>
-            <th><Zimmernummer></Zimmernummer></th>
+            <th>Zimmernummer</th>
             <th>Vorname</th>
             <th>Nachname</th>
             <th>Ankunft</th>
@@ -30,6 +30,7 @@
             <th>Gesammtpreis</th>
             <th>Stammkunde</th>
             <th>Rechnung</th>
+            <th>Bearbeitung</th>
         </tr>
         </thead>
         <tbody>
@@ -38,23 +39,5 @@
     </table>
 </div>
 
-<script>
-    fetch("../../php/get_rechnungTable.php")
-        .then(response => response.json())
-        .then(data => {
-            let liste = document.getElementById("benutzerListe");
-
-            const tableBody = document.querySelector("#dataTable tbody");
-            tableBody.innerHTML = "";
-
-            data.forEach(row => {
-                const tr = document.createElement("tr");
-                tr.innerHTML = `<td>${row.zimmernummer}</td><td>${row.vorname}</td><td>${row.nachname}</td><td>${row.von}</td><td>${row.bis}</td>
-                                <td>${row.email}</td><td>${row.anzBett}</td><td>${row.gesammtpreis}</td><td>${row.stammkunde}</td><td><button onclick="test()">Klick</button></td>`;
-                tableBody.appendChild(tr);
-            });
-        })
-        .catch(error => console.error("Fehler:", error));
-</script>
 </body>
 </html>

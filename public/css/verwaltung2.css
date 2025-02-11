@@ -59,8 +59,9 @@ h1{
 }
 
 .table-container {
-    width: 100%;
-    max-width: 900px;
+    margin-left: 10%;
+    margin-right: 10%;
+    width: auto;
     max-height: 250px;
     overflow-y: auto;
     overflow-x: auto;
