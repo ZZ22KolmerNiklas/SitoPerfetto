@@ -40,11 +40,22 @@
 <div class="review-container">
     <label>Neue Rezension:</label>
     <div class="review-box" id="reviewBox">Hier erscheint die neue Rezension...</div>
-    <button class="verwaltungBtn" onclick="preisVerwalten()">Preis verwalten</button>
+    <button class="verwaltungBtn" onclick="preisVerwalten('show')">Preis verwalten</button>
     <div class="button-container">
         <button onclick="confirmReview()">Bestätigen</button>
         <button onclick="rejectReview()">Ablehnen</button>
     </div>
+</div>
+<div class="preisVerwaltung" id="preisVerwaltungPopup">
+    <b class="zimmerPreis">Zimmerpreis<br><br></b>
+    <form action="">
+        <label>Standard: <input type="number" min="0" id="standardPreis"></input>€<br><br></label>
+        <label>Premium: <input type="number" min="0" id="premiumPreis"></input>€<br><br></label>
+        <label>Luxus: <input type="number" min="0" id="luxusPreis"></input>€<br><br></label>
+        <button class="preisBtn" type="submit" onclick="preisVerwalten('hide', 'senden')" style="font-size: 20px; float: right">Speichern</button>
+        <button class="preisBtn" type="button" onclick="preisVerwalten('hide')" style="font-size: 20px; float: right; margin-right: 10px">Abbrechen</button>
+    </form>
+
 </div>
 </body>
 </html>

@@ -8,6 +8,10 @@ function login(action){
     }
 }
 
+function verwalten(){
+    window.location.href = "../oberflächen/verwaltung.html";
+}
+
 function zimmerWahl(zimmer){
     if(zimmer === 's'){
         sessionStorage.setItem("zimmerArt", "Standart");
@@ -166,4 +170,3 @@ function bewertung(action, senden){
 function sterne(anzahl){
     console.log(anzahl);
 }
-

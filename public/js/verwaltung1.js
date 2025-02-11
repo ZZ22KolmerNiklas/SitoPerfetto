@@ -11,3 +11,14 @@ function rejectReview() {
 function test(){
     console.log('klappt');
 }
+function preisVerwalten(action, senden){
+    let verwaltung = document.getElementById("preisVerwaltungPopup");
+    if(action === 'show'){
+        verwaltung.style.display = "block";
+    }else if (action === 'hide') {
+        verwaltung.style.display = "none";
+    }
+    if(senden === "senden"){
+        /*an DB übergeben*/
+    }
+}

@@ -116,3 +116,36 @@ th {
     padding: 8px 12px;
     cursor: pointer;
 }
+.preisVerwaltung{
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: white;
+    padding: 20px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+    z-index: 1000;
+    font-family: Arial, serif;
+    font-size: 25px;
+    width: 30%;
+    height: 50%;
+}
+.preisBtn{
+    margin-right: 50%;
+    margin-top: 5%;
+    padding: 8px 12px;
+    background: #ff9800;
+    color: white;
+    cursor: pointer;
+    box-shadow: 0 5px #c77700;
+    transition: 0.2s;
+    border: none;
+    border-radius: 8px;
+}
+.zimmerPreis{
+    margin-left: 32%;
+    font-family: Arial, serif;
+    font-size: xx-large;
+}
