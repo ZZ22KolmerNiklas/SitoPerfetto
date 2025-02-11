@@ -1,3 +1,6 @@
+
+const ONE_DAY = 1000 * 60 * 60 * 24;
+
 function home() {
     window.location.href = "../oberflächen/startseite.html";
 }
@@ -20,9 +23,15 @@ window.onload = function(){
             tableBody.innerHTML = "";
 
             data.forEach(row => {
+                const startDate = new Date(row.von);
+                const endDate = new Date(row.bis);
+                const diffInMs = endDate - startDate;
+                const diffInDays = diffInMs / (1000 * 60 * 60 * 24);
+                const gesamtPreis = diffInDays * row.preisProNacht;
+
                 const tr = document.createElement("tr");
                 tr.innerHTML = `<td>${row.zimmernummer}</td><td>${row.vorname}</td><td>${row.nachname}</td><td>${row.von}</td><td>${row.bis}</td>
-                                    <td>${row.email}</td><td>${row.anzahlBetten}</td><td>${row.gesammtpreis}</td><td>${row.stammkunde}</td>
+                                    <td>${row.email}</td><td>${row.anzahlBetten}</td><td>${gesamtPreis}€</td><td>${row.stammkunde}</td>
                                     <td><button onclick="test()">Erstellen</button></td><td><button onclick="test()">Bearbeiten</button></td>`;
                 tableBody.appendChild(tr);
             });
