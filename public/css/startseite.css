@@ -30,6 +30,21 @@
     transform: translateY(3px);
 }
 
+.name{
+    background-color: white;
+    border: 2px solid black;
+    width: 150px;
+    margin: 0 0 auto 0 ;
+    font-family: Arial, serif;
+    font-size: 20px;
+    padding: 0;
+    word-wrap:break-word;
+    position: absolute;
+    right: 0.5%;
+    top: 1%;
+    display: none;
+}
+
 .verwalten{
     position: absolute;
     right: 0.5%;
@@ -45,6 +60,7 @@
     cursor: pointer;
     box-shadow: 0 5px #c77700;
     transition: 0.2s;
+    display: none;
 }
 
 .verwalten:hover {
@@ -177,6 +193,9 @@ p{
     font-size: 16px;
 }
 
+.reginput{
+    width: 95.7%;
+}
 .bewertungen{
     display: none;
     position: fixed;
@@ -254,4 +273,3 @@ p{
         width: 100%;
     }
 }
-

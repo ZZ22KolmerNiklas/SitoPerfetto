@@ -53,6 +53,104 @@ function changeGeschlecht(action) {
     }
 }
 
+document.getElementById("loginForm").addEventListener("submit", async function (event){
+    event.preventDefault(); // Verhindert das Standard-Formular-Absenden
+
+    let email = document.getElementById("loginemail").value;
+    let passwort = document.getElementById("loginpw").value;
+
+    let data = {
+        email: email,
+        passwort: passwort
+    };
+
+    // Fetch-POST an PHP senden
+    fetch("../../php/login.php", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(data) // JSON-Daten senden
+    })
+        .then(response => response.json())
+        .then(result => {
+            if(result.success){
+                document.getElementById('name').style.display = 'block';
+                document.getElementById('name').innerText = result.name;
+                document.getElementById('popuplogin').style.display = 'none';
+                document.getElementById('login').style.display = 'none';
+                if(result.admin === 1){
+                    document.getElementById('verwalten').style.display = "block";
+                }
+            }else{
+                document.getElementById('errornachricht').innerText = result.message;
+                document.getElementById('popuperror').style.display = "block";
+            }
+        });
+});
+
+document.getElementById("registerForm").addEventListener("submit", async function (event) {
+    event.preventDefault(); // Verhindert das Standard-Formular-Absenden
+
+    // Daten aus dem Formular holen
+    let vorname = document.getElementById("vorname").value;
+    let nachname = document.getElementById("nachname").value;
+    let geschlecht;
+    let strasse = document.getElementById("straße").value;
+    let hausnr = document.getElementById("hausnr").value;
+    let plz = document.getElementById("plz").value;
+    let ort = document.getElementById("ort").value;
+    let land = document.getElementById("land").value;
+    let gebdate = document.getElementById("gebdate").value;
+    let email = document.getElementById("registeremail").value;
+    let passwort = document.getElementById("registerpw").value;
+    let passwortWdh = document.getElementById('registerpwwdh').value;
+
+    if (document.getElementById('maennlich').checked) {
+        geschlecht = 'm';
+    } else if (document.getElementById('weiblich')) {
+        geschlecht = 'w';
+    } else if (document.getElementById('divers')) {
+        geschlecht = 'd';
+    }
+
+    if(passwort !== passwortWdh){
+        document.getElementById('errornachricht').innerText = 'Passwörter stimmen nicht überein!';
+        document.getElementById('popuperror').style.display = "block";
+    }else{
+        // Daten als JSON-Objekt vorbereiten
+        let data = {
+            vorname: vorname,
+            nachname: nachname,
+            geschlecht: geschlecht,
+            strasse: strasse,
+            hausnr: hausnr,
+            plz: plz,
+            ort: ort,
+            land: land,
+            gebdate: gebdate,
+            email: email,
+            passwort: passwort
+        };
+
+        // Fetch-POST an PHP senden
+        fetch("../../php/insert_kunde.php", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(data) // JSON-Daten senden
+        })
+            .then(response => response.text())
+            .catch(error => console.error("Fehler:", error));
+        register('hide');
+    }
+});
+
+function schliessen() {
+    document.getElementById('popuperror').style.display = "none";
+}
+
 function bewertung(action, senden){
     let bewertung = document.getElementById("bewertungPopup");
     if(action === 'show'){
@@ -68,5 +166,4 @@ function bewertung(action, senden){
 function sterne(anzahl){
     console.log(anzahl);
 }
-
 
