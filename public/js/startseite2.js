@@ -1,3 +1,14 @@
+window.onload = function(){
+    if(sessionStorage.getItem("username") !== null){
+        document.getElementById('name').style.display =  "block";
+        document.getElementById('name').innerText = sessionStorage.getItem("username");
+        document.getElementById('login').style.display = "none";
+        if(sessionStorage.getItem("admin") === '1'){
+            document.getElementById("verwalten").style.display = "block";
+        }
+    }
+}
+
 function login(action){
     let popup = document.getElementById("popuplogin");
 
@@ -14,7 +25,7 @@ function verwalten(){
 
 function zimmerWahl(zimmer){
     if(zimmer === 's'){
-        sessionStorage.setItem("zimmerArt", "Standart");
+        sessionStorage.setItem("zimmerArt", "Standard");
     }else if (zimmer === 'p'){
         sessionStorage.setItem("zimmerArt", "Premium");
     }else if (zimmer === 'l'){
@@ -78,7 +89,11 @@ document.getElementById("loginForm").addEventListener("submit", async function (
     })
         .then(response => response.json())
         .then(result => {
+            console.log(result);
             if(result.success){
+                sessionStorage.setItem("username", result.name);
+                sessionStorage.setItem("user_id", result.user_id);
+                sessionStorage.setItem("admin", result.admin);
                 document.getElementById('name').style.display = 'block';
                 document.getElementById('name').innerText = result.name;
                 document.getElementById('popuplogin').style.display = 'none';

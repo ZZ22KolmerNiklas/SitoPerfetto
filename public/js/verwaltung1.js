@@ -37,6 +37,11 @@ window.onload = function(){
             });
         })
         .catch(error => console.error("Fehler:", error));
+
+    if(sessionStorage.getItem("username") !== null){
+        document.getElementById('name').style.display =  "block";
+        document.getElementById('name').innerText = sessionStorage.getItem("username");
+    }
 }
 async function generateInvoice() {
     const {jsPDF} = window.jspdf;
