@@ -82,6 +82,9 @@ document.getElementById("loginForm").addEventListener("submit", async function (
                 if(result.admin === 1){
                     document.getElementById('verwalten').style.display = "block";
                 }
+            }else{
+                document.getElementById('errornachricht').innerText = result.message;
+                document.getElementById('popuperror').style.display = "block";
             }
         });
 });
@@ -101,6 +104,7 @@ document.getElementById("registerForm").addEventListener("submit", async functio
     let gebdate = document.getElementById("gebdate").value;
     let email = document.getElementById("registeremail").value;
     let passwort = document.getElementById("registerpw").value;
+    let passwortWdh = document.getElementById('registerpwwdh').value;
 
     if (document.getElementById('maennlich').checked) {
         geschlecht = 'm';
@@ -110,30 +114,39 @@ document.getElementById("registerForm").addEventListener("submit", async functio
         geschlecht = 'd';
     }
 
-    // Daten als JSON-Objekt vorbereiten
-    let data = {
-        vorname: vorname,
-        nachname: nachname,
-        geschlecht: geschlecht,
-        strasse: strasse,
-        hausnr: hausnr,
-        plz: plz,
-        ort: ort,
-        land: land,
-        gebdate: gebdate,
-        email: email,
-        passwort: passwort
-    };
+    if(passwort !== passwortWdh){
+        document.getElementById('errornachricht').innerText = 'Passwörter stimmen nicht überein!';
+        document.getElementById('popuperror').style.display = "block";
+    }else{
+        // Daten als JSON-Objekt vorbereiten
+        let data = {
+            vorname: vorname,
+            nachname: nachname,
+            geschlecht: geschlecht,
+            strasse: strasse,
+            hausnr: hausnr,
+            plz: plz,
+            ort: ort,
+            land: land,
+            gebdate: gebdate,
+            email: email,
+            passwort: passwort
+        };
 
-    // Fetch-POST an PHP senden
-    fetch("../../php/insert_kunde.php", {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify(data) // JSON-Daten senden
-    })
-        .then(response => response.text())
-        .catch(error => console.error("Fehler:", error));
-    register('hide');
+        // Fetch-POST an PHP senden
+        fetch("../../php/insert_kunde.php", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(data) // JSON-Daten senden
+        })
+            .then(response => response.text())
+            .catch(error => console.error("Fehler:", error));
+        register('hide');
+    }
 });
+
+function schliessen() {
+    document.getElementById('popuperror').style.display = "none";
+}

@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PHP + JavaScript in IntelliJ</title>
-    <script defer src="../js/startseite3.js"></script>
+    <script defer src="../js/startseite4.js"></script>
     <link rel="stylesheet" href="../css/startseite5.css">
 </head>
 <body>
@@ -34,7 +34,11 @@
                 </form>
             </div>
         </div>
+    </div>
 
+    <div class="popup" id="popuperror" style="z-index: 1001">
+        <label id="errornachricht"></label><br>
+        <button onclick="schliessen()">OK</button>
     </div>
 
     <div class="popup" id="popupregister">
@@ -51,6 +55,7 @@
                 <label>Geburtsdatum:</label><br>
                 <label>E-Mail:</label><br>
                 <label>Passwort:</label><br>
+                <label>Passwort Wdh:</label><br>
                 <button type="button" onclick="register('hide')">Schließen</button>
             </div>
             <div class="inputdaten">
@@ -79,6 +84,7 @@
                     <input class="reginput" type="date" name="gebdate" id="gebdate" size="14" required />
                     <input name="registeremail" id="registeremail" size="14" required />
                     <input name="passwort" id="registerpw" type="password" size="14" required />
+                    <input name="passwortwdh" id="registerpwwdh" type="password" size="14" required />
                     <button type="submit">Registrieren</button>
                 </form>
             </div>
