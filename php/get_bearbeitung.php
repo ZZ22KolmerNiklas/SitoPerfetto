@@ -13,12 +13,14 @@ $stmt = $conn->prepare("
     FROM buchung b
     JOIN benutzer u ON b.benutzer = u.BenutzerID
     JOIN zimmer z ON b.zimmer = z.zimmernr
+    WHERE b.buchungsnr = 
 ");
+$stmt->bind_param("s", $buchungs_nr);
 $stmt->execute();
 $stmt->store_result();
 
 $stmt->bind_result(
-    $buchungs_nr, $zimmer_nr, $benutzer_id, $vondatum, $bisdatum,
+    $zimmer_nr, $benutzer_id, $vondatum, $bisdatum,
     $vorname, $nachname, $stammkunde, $email,
     $anzBett, $preisProNacht
 );
@@ -26,7 +28,6 @@ $stmt->bind_result(
 $data = [];
 while ($stmt->fetch()) {
     $data[] = [
-        "buchungsnummer" => $buchungs_nr,
         "zimmernummer" => $zimmer_nr,
         "vorname" => $vorname,
         "nachname" => $nachname,

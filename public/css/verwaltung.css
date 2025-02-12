@@ -166,3 +166,7 @@ th {
     box-shadow: 0 5px #c77700;
     transition: 0.2s;
 }
+
+.invis{
+    display: none;
+}

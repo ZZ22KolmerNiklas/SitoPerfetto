@@ -16,6 +16,7 @@ function test(){
 }
 
 window.onload = function(){
+    let i = 1
     fetch("../../php/get_verwaltungTable1.php")
         .then(response => response.json())
         .then(data => {
@@ -29,11 +30,24 @@ window.onload = function(){
                 const diffInDays = diffInMs / (1000 * 60 * 60 * 24);
                 const gesamtPreis = diffInDays * row.preisProNacht;
 
+
+                const cell = document.createElement("td");
+
+                const btn = document.createElement("button");
+                btn.id = i;
+                btn.innerText = `Bearbeiten`;
+                btn.addEventListener("click", function (){
+                    console.log(btn.id);
+                });
+
+                cell.appendChild(btn);
+
                 const tr = document.createElement("tr");
                 tr.innerHTML = `<td>${row.zimmernummer}</td><td>${row.vorname}</td><td>${row.nachname}</td><td>${row.von}</td><td>${row.bis}</td>
                                     <td>${row.email}</td><td>${row.anzahlBetten}</td><td>${gesamtPreis}€</td><td>${row.stammkunde}</td>
                                     <td><button onclick="generateInvoice()">Erstellen</button></td><td><button onclick="test()">Bearbeiten</button></td>`;
                 tableBody.appendChild(tr);
+                i++;
             });
         })
         .catch(error => console.error("Fehler:", error));
