@@ -89,6 +89,14 @@ th {
     margin-left: 60%;
     padding: 8px 12px;
     cursor: pointer;
+
+    background: #ff9800;
+    color: white;
+    font-size: 16px;
+    border: none;
+    border-radius: 8px;
+    box-shadow: 0 5px #c77700;
+    transition: 0.2s;
 }
 .review-container {
     margin-left: 10%;
@@ -145,4 +153,16 @@ th {
     margin-left: 32%;
     font-family: Arial, serif;
     font-size: xx-large;
+}
+
+.btnOrange{
+    background: #ff9800;
+    color: white;
+    padding: 12px 24px;
+    font-size: 16px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    box-shadow: 0 5px #c77700;
+    transition: 0.2s;
 }
