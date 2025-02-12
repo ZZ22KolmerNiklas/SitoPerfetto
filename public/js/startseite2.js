@@ -3,6 +3,7 @@ window.onload = function(){
         document.getElementById('name').style.display =  "block";
         document.getElementById('name').innerText = sessionStorage.getItem("username");
         document.getElementById('login').style.display = "none";
+        document.getElementById('abmelden').style.display = "block";
         if(sessionStorage.getItem("admin") === '1'){
             document.getElementById("verwalten").style.display = "block";
         }
@@ -16,7 +17,17 @@ function login(action){
         popup.style.display = "block";
     } else if (action === "hide") {
         popup.style.display = "none";
+        document.getElementById('loginemail').value = '';
+        document.getElementById('loginpw').value = '';
     }
+}
+
+function abmelden() {
+    document.getElementById('login').style.display = "block";
+    document.getElementById('name').style.display = "none";
+    document.getElementById('verwalten').style.display = "none";
+    document.getElementById('abmelden').style.display = "none";
+    sessionStorage.clear();
 }
 
 function verwalten(){
@@ -98,6 +109,9 @@ document.getElementById("loginForm").addEventListener("submit", async function (
                 document.getElementById('name').innerText = result.name;
                 document.getElementById('popuplogin').style.display = 'none';
                 document.getElementById('login').style.display = 'none';
+                document.getElementById('abmelden').style.display = 'block';
+                document.getElementById('loginemail').value = '';
+                document.getElementById('loginpw').value = '';
                 if(result.admin === 1){
                     document.getElementById('verwalten').style.display = "block";
                 }
