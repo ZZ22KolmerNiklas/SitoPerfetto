@@ -45,7 +45,8 @@ window.onload = function(){
                 const tr = document.createElement("tr");
                 tr.innerHTML = `<td>${row.zimmernummer}</td><td>${row.vorname}</td><td>${row.nachname}</td><td>${row.von}</td><td>${row.bis}</td>
                                     <td>${row.email}</td><td>${row.anzahlBetten}</td><td>${gesamtPreis}€</td><td>${row.stammkunde}</td>
-                                    <td><button onclick="generateInvoice()">Erstellen</button></td><td><button onclick="test()">Bearbeiten</button></td>`;
+                                    <td><button onclick="generateInvoice()">Erstellen</button></td>`;
+                tr.appendChild(cell);
                 tableBody.appendChild(tr);
                 i++;
             });
