@@ -32,6 +32,7 @@ $stmt->bind_result(
     $anzBett, $preisProNacht, $zimmerart,
     $rechnungs_nr
 );
+$stmt->fetch();
 
 $data = [
     "zimmernummer" => $zimmer_nr,

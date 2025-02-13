@@ -115,9 +115,10 @@ async function generateInvoice(buchungsNr) {
                 const endDate = new Date(data.bis);
                 const diffInMs = endDate - startDate;
                 const diffInDays = diffInMs / (1000 * 60 * 60 * 24);
+                const rechnungsNr = Number(data.rechnungsnr)+1;
                 doc.text("FUNREST Hotel", 10, 10);
                 doc.text("Funstraße 1, 12345 Berlin", 10, 20);
-                doc.text("RechnungNr: "+data.rechnungsnr+1, 10, 40);
+                doc.text("RechnungNr: "+rechnungsNr, 10, 40);
                 doc.text("BuchungsNr: "+buchungsNr, 10, 50)
                 doc.text("Von: "+startDate.toLocaleDateString(), 10, 60);
                 doc.text("Bis: "+endDate.toLocaleDateString(), 10, 70);
