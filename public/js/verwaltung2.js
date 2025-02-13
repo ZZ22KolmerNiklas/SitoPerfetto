@@ -11,8 +11,9 @@ function rejectReview() {
     alert("Rezension abgelehnt!");
 }
 
-function test(){
-    console.log('klappt');
+function test(data){
+    console.log(data);
+    console.log("ende");
 }
 
 window.onload = function(){
@@ -34,10 +35,23 @@ window.onload = function(){
                 const cell = document.createElement("td");
 
                 const btn = document.createElement("button");
-                btn.id = i;
+                btn.id = row.buchungsnummer;
                 btn.innerText = `Bearbeiten`;
                 btn.addEventListener("click", function (){
                     console.log(btn.id);
+                    let data = {
+                        buchungsnr: btn.id
+                    };
+                    console.log(data);
+                    fetch("../../php/get_bearbeitung.php", {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json"
+                        },
+                        body: JSON.stringify(data) // JSON-Daten senden
+                    })
+                        .then(response => response.json())
+                        .then(data => console.log(data));
                 });
 
                 cell.appendChild(btn);

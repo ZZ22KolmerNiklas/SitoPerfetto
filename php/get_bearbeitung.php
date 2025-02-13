@@ -4,6 +4,10 @@ header("Content-Type: application/json");
 include 'database.php';
 
 $data = json_decode(file_get_contents("php://input"), true);
+$buchungsnr = isset($data['buchungsnr']) ? intval($data['buchungsnr']) : 0;
+
+
+
 
 $stmt = $conn->prepare("
     SELECT 
@@ -13,14 +17,14 @@ $stmt = $conn->prepare("
     FROM buchung b
     JOIN benutzer u ON b.benutzer = u.BenutzerID
     JOIN zimmer z ON b.zimmer = z.zimmernr
-    WHERE b.buchungsnr = 
+    WHERE b.buchungsnr = ?
 ");
-$stmt->bind_param("s", $buchungs_nr);
+$stmt->bind_param("s", $buchungsnr);
 $stmt->execute();
 $stmt->store_result();
 
 $stmt->bind_result(
-    $zimmer_nr, $benutzer_id, $vondatum, $bisdatum,
+    $buchungs_nr,$zimmer_nr, $benutzer_id, $vondatum, $bisdatum,
     $vorname, $nachname, $stammkunde, $email,
     $anzBett, $preisProNacht
 );
@@ -39,6 +43,8 @@ while ($stmt->fetch()) {
         "bis" => $bisdatum
     ];
 }
+
+
 
 echo json_encode($data);
 
