@@ -35,15 +35,8 @@ function verwalten(){
 }
 
 function zimmerWahl(zimmer){
-    if(zimmer === 's'){
-        sessionStorage.setItem("zimmerArt", "Standard");
-    }else if (zimmer === 'p'){
-        sessionStorage.setItem("zimmerArt", "Premium");
-    }else if (zimmer === 'l'){
-        sessionStorage.setItem("zimmerArt", "Luxus");
-    } else{
-        sessionStorage.setItem("zimmerArt", "Error");
-    }
+    sessionStorage.setItem("zimmerArt", zimmer);
+
     window.location.href = "../oberflächen/zimmerBuchen.html";
 }
 
@@ -185,19 +178,42 @@ function schliessen() {
 }
 
 function bewertung(action, senden){
+    console.log("1");
+    if(senden === "senden"){
+        console.log("2");
+        let data = {
+            zimmer: bewertungart,
+            benutzer: sessionStorage.getItem("user_id"),
+            bewertung: document.getElementById("textarea").value,
+            sterne: stern}
+
+        fetch("../../php/bewertung.php", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(data) // JSON-Daten senden
+        })
+            .then(response => response.text())
+            .catch(error => console.error("Fehler:", error));
+        console.log(data);
+    } else {
+        bewertungart = senden;
+    }
+
     let bewertung = document.getElementById("bewertungPopup");
     if(action === 'show'){
         bewertung.style.display = "block";
     }else if (action === 'hide') {
         bewertung.style.display = "none";
     }
-    if(senden === "senden"){
-        /*an DB übergeben*/
-    }
 }
 
+let stern = 0;
+let bewertungart = "";
+
 function sterne(anzahl){
-    console.log(anzahl);
+    stern = anzahl;
 }
 
 function verwalten(){

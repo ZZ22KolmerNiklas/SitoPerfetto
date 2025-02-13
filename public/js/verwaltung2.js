@@ -11,12 +11,20 @@ function rejectReview() {
     alert("Rezension abgelehnt!");
 }
 
-function test(data){
-    console.log(data);
-    console.log("ende");
+function Bewertungen_anzeigen (){
+    fetch("../../php/get_bewertung.php")
+        .then(response => response.json())
+        .then(data => {
+            data.forEach(row => {
+
+            });
+        })
+        .catch(error => console.error("Fehler:", error));
 }
 
 window.onload = function(){
+    Bewertungen_anzeigen();
+
     let i = 1
     fetch("../../php/get_verwaltungTable1.php")
         .then(response => response.json())
