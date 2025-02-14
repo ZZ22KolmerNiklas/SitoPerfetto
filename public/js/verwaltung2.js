@@ -121,7 +121,7 @@ async function generateInvoice() {
         alert("Netzwerkfehler beim Speichern der Rechnung.");
     }
 }
-function abbrechen(action){
+function abbrechen(){
     document.getElementById('popupBearbeiten').style.display = "none";
 }
 
