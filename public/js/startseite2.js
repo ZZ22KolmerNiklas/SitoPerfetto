@@ -49,6 +49,7 @@ function zimmerWahl(zimmer){
 
 function register(action){
     let popupReg = document.getElementById("popupregister");
+    let popupLog = document.getElementById("popuplogin");
 
     if (action === "show") {
         popupReg.style.display = "block";
