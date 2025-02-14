@@ -6,7 +6,7 @@
     <title>PHP + JavaScript in IntelliJ</title>
     <script defer src="../js/verwaltung2.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-    <link rel="stylesheet" href="../css/verwaltung1.css">
+    <link rel="stylesheet" href="../css/verwaltung2.css">
 </head>
 <body>
 <div class="header">
@@ -59,6 +59,43 @@
         <button class="preisBtn" type="button" onclick="preisVerwalten('hide')" style="font-size: 20px">Abbrechen</button>
     </form>
 
+</div>
+<div class="popup" id="popupBearbeiten">
+    <div class="popupinput">
+        <div class="inputdaten">
+            <label>ZimmerNr:</label><br>
+            <label>Vorname:</label><br>
+            <label>Nachname:</label><br>
+            <label>Ankunft:</label><br>
+            <label>Abreise:</label><br>
+            <label>E-Mail:</label><br>
+            <label>Bettanzahl:</label><br>
+            <label>Stammkunde:</label><br>
+            <button class="beabtn" type="button" onclick="abbrechen()">Abbrechen</button>
+        </div>
+        <div class="inputdaten">
+            <form name="bearbeitungForm" id="bearbeitungForm">
+                <input name="zimmerNr" id="zimmerNr" size="14" required />
+                <input name="vorname" id="vorname" size="14" required /><br>
+                <input name="nachname" id="nachname" size="14" required /><br>
+                <input name="ankunft" id="ankunft" size="14" required />
+                <input name="abreise" id="abreise" size="14" required />
+                <input name="email" id="email" size="14" required />
+                <input name="bettanzahl" id="bettanzahl" size="14" required />
+                <div class="stammkunde">
+                    <div>
+                        <label>Ja</label>
+                        <input style="margin-left: 0" type="radio" id="ja" name="ja" onclick="istStammkunde('ja')"/>
+                    </div>
+                    <div>
+                        <label>Nein</label>
+                        <input style="margin-left: 0" type="radio" id="nein" name="nein" onclick="istStammkunde('nein')"/>
+                    </div>
+                </div>
+                <button class="beabtn" type="submit">Speichern</button>
+            </form>
+        </div>
+    </div>
 </div>
 </body>
 </html>

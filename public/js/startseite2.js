@@ -49,7 +49,6 @@ function zimmerWahl(zimmer){
 
 function register(action){
     let popupReg = document.getElementById("popupregister");
-    let popupLog = document.getElementById("popuplogin");
 
     if (action === "show") {
         popupReg.style.display = "block";
@@ -198,8 +197,4 @@ function bewertung(action, senden){
 
 function sterne(anzahl){
     console.log(anzahl);
-}
-
-function verwalten(){
-    window.location.href = "../oberflächen/verwaltung.html";
 }

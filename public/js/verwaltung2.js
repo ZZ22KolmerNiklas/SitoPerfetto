@@ -51,7 +51,10 @@ window.onload = function(){
                         body: JSON.stringify(data) // JSON-Daten senden
                     })
                         .then(response => response.json())
-                        .then(data => console.log(data));
+                        .then(data => {
+                            document.getElementById('popupBearbeiten').style.display = "block";
+                            console.log(data);
+                        });
                 });
 
                 cell.appendChild(btn);
@@ -118,5 +121,21 @@ async function generateInvoice() {
         }
     } catch (error) {
         alert("Netzwerkfehler beim Speichern der Rechnung.");
+    }
+}
+function abbrechen(action){
+    document.getElementById('popupBearbeiten').style.display = "none";
+}
+
+function istStammkunde(action) {
+    let ja = document.getElementById('ja');
+    let nein = document.getElementById('nein');
+
+    if(action === 'ja'){
+        ja.checked = true;
+        nein.checked = false;
+    }else if(action === 'w'){
+        ja.checked = false;
+        nein.checked = true;
     }
 }
