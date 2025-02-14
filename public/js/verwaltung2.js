@@ -35,10 +35,7 @@ window.onload = function(){
             data.forEach(row => {
                 const startDate = new Date(row.von);
                 const endDate = new Date(row.bis);
-                const diffInMs = endDate - startDate;
-                const diffInDays = diffInMs / (1000 * 60 * 60 * 24);
-                const gesamtPreis = diffInDays * row.preisProNacht;
-
+                const gesamtPreis = gesamtpreisErmitteln(startDate, endDate, row.preisProNacht);
 
                 const cell = document.createElement("td");
 
@@ -64,10 +61,22 @@ window.onload = function(){
 
                 cell.appendChild(btn);
 
+                const cellR = document.createElement("td");
+
+                const btnR = document.createElement("button");
+                btnR.id = row.buchungsnummer;
+                btnR.innerText = `Erstellen`;
+                btnR.addEventListener("click", function (){
+                    generateInvoice(btnR.id);
+                    console.log(btnR.id);
+                });
+
+                cellR.appendChild(btnR);
+
                 const tr = document.createElement("tr");
-                tr.innerHTML = `<td>${row.zimmernummer}</td><td>${row.vorname}</td><td>${row.nachname}</td><td>${row.von}</td><td>${row.bis}</td>
-                                    <td>${row.email}</td><td>${row.anzahlBetten}</td><td>${gesamtPreis}€</td><td>${row.stammkunde}</td>
-                                    <td><button onclick="generateInvoice()">Erstellen</button></td>`;
+                tr.innerHTML = `<td>${row.zimmernummer}</td><td>${row.vorname}</td><td>${row.nachname}</td><td>${startDate.toLocaleDateString()}</td><td>${endDate.toLocaleDateString()}</td>
+                                    <td>${row.email}</td><td>${row.anzahlBetten}</td><td>${gesamtPreis}€</td><td>${row.stammkunde}</td>`;
+                tr.appendChild(cellR);
                 tr.appendChild(cell);
                 tableBody.appendChild(tr);
                 i++;
@@ -92,33 +101,39 @@ function preisVerwalten(action, senden) {
     }
 }
 
-async function generateInvoice() {
+async function generateInvoice(buchungsNr) {
     const {jsPDF} = window.jspdf;
     const doc = new jsPDF();
 
-    doc.text("FUNREST Hotel", 10, 10);
-    doc.text("Funstraße 1, 12345 Berlin", 10, 20);
-    doc.text("RechnungNr: ", 10, 40);
-    doc.text("BuchungsNr: ___", 10, 50)
-    doc.text("Von: __/__/____", 10, 60);
-    doc.text("Bis: __/__/____", 10, 70);
-    doc.text("Zeitraum: ___ Nächte", 10, 80);
-    doc.text("Zimmerart: 'Luxus'", 10, 90);
-    doc.text("Zimmernummer: '301'", 10, 100);
-    doc.text("Preis: ___€", 10, 110);
-
-    doc.save("download/rechnung.pdf");
-
-    const pdfData = doc.output("blob");
-
-    const formData = new FormData();
-    formData.append("file", pdfData, "rechnung.pdf");
+    let data = {
+        "buchungsnr": buchungsNr
+    }
 
     try {
-        const response = await fetch("../../php/rechnung", {
+        const response = await fetch("../../php/get_rechnungsdinger.php", {
             method: "POST",
-            body: formData
-        });
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(data) // JSON-Daten senden
+        })
+            .then(response => response.json())
+            .then(data => {
+                const startDate = new Date(data.von);
+                const endDate = new Date(data.bis);
+                const diffInMs = endDate - startDate;
+                const diffInDays = diffInMs / (1000 * 60 * 60 * 24);
+                const rechnungsNr = Number(data.rechnungsnr)+1;
+                doc.text("FUNREST Hotel", 10, 10);
+                doc.text("Funstraße 1, 12345 Berlin", 10, 20);
+                doc.text("RechnungNr: "+rechnungsNr, 10, 40);
+                doc.text("BuchungsNr: "+buchungsNr, 10, 50)
+                doc.text("Von: "+startDate.toLocaleDateString(), 10, 60);
+                doc.text("Bis: "+endDate.toLocaleDateString(), 10, 70);
+                doc.text("Zeitraum: "+diffInDays+" Nächte", 10, 80);
+                doc.text("Zimmerart: "+data.zimmerart, 10, 90);
+                doc.text("Preis: "+gesamtpreisErmitteln(startDate, endDate, data.preisProNacht)+"€", 10, 100);
+            });
         if (response.ok) {
             alert("Rechnung wurde erfolgreich gespeichert!");
         } else {
@@ -127,4 +142,37 @@ async function generateInvoice() {
     } catch (error) {
         alert("Netzwerkfehler beim Speichern der Rechnung.");
     }
+
+    //doc.save("download/rechnung.pdf");
+
+    const pdfData = doc.output("blob");
+
+    const formData = new FormData();
+    formData.append("file", pdfData, "rechnung.pdf");
+    formData.append("buchungsNr", '1');
+
+    try {
+        const response = await fetch("../../php/insert_rechnung.php", {
+            method: "POST",
+            body: formData
+        })
+            .then(response => response.json())
+            .then(data => {
+                console.log(data.message);
+            });
+        if (response.ok) {
+            alert("Rechnung wurde erfolgreich gespeichert!");
+        } else {
+            alert("Fehler beim Speichern der Rechnung.");
+        }
+    } catch (error) {
+        alert("Netzwerkfehler beim Speichern der Rechnung.");
+    }
+}
+
+function gesamtpreisErmitteln(startDate, endDate, preisProNacht){
+    const diffInMs = endDate - startDate;
+    const diffInDays = diffInMs / (1000 * 60 * 60 * 24);
+    const gesamtPreis = diffInDays * preisProNacht;
+    return gesamtPreis;
 }
