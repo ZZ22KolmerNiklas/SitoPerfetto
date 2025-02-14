@@ -1,3 +1,15 @@
+window.onload = function(){
+    if(sessionStorage.getItem("username") !== null){
+        document.getElementById('name').style.display =  "block";
+        document.getElementById('name').innerText = sessionStorage.getItem("username");
+        document.getElementById('login').style.display = "none";
+        document.getElementById('abmelden').style.display = "block";
+        if(sessionStorage.getItem("admin") === '1'){
+            document.getElementById("verwalten").style.display = "block";
+        }
+    }
+}
+
 function login(action){
     let popup = document.getElementById("popuplogin");
 
@@ -5,19 +17,26 @@ function login(action){
         popup.style.display = "block";
     } else if (action === "hide") {
         popup.style.display = "none";
+        document.getElementById('loginemail').value = '';
+        document.getElementById('loginpw').value = '';
     }
 }
 
+function abmelden() {
+    document.getElementById('login').style.display = "block";
+    document.getElementById('name').style.display = "none";
+    document.getElementById('verwalten').style.display = "none";
+    document.getElementById('abmelden').style.display = "none";
+    sessionStorage.clear();
+}
+
+function verwalten(){
+    window.location.href = "../oberflächen/verwaltung.html";
+}
+
 function zimmerWahl(zimmer){
-    if(zimmer === 's'){
-        sessionStorage.setItem("zimmerArt", "Standart");
-    }else if (zimmer === 'p'){
-        sessionStorage.setItem("zimmerArt", "Premium");
-    }else if (zimmer === 'l'){
-        sessionStorage.setItem("zimmerArt", "Luxus");
-    } else{
-        sessionStorage.setItem("zimmerArt", "Error");
-    }
+    sessionStorage.setItem("zimmerArt", zimmer);
+
     window.location.href = "../oberflächen/zimmerBuchen.html";
 }
 
@@ -74,11 +93,18 @@ document.getElementById("loginForm").addEventListener("submit", async function (
     })
         .then(response => response.json())
         .then(result => {
+            console.log(result);
             if(result.success){
+                sessionStorage.setItem("username", result.name);
+                sessionStorage.setItem("user_id", result.user_id);
+                sessionStorage.setItem("admin", result.admin);
                 document.getElementById('name').style.display = 'block';
                 document.getElementById('name').innerText = result.name;
                 document.getElementById('popuplogin').style.display = 'none';
                 document.getElementById('login').style.display = 'none';
+                document.getElementById('abmelden').style.display = 'block';
+                document.getElementById('loginemail').value = '';
+                document.getElementById('loginpw').value = '';
                 if(result.admin === 1){
                     document.getElementById('verwalten').style.display = "block";
                 }
@@ -152,18 +178,40 @@ function schliessen() {
 }
 
 function bewertung(action, senden){
+    console.log("1");
+    if(senden === "senden"){
+        console.log("2");
+        let data = {
+            zimmer: bewertungart,
+            benutzer: sessionStorage.getItem("user_id"),
+            bewertung: document.getElementById("textarea").value,
+            sterne: stern}
+
+        fetch("../../php/bewertung.php", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(data) // JSON-Daten senden
+        })
+            .then(response => response.text())
+            .catch(error => console.error("Fehler:", error));
+        console.log(data);
+    } else {
+        bewertungart = senden;
+    }
+
     let bewertung = document.getElementById("bewertungPopup");
     if(action === 'show'){
         bewertung.style.display = "block";
     }else if (action === 'hide') {
         bewertung.style.display = "none";
     }
-    if(senden === "senden"){
-        /*an DB übergeben*/
-    }
 }
+
+let stern = 0;
+let bewertungart = "";
 
 function sterne(anzahl){
-    console.log(anzahl);
+    stern = anzahl;
 }
-

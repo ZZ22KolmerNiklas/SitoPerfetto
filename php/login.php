@@ -33,7 +33,7 @@ if ($stmt->num_rows > 0) {
     if (password_verify($passwort, $hashedPasswort)) {
         session_start();
         $_SESSION["user_id"] = $benutzer_id;
-        echo json_encode(["success" => true, "message" => "Login erfolgreich!", "name" => "$vorname $nachname", "admin" => $admin]);
+        echo json_encode(["success" => true, "message" => "Login erfolgreich!", "name" => "$vorname $nachname", "user_id" => $benutzer_id, "admin" => $admin]);
     } else {
         echo json_encode(["success" => false, "message" => "Falsches Passwort!"]);
     }

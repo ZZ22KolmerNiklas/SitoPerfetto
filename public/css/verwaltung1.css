@@ -1,0 +1,205 @@
+.header{
+    display: flex;
+    justify-content: center;  /* Zentriert horizontal */
+    align-items: center;  /* Zentriert vertikal */
+}
+h1{
+    border: 2px solid black;
+    border-radius: 8px;
+    padding: 100px 190px;
+    text-align: center;
+    display: inline-block;
+    background-image: url("../img/hotel.png");
+    background-position: 50% 75%;
+    background-repeat: no-repeat;
+    background-size: 700px 700px;
+    align-content: center;
+    margin: 0 auto 10px auto;
+}
+
+.funrest{
+    background-color: white;
+    margin: auto;
+    font-family: Arial, serif;
+    font-size: 40px;
+    border-radius: 10px;
+    padding: 0 10px ;
+}
+.berlin{
+    background-color: white;
+    margin: auto;
+    font-family: Arial, serif;
+    width: 120px;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+}
+
+.back{
+    background-color: white;
+    margin: 0 96px auto 0;
+    padding: 0;
+    width: 54px;
+    height: 54px;
+}
+
+.backImg{
+    width: 50px;
+    height: 50px;
+}
+
+.name{
+    background-color: white;
+    border: 2px solid black;
+    width: 150px;
+    margin: 0 0 auto 0 ;
+    font-family: Arial, serif;
+    font-size: 20px;
+    padding: 0;
+    word-wrap:break-word;
+}
+
+.table-container {
+    margin-left: 8%;
+    margin-right: 8%;
+    width: auto;
+    max-height: 250px;
+    overflow-y: auto;
+    overflow-x: auto;
+    border: 1px solid #ddd;
+    display: block;
+}
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+th, td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+    white-space: nowrap;
+}
+th {
+    position: sticky;
+    top: 0;
+    background-color: #f4f4f4;
+}
+.verwaltungBtn{
+    cursor: pointer;
+    margin-left: 60%;
+
+
+    background: #ff9800;
+    color: white;
+    padding: 12px 24px;
+    font-size: 16px;
+    border: none;
+    border-radius: 8px;
+    box-shadow: 0 5px #c77700;
+    transition: 0.2s;
+}
+.review-container {
+    margin-left: 10%;
+    margin-right: 10%;
+    margin-top: 4%;
+ }
+.review-box {
+    margin-right: 10%;
+    margin-top: 1%;
+    width: 60%;
+    height: 100px;
+    overflow-y: auto;
+    border: 1px solid #ddd;
+    padding: 8px;
+    background-color: #f9f9f9;
+}
+.button-container {
+    margin-top: 1%;
+}
+.button-container button {
+    top: 90%;
+    margin-right: 10px;
+    padding: 8px 12px;
+    cursor: pointer;
+}
+.preisVerwaltung{
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: white;
+    padding: 20px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+    z-index: 1000;
+    font-family: Arial, serif;
+    font-size: 25px;
+    width: 30%;
+    height: 50%;
+}
+.preisBtn{
+    padding: 8px 12px;
+    background: #ff9800;
+    color: white;
+    cursor: pointer;
+    box-shadow: 0 5px #c77700;
+    transition: 0.2s;
+    border: none;
+    border-radius: 8px;
+}
+.zimmerPreis{
+    margin-left: 32%;
+    font-family: Arial, serif;
+    font-size: xx-large;
+}
+
+.btnOrange{
+    background: #ff9800;
+    color: white;
+    padding: 12px 24px;
+    font-size: 16px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    box-shadow: 0 5px #c77700;
+    transition: 0.2s;
+}
+
+.invis{
+    display: none;
+}
+
+.popup{
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: white;
+    padding: 20px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+    z-index: 1000;
+    font-family: Arial, serif;
+}
+
+.popupinput{
+    display: grid;
+    grid-template-columns:max-content min-content;
+    gap: 10px;
+}
+
+.stammkunde{
+    display: grid;
+    grid-template-columns: 50% 50%;
+}
+
+.inputdaten{
+    line-height: 150%;
+    font-family: Arial, serif;
+    font-size: 16px;
+}
+
+.beabtn{
+    margin-top: 15px;
+}

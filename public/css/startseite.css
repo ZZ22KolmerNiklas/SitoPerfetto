@@ -30,6 +30,33 @@
     transform: translateY(3px);
 }
 
+.abmelden{
+    position: absolute;
+    right: 0.5%;
+    top: 7%;
+    width: 8%;
+    height: 5%;
+    background: #ff9800;
+    color: white;
+    padding: 12px 24px;
+    font-size: 16px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    box-shadow: 0 5px #c77700;
+    transition: 0.2s;
+    display: none;
+}
+
+.abmelden:hover {
+    opacity: 0.8;
+}
+
+.abmelden:active {
+    box-shadow: 0 2px #c77700;
+    transform: translateY(3px);
+}
+
 .name{
     background-color: white;
     border: 2px solid black;
@@ -48,7 +75,7 @@
 .verwalten{
     position: absolute;
     right: 0.5%;
-    top: 7%;
+    top: 13%;
     width: 8%;
     height: 5%;
     background: #ff9800;

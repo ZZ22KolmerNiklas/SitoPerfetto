@@ -1,5 +1,6 @@
 window.onload = function(){
     document.getElementById('art').innerHTML = sessionStorage.getItem("zimmerArt");
+    document.getElementById('name').innerText = sessionStorage.getItem("username");
 }
 
 function buchen(action){
