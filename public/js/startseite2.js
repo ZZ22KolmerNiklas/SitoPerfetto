@@ -199,3 +199,7 @@ function bewertung(action, senden){
 function sterne(anzahl){
     console.log(anzahl);
 }
+
+function verwalten(){
+    window.location.href = "../oberflächen/verwaltung.html";
+}
