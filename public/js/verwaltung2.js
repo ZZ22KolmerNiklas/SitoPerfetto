@@ -51,10 +51,8 @@ window.onload = function(){
                         body: JSON.stringify(data) // JSON-Daten senden
                     })
                         .then(response => response.json())
-                        .then(data => {
-                            document.getElementById('popupBearbeiten').style.display = "block";
-                            console.log(data);
-                        });
+                        .then(data => console.log(data));
+                    document.getElementById('popupBearbeiten').style.display = "block";
                 });
 
                 cell.appendChild(btn);
