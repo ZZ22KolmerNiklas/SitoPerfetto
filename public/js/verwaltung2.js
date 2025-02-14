@@ -43,6 +43,7 @@ window.onload = function(){
                 btn.id = row.buchungsnummer;
                 btn.innerText = `Bearbeiten`;
                 btn.addEventListener("click", function (){
+                    document.getElementById('popupBearbeiten').style.display = "block";
                     console.log(btn.id);
                     let data = {
                         buchungsnr: btn.id
@@ -175,4 +176,21 @@ function gesamtpreisErmitteln(startDate, endDate, preisProNacht){
     const diffInDays = diffInMs / (1000 * 60 * 60 * 24);
     const gesamtPreis = diffInDays * preisProNacht;
     return gesamtPreis;
+}
+
+function abbrechen(){
+    document.getElementById('popupBearbeiten').style.display = "none";
+}
+
+function istStammkunde(action) {
+    let ja = document.getElementById('ja');
+    let nein = document.getElementById('nein');
+
+    if(action === 'ja'){
+        ja.checked = true;
+        nein.checked = false;
+    }else if(action === 'nein'){
+        ja.checked = false;
+        nein.checked = true;
+    }
 }

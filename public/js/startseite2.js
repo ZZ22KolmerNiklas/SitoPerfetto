@@ -215,7 +215,3 @@ let bewertungart = "";
 function sterne(anzahl){
     stern = anzahl;
 }
-
-function verwalten(){
-    window.location.href = "../oberflächen/verwaltung.html";
-}

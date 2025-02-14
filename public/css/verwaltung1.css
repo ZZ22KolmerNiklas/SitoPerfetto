@@ -168,3 +168,38 @@ th {
 .invis{
     display: none;
 }
+
+.popup{
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: white;
+    padding: 20px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+    z-index: 1000;
+    font-family: Arial, serif;
+}
+
+.popupinput{
+    display: grid;
+    grid-template-columns:max-content min-content;
+    gap: 10px;
+}
+
+.stammkunde{
+    display: grid;
+    grid-template-columns: 50% 50%;
+}
+
+.inputdaten{
+    line-height: 150%;
+    font-family: Arial, serif;
+    font-size: 16px;
+}
+
+.beabtn{
+    margin-top: 15px;
+}
