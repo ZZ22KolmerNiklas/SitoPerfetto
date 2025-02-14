@@ -132,7 +132,7 @@ function istStammkunde(action) {
     if(action === 'ja'){
         ja.checked = true;
         nein.checked = false;
-    }else if(action === 'w'){
+    }else if(action === 'nein'){
         ja.checked = false;
         nein.checked = true;
     }
