@@ -26,26 +26,28 @@
 
     <div>
         <div class="infos">
-            <label class="checkContainer">Einzelzimmer
-                <input class="check" type="checkbox" id="einzelzimmer" checked="checked" onclick="checkbox('einzel')">
-                <span class="checkmark"></span>
-            </label>
-            <label class="checkContainer">Doppelzimmer
-                <input class="check" type="checkbox" id="doppelzimmer" onclick="checkbox('doppel')">
-                <span class="checkmark"></span>
-            </label>
-            <label>
-                <p style="margin: 20px 0 0 0">Ankunft</p>
-                <input class="datum" type="date" id="vonDatum" value="2025-02-06"
-                       min="2025-02-06"/>
+            <form name="buchenForm" id="buchenForm">
+                <label class="checkContainer">Einzelzimmer
+                    <input class="check" type="checkbox" id="einzelzimmer" checked="checked" onclick="checkbox('einzel')">
+                    <span class="checkmark"></span>
+                </label>
+                <label class="checkContainer">Doppelzimmer
+                    <input class="check" type="checkbox" id="doppelzimmer" onclick="checkbox('doppel')">
+                    <span class="checkmark"></span>
+                </label>
+                <label>
+                    <p style="margin: 20px 0 0 0">Ankunft</p>
+                    <input class="datum" type="date" id="vonDatum" value="2025-02-06"
+                           min="2025-02-06"/>
 
-                <p style="margin: 20px 0 0 0">Abreise</p>
-                <input class="datum" type="date" id="bisDatum" value="2025-02-07"
-                       min="2025-02-07"/>
-            </label>
-            <p> Preis: <label class="ausgabeLbl">70000€</label></p>
-            <p> Verfügbare Zimmer: <label class="ausgabeLbl">8</label></p>
-            <button class="buchenBtn" onclick="buchen('show')" type="submit">Buchen</button>
+                    <p style="margin: 20px 0 0 0">Abreise</p>
+                    <input class="datum" type="date" id="bisDatum" value="2025-02-07"
+                           min="2025-02-07"/>
+                </label>
+                <p> Preis: <label class="ausgabeLbl" id="gesamtPreis">70000€</label></p>
+                <p> Verfügbare Zimmer: <label class="ausgabeLbl" id="anzZimmer">8</label></p>
+                <button class="buchenBtn" onclick="changePopup('show')" type="submit">Buchen</button>
+            </form>
         </div>
     </div>
 
@@ -64,7 +66,7 @@ mittelgut
 <div class="popup" id="popupBuchung">
     <form name="buchungForm">
         <label>Buchung erfolgeich. Die Rechnung wird an Ihre E-mail geschickt<br></label>
-        <button style="margin-left: 45%" type="button" onclick="buchen('hide')">Ok</button>
+        <button style="margin-left: 45%" type="button" onclick="changePopup('hide')">Ok</button>
     </form>
 </div>
 </body>

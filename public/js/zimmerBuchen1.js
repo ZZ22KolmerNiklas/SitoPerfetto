@@ -3,7 +3,7 @@ window.onload = function(){
     document.getElementById('name').innerText = sessionStorage.getItem("username");
 }
 
-function buchen(action){
+function changePopup(action){
     let popup = document.getElementById("popupBuchung");
 
     if (action === "show") {
