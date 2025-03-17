@@ -8,6 +8,7 @@ $data = json_decode(file_get_contents("php://input"), true);
 
 
 $anzBett = isset($data['anzBett']) ? intval($data['anzBett']) : 0;
+$zimmerArt = isset($data['zimmerArt']) ? trim($data['zimmerArt']) : '';
 $benutzer = isset($data['benutzer']) ? intval($data['benutzer']) : 0;
 $vonDatum = isset($data['vonDatum']) ? trim($data['vonDatum']) : '';
 $bisDatum = isset($data['bisDatum']) ? trim($data['bisDatum']) : '';
@@ -28,6 +29,7 @@ $stmt = $conn->prepare("
     )
     WHERE b.zimmer IS NULL
     AND z.anzbett = ?
+    AND z.art = ?
 ");
 
 if (!$stmt) {
@@ -35,7 +37,7 @@ if (!$stmt) {
     exit;
 }
 
-$stmt->bind_param("sssi", $bisDatum, $vonDatum, $bisDatum, $anzBett);
+$stmt->bind_param("sssis", $bisDatum, $vonDatum, $bisDatum, $anzBett, $zimmerArt);
 $stmt->execute();
 $result = $stmt->get_result();
 

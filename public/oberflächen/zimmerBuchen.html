@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PHP + JavaScript in IntelliJ</title>
-    <script defer src="../js/zimmerBuchen2.js"></script>
+    <script defer src="../js/zimmerBuchen1.js"></script>
     <link rel="stylesheet" href="../css/zimmerBuchen2.css">
 </head>
 <body>
@@ -46,7 +46,7 @@
                 </label>
                 <p> Preis: <label class="ausgabeLbl" id="gesamtPreis"></label></p>
                 <p> Verfügbare Zimmer: <label class="ausgabeLbl" id="anzZimmer"></label></p>
-                <button class="buchenBtn" onclick="changePopup('show')" type="submit">Buchen</button>
+                <button class="buchenBtn" type="submit">Buchen</button>
             </form>
         </div>
     </div>
@@ -64,10 +64,8 @@ mittelgut
     </textarea>
 </span>
 <div class="popup" id="popupBuchung">
-    <form name="buchungForm">
-        <label>Buchung erfolgeich. Die Rechnung wird an Ihre E-mail geschickt<br></label>
-        <button style="margin-left: 45%" type="button" onclick="changePopup('hide')">Ok</button>
-    </form>
+    <label id="buchungText"></label>
+    <button style="margin-left: 45%" type="button" onclick="changePopup('hide')">Ok</button>
 </div>
 </body>
 </html>

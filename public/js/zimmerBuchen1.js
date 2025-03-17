@@ -13,6 +13,7 @@ function changePopup(action){
         popup.style.display = "block";
         /*Rechnung an admin weiter geben*/
     } else if (action === "hide") {
+        dataChange();
         popup.style.display = "none";
     }
 }
@@ -57,7 +58,6 @@ function dataChange(){
 }
 
 function gesamtpreisErmitteln(startDate, endDate, preisProNacht){
-    console.log(preisProNacht);
     const diffInMs = endDate - startDate;
     const diffInDays = diffInMs / (1000 * 60 * 60 * 24);
     const gesamtPreis = diffInDays * preisProNacht;
@@ -70,10 +70,12 @@ document.getElementById("buchenForm").addEventListener("submit", async function 
     let anzBett = document.getElementById("einzelzimmer").checked ? 1 : 2;
     let data = {
         anzBett: anzBett,
+        zimmerArt: sessionStorage.getItem("zimmerArt"),
         benutzer: sessionStorage.getItem("user_id"),
         vonDatum: document.getElementById("vonDatum").value,
         bisDatum: document.getElementById("bisDatum").value
     }
+    changePopup('show');
     fetch("../../php/buchen.php", {
         method: "POST",
         headers: {
@@ -81,8 +83,20 @@ document.getElementById("buchenForm").addEventListener("submit", async function 
         },
         body: JSON.stringify(data) // JSON-Daten senden
     })
-        .then(response => response.text())
-        .catch(error => console.error("Fehler:", error));
+        .then(response => response.json())
+        .then(result => {
+            console.log(result);
+            if(document.getElementById("anzZimmer").innerText != 0){
+                document.getElementById("buchungText").innerText = 'Buchung erfolgeich. Die Rechnung wird an Ihre E-mail geschickt.';
+                console.log('ja');
+            }else{
+                document.getElementById("buchungText").innerText = 'Kein freies Zimmer gefunden. Bitte anderen Zeitraum wählen.';
+                console.log('nein');
+            }
+        })
+        .catch(error => {
+            console.error("Fehler:", error);
+        });
     console.log(data);
 });
 
