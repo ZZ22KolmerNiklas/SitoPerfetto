@@ -175,10 +175,14 @@ document.getElementById("registerForm").addEventListener("submit", async functio
 
 function schliessen() {
     document.getElementById('popuperror').style.display = "none";
+    document.getElementById('popuperror1stern').style.display = "none";
 }
 
 function bewertung(action, senden){
     if(senden === "senden"){
+        if(stern === 0){
+            document.getElementById('popuperror1stern').style.display = "block";
+        }
         let data = {
             zimmer: bewertungart,
             benutzer: sessionStorage.getItem("user_id"),
