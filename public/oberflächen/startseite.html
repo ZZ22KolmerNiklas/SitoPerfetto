@@ -119,22 +119,17 @@
     <div class="bewertungen" id="bewertungPopup">
         <label>Deine Erfahrungen:<br><br></label>
         <span class="star-rating">
-  <input type="radio" name="rating" value="1" onclick="sterne(1)"><i></i>
-  <input type="radio" name="rating" value="2" onclick="sterne(2)"><i></i>
-  <input type="radio" name="rating" value="3" onclick="sterne(3)"><i></i>
-  <input type="radio" name="rating" value="4" onclick="sterne(4)"><i></i>
-  <input type="radio" name="rating" value="5" onclick="sterne(5)"><i></i>
-</span>
+          <input type="radio" name="rating" value="1" onclick="sterne(1)"><i></i>
+          <input type="radio" name="rating" value="2" onclick="sterne(2)"><i></i>
+          <input type="radio" name="rating" value="3" onclick="sterne(3)"><i></i>
+          <input type="radio" name="rating" value="4" onclick="sterne(4)"><i></i>
+          <input type="radio" name="rating" value="5" onclick="sterne(5)"><i></i>
+        </span>
         <label style="color: white"><br>  Mixmax</label>
         <textarea class="bewertungArea" maxlength="255" id="textarea"></textarea>
         <br><br>
         <button type="button" onclick="bewertung('hide', 'senden')" style="font-size: 20px; float: right">Abschicken</button>
         <button type="button" onclick="bewertung('hide')" style="font-size: 20px; float: right; margin-right: 10px">Abbrechen</button>
-    </div>
-
-    <div class="popup" id="popuperror1stern" style="z-index: 1001">
-        <label id="errornachricht1stern">Wähle zwischen einem und fünf Sternen.</label><br>
-        <button onclick="schliessen()">OK</button>
     </div>
 
 </body>
