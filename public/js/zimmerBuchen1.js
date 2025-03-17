@@ -23,6 +23,26 @@ function checkbox(gecheckt){
     }
 }
 
+document.getElementById("buchenForm").addEventListener("submit", async function (event) {
+        let zimmer = document.getElementById("einzelzimmer").checked ? document.getElementById("einzelzimmer").innerText : document.getElementById("doppelzimmer").innerText;
+        let data = {
+            zimmer: zimmer,
+            benutzer: sessionStorage.getItem("user_id"),
+            vonDatum: document.getElementById("textarea").value,
+            bisDatum: stern}
+
+        fetch("../../php/bewertung.php", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(data) // JSON-Daten senden
+        })
+            .then(response => response.text())
+            .catch(error => console.error("Fehler:", error));
+        console.log(data);
+});
+
 function home() {
     window.location.href = "../oberflächen/startseite.html";
 }
