@@ -5,10 +5,43 @@ function home() {
     window.location.href = "../oberflächen/startseite.html";
 }
 function confirmReview() {
+    let bewertungid = Number(sessionStorage.getItem("bewertungId"));
+    let data = {
+        "bewertungId": bewertungid
+    };
+    console.log(data);
+    fetch("../../php/bewertungBestaetigt.php", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(data) // JSON-Daten senden
+    })
+        .then(response => response.text())
+        .catch(error => console.error("Fehler:", error));
+
+
     alert("Rezension bestätigt!");
+
+    getNaechsteBewertung();
 }
 function rejectReview() {
+    let bewertungid = Number(sessionStorage.getItem("bewertungId"));
+    let data = {
+        "bewertungId": bewertungid
+    };
+    fetch("../../php/bewertungLoeschen.php", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(data) // JSON-Daten senden
+    })
+        .then(response => response.text())
+        .catch(error => console.error("Fehler:", error));
+
     alert("Rezension abgelehnt!");
+    getNaechsteBewertung();
 }
 
 function sterneAnzeigen(sterne){
@@ -51,14 +84,20 @@ function getNaechsteBewertung(){
     fetch("../../php/get_bewertung.php")
         .then(response => response.json())
         .then(data => {
-            data.forEach(row => {
-                sterneAnzeigen(row.sterne);
-                document.getElementById('reviewBox').innerText = '\n' + row.zimmer + '\n' + row.bewertung;
-            });
+            if(data.length === 0){
+                sterneAnzeigen(5);
+                document.getElementById('reviewBox').innerText = '\nHier erscheinen die neuen Rezension...'
+            } else{
+                data.forEach(row => {
+                    sterneAnzeigen(row.sterne);
+                    let bewertungid = row.bewertungid;
+                    sessionStorage.setItem("bewertungId", bewertungid)
+                    document.getElementById('reviewBox').innerText = '\n' + row.zimmer + '\n' + row.bewertung;
+                });
+            }
         })
         .catch(error => console.error("Fehler:", error));
 }
-
 
 
 window.onload = function(){
