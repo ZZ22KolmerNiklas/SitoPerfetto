@@ -118,6 +118,7 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 function updateMinDate() {
+    dataChange();
     const vonDatum = new Date(document.getElementById("vonDatum").value);
     const bisDatumInput = document.getElementById("bisDatum");
 
