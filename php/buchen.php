@@ -7,23 +7,62 @@ include 'database.php';
 $data = json_decode(file_get_contents("php://input"), true);
 
 
-$zimmer = isset($data['zimmer']) ? trim($data['zimmer']) : '';
+$anzBett = isset($data['anzBett']) ? intval($data['anzBett']) : 0;
 $benutzer = isset($data['benutzer']) ? intval($data['benutzer']) : 0;
-$vonDatum = isset($data['bewertung']) ? trim($data['bewertung']) : '';
-$bisDatum = isset($data['sterne']) ? intval($data['sterne']) : 0;
-$ueberprueft = 0;
+$vonDatum = isset($data['vonDatum']) ? trim($data['vonDatum']) : '';
+$bisDatum = isset($data['bisDatum']) ? trim($data['bisDatum']) : '';
 
-
-if ($sterne < 1 || empty($bewertung)) {
-    echo json_encode(["error" => "Ungültige Eingabe"]);
-    exit();
+if (empty($anzBett) || empty($benutzer) || empty($vonDatum) || empty($bisDatum)) {
+    echo json_encode(['error' => 'Fehlende Parameter']);
+    exit;
 }
 
-// SQL-Statement vorbereiten
-$stmt = $conn->prepare("INSERT INTO buchung (zimmer, benutzer, vondatum, bisdatum) VALUES (?, ?, ?, ?, ?)");
-$stmt->bind_param("sssii", $zimmer, $benutzer, $vonDatum, $bisDatum);
+// 1. Freie Zimmer abfragen
+$stmt = $conn->prepare("
+    SELECT z.zimmernr
+    FROM zimmer z
+    LEFT JOIN Buchung b ON z.zimmernr = b.zimmer
+    AND (
+      (b.vondatum <= ? AND b.bisdatum >= ?)
+      OR (b.vondatum <= ? AND b.bisdatum IS NULL)
+    )
+    WHERE b.zimmer IS NULL
+    AND z.anzbett = ?
+");
+
+if (!$stmt) {
+    echo json_encode(['error' => 'Fehler bei der SQL-Prepare: ' . $conn->error]);
+    exit;
+}
+
+$stmt->bind_param("sssi", $bisDatum, $vonDatum, $bisDatum, $anzBett);
 $stmt->execute();
-echo json_encode($data);
+$result = $stmt->get_result();
+
+if ($result->num_rows === 0) {
+    echo json_encode(['error' => 'Kein freies Zimmer gefunden']);
+    exit;
+}
+
+$row = $result->fetch_assoc();
+$zimmer = $row['zimmernr'];
+
+$stmt->close();
+
+// 2. Buchung erstellen
+$stmt = $conn->prepare("INSERT INTO buchung (zimmer, benutzer, vondatum, bisdatum) VALUES (?, ?, ?, ?)");
+
+if (!$stmt) {
+    echo json_encode(['error' => 'Fehler bei der SQL-Prepare (INSERT): ' . $conn->error]);
+    exit;
+}
+
+$stmt->bind_param("iiss", $zimmer, $benutzer, $vonDatum, $bisDatum);
+if ($stmt->execute()) {
+    echo json_encode(['success' => 'Buchung erfolgreich', 'zimmer' => $zimmer]);
+} else {
+    echo json_encode(['error' => 'Fehler beim Einfügen: ' . $stmt->error]);
+}
 
 // Verbindung schließen
 $stmt->close();

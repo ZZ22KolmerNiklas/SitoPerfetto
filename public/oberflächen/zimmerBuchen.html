@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PHP + JavaScript in IntelliJ</title>
-    <script defer src="../js/zimmerBuchen1.js"></script>
+    <script defer src="../js/zimmerBuchen2.js"></script>
     <link rel="stylesheet" href="../css/zimmerBuchen2.css">
 </head>
 <body>
@@ -20,7 +20,7 @@
 
 <div class="grid">
     <div>
-        <img class="zimmerImg" src="../img/luxurious%20hotel%20room.png" alt="Bild nicht gefunden.">
+        <img class="zimmerImg" id="zimmerImg" src="" alt="Bild nicht gefunden.">
         <p class="art" id="art">k</p>
     </div>
 
@@ -38,14 +38,14 @@
                 <label>
                     <p style="margin: 20px 0 0 0">Ankunft</p>
                     <input class="datum" type="date" id="vonDatum" value="2025-02-06"
-                           min="2025-02-06"/>
+                           min="2025-02-06" onchange="dataChange()"/>
 
                     <p style="margin: 20px 0 0 0">Abreise</p>
                     <input class="datum" type="date" id="bisDatum" value="2025-02-07"
-                           min="2025-02-07"/>
+                           min="2025-02-07" onchange="dataChange()"/>
                 </label>
-                <p> Preis: <label class="ausgabeLbl" id="gesamtPreis">70000€</label></p>
-                <p> Verfügbare Zimmer: <label class="ausgabeLbl" id="anzZimmer">8</label></p>
+                <p> Preis: <label class="ausgabeLbl" id="gesamtPreis"></label></p>
+                <p> Verfügbare Zimmer: <label class="ausgabeLbl" id="anzZimmer"></label></p>
                 <button class="buchenBtn" onclick="changePopup('show')" type="submit">Buchen</button>
             </form>
         </div>
