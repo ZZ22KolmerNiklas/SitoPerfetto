@@ -178,9 +178,7 @@ function schliessen() {
 }
 
 function bewertung(action, senden){
-    console.log("1");
     if(senden === "senden"){
-        console.log("2");
         let data = {
             zimmer: bewertungart,
             benutzer: sessionStorage.getItem("user_id"),
