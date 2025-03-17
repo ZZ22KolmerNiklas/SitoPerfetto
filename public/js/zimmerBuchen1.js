@@ -86,7 +86,7 @@ document.getElementById("buchenForm").addEventListener("submit", async function 
         .then(response => response.json())
         .then(result => {
             console.log(result);
-            if(document.getElementById("anzZimmer").innerText != 0){
+            if(document.getElementById("anzZimmer").innerText !== '0'){
                 document.getElementById("buchungText").innerText = 'Buchung erfolgeich. Die Rechnung wird an Ihre E-mail geschickt.';
                 console.log('ja');
             }else{
