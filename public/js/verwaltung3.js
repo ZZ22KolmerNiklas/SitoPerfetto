@@ -11,19 +11,58 @@ function rejectReview() {
     alert("Rezension abgelehnt!");
 }
 
-function Bewertungen_anzeigen (){
+function sterneAnzeigen(sterne){
+
+    switch (sterne) {
+        case 1:
+            document.getElementById('stern2').style.display = 'none';
+            document.getElementById('stern3').style.display = 'none';
+            document.getElementById('stern4').style.display = 'none';
+            document.getElementById('stern5').style.display = 'none';
+            break;
+        case 2:
+            document.getElementById('stern2').style.display = 'inline-block';
+            document.getElementById('stern3').style.display = 'none';
+            document.getElementById('stern4').style.display = 'none';
+            document.getElementById('stern5').style.display = 'none';
+            break;
+        case 3:
+            document.getElementById('stern2').style.display = 'inline-block';
+            document.getElementById('stern3').style.display = 'inline-block';
+            document.getElementById('stern4').style.display = 'none';
+            document.getElementById('stern5').style.display = 'none';
+            break;
+        case 4:
+            document.getElementById('stern2').style.display = 'inline-block';
+            document.getElementById('stern3').style.display = 'inline-block';
+            document.getElementById('stern4').style.display = 'inline-block';
+            document.getElementById('stern5').style.display = 'none';
+            break;
+        case 5:
+            document.getElementById('stern2').style.display = 'inline-block';
+            document.getElementById('stern3').style.display = 'inline-block';
+            document.getElementById('stern4').style.display = 'inline-block';
+            document.getElementById('stern5').style.display = 'inline-block';
+            break;
+    }
+}
+
+function getNaechsteBewertung(){
     fetch("../../php/get_bewertung.php")
         .then(response => response.json())
         .then(data => {
             data.forEach(row => {
-
+                sterneAnzeigen(row.sterne);
+                document.getElementById('reviewBox').innerText = '\n' + row.zimmer + '\n' + row.bewertung;
             });
         })
         .catch(error => console.error("Fehler:", error));
 }
 
+
+
 window.onload = function(){
-    Bewertungen_anzeigen();
+    getNaechsteBewertung();
 
     let i = 1
     fetch("../../php/get_verwaltungTable1.php")

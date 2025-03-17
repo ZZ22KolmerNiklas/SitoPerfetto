@@ -6,7 +6,7 @@
     <title>PHP + JavaScript in IntelliJ</title>
     <script defer src="../js/verwaltung3.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-    <link rel="stylesheet" href="../css/verwaltung1.css">
+    <link rel="stylesheet" href="../css/verwaltung2.css">
 </head>
 <body>
 <div class="header">
@@ -15,7 +15,7 @@
         <p class="funrest">FUNREST Hotel</p>
         <p class="berlin">Berlin</p>
     </h1>
-    <p class="name" id="name">Maximilian Braun</p>
+    <p class="name" id="name"></p>
 </div>
 <div class="table-container">
     <table id="dataTable">
@@ -42,13 +42,23 @@
 
 <div class="review-container">
     <label>Neue Rezension:</label>
-    <div class="review-box" id="reviewBox">Hier erscheint die neue Rezension...</div>
+    <div class="review-box">
+        <label id="stern1">&#11088</label>
+        <label id="stern2">&#11088</label>
+        <label id="stern3">&#11088</label>
+        <label id="stern4">&#11088</label>
+        <label id="stern5">&#11088</label>
+        <label id="reviewBox">Hier erscheinen die neuen Rezension...</label>
+    </div>
     <div class="button-container">
         <button onclick="confirmReview()" class="btnOrange">Bestätigen</button>
         <button onclick="rejectReview()" class="btnOrange">Ablehnen</button>
         <button class="verwaltungBtn" onclick="preisVerwalten('show')">Preis verwalten</button>
     </div>
 </div>
+
+
+
 <div class="popup" id="popupBearbeiten">
     <div class="popupinput">
         <div class="inputdaten">
@@ -67,8 +77,10 @@
                 <input name="zimmerNr" id="zimmerNr" size="14" required />
                 <input name="vorname" id="vorname" size="14" required /><br>
                 <input name="nachname" id="nachname" size="14" required /><br>
-                <input name="ankunft" id="ankunft" size="14" required />
-                <input name="abreise" id="abreise" size="14" required />
+                <input name="ankunft" id="ankunft"  class="datum" type="date" value="2025-02-06"
+                       min="2025-02-06" required/>
+                <input name="abreise" id="abreise"  class="datum" type="date"  value="2025-02-06"
+                       min="2025-02-06" required/>
                 <input name="email" id="email" size="14" required />
                 <input name="bettanzahl" id="bettanzahl" size="14" required />
                 <div class="stammkunde">
