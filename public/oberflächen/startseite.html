@@ -95,21 +95,21 @@
     <div class="zimmer" id="zimmerBtn">
         <div class="standard">
             <div class="art">Standard</div>
-            <img class="standardzimmer bild" src="../img/standard%20hotel%20room.png" alt="standard">
+            <img class="standardzimmer bild" src="../img/Standard.png" alt="standard">
             <p></p>
             <button class="buchen weiterButton" onclick="zimmerWahl('Standard')">Buchen</button>
             <button class="bewerten weiterButton" onclick="bewertung('show', 's')" type="submit">Bewerten</button>
         </div>
         <div class="premium">
             <div class="art">Premium</div>
-            <img class="premiumzimmer bild" src="../img/premium%20hotel%20room.png" alt="premium">
+            <img class="premiumzimmer bild" src="../img/Premium.png" alt="premium">
             <p></p>
             <button class="buchen weiterButton" onclick="zimmerWahl('Premium')">Buchen</button>
             <button class="bewerten weiterButton" onclick="bewertung('show', 'p')" type="submit">Bewerten</button>
         </div>
         <div class="luxus">
             <div class="art">Luxus</div>
-            <img class="luxuszimmer bild" src="../img/luxurious%20hotel%20room.png" alt="luxus">
+            <img class="luxuszimmer bild" src="../img/Luxus.png" alt="luxus">
             <p></p>
             <button class="buchen weiterButton" onclick="zimmerWahl('Luxus')">Buchen</button>
             <button class="bewerten weiterButton" onclick="bewertung('show', 'l')" type="submit">Bewerten</button>
@@ -132,6 +132,10 @@
         <button type="button" onclick="bewertung('hide')" style="font-size: 20px; float: right; margin-right: 10px">Abbrechen</button>
     </div>
 
+    <div class="popup" id="popuperror1stern" style="z-index: 1001">
+        <label id="errornachricht1stern">Wähle zwischen einem und fünf Sternen.</label><br>
+        <button onclick="schliessen()">OK</button>
+    </div>
 
 </body>
 </html>
