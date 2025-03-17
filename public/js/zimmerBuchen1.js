@@ -100,6 +100,38 @@ document.getElementById("buchenForm").addEventListener("submit", async function 
     console.log(data);
 });
 
+document.addEventListener("DOMContentLoaded", () => {
+    dataChange();
+    const vonDatumInput = document.getElementById("vonDatum");
+    const bisDatumInput = document.getElementById("bisDatum");
+
+    const heute = new Date();
+    const morgen = new Date(heute);
+    morgen.setDate(heute.getDate() + 1);
+
+    const formatDate = (date) => date.toISOString().split('T')[0];
+
+    vonDatumInput.value = formatDate(heute);
+    vonDatumInput.min = formatDate(heute);
+    bisDatumInput.value = formatDate(morgen);
+    bisDatumInput.min = formatDate(morgen);
+});
+
+function updateMinDate() {
+    const vonDatum = new Date(document.getElementById("vonDatum").value);
+    const bisDatumInput = document.getElementById("bisDatum");
+
+    const naechsterTag = new Date(vonDatum);
+    naechsterTag.setDate(vonDatum.getDate() + 1);
+
+    bisDatumInput.min = naechsterTag.toISOString().split('T')[0];
+
+    // Falls das aktuelle Abreisedatum vor dem neuen Mindestdatum liegt, aktualisieren
+    if (new Date(bisDatumInput.value) < naechsterTag) {
+        bisDatumInput.value = naechsterTag.toISOString().split('T')[0];
+    }
+}
+
 function home() {
     window.location.href = "../oberflächen/startseite.html";
 }
