@@ -187,6 +187,7 @@ async function generateInvoice(buchungsNr) {
     let data = {
         "buchungsnr": buchungsNr
     }
+    console.log(data);
 
     try {
         const response = await fetch("../../php/get_rechnungsdinger.php", {
@@ -198,37 +199,40 @@ async function generateInvoice(buchungsNr) {
         })
             .then(response => response.json())
             .then(data => {
-                const startDate = new Date(data.von);
-                const endDate = new Date(data.bis);
-                const diffInMs = endDate - startDate;
-                const diffInDays = diffInMs / (1000 * 60 * 60 * 24);
-                const rechnungsNr = Number(data.rechnungsnr)+1;
-                doc.text("FUNREST Hotel", 10, 10);
-                doc.text("Funstraße 1, 12345 Berlin", 10, 20);
-                doc.text("RechnungNr: "+rechnungsNr, 10, 40);
-                doc.text("BuchungsNr: "+buchungsNr, 10, 50)
-                doc.text("Von: "+startDate.toLocaleDateString(), 10, 60);
-                doc.text("Bis: "+endDate.toLocaleDateString(), 10, 70);
-                doc.text("Zeitraum: "+diffInDays+" Nächte", 10, 80);
-                doc.text("Zimmerart: "+data.zimmerart, 10, 90);
-                doc.text("Preis: "+gesamtpreisErmitteln(startDate, endDate, data.preisProNacht)+"€", 10, 100);
+                    console.log(data);
+                    const startDate = new Date(data.von);
+                    const endDate = new Date(data.bis);
+                    const diffInMs = endDate - startDate;
+                    const diffInDays = diffInMs / (1000 * 60 * 60 * 24);
+                    const rechnungsNr = Number(data.rechnungsnr) + 1;
+                    doc.text("FUNREST Hotel", 10, 10);
+                    doc.text("Funstraße 1, 12345 Berlin", 10, 20);
+                    doc.text("RechnungNr: " + rechnungsNr, 10, 40);
+                    doc.text("BuchungsNr: " + buchungsNr, 10, 50)
+                    doc.text("Von: " + startDate.toLocaleDateString(), 10, 60);
+                    doc.text("Bis: " + endDate.toLocaleDateString(), 10, 70);
+                    doc.text("Zeitraum: " + diffInDays + " Nächte", 10, 80);
+                    doc.text("Zimmerart: " + data.zimmerart, 10, 90);
+                    doc.text("Preis: " + gesamtpreisErmitteln(startDate, endDate, data.preisProNacht) + "€", 10, 100);
+
             });
-        if (response.ok) {
+        if (response) {
             alert("Rechnung wurde erfolgreich gespeichert!");
         } else {
             alert("Fehler beim Speichern der Rechnung.");
         }
     } catch (error) {
-        alert("Netzwerkfehler beim Speichern der Rechnung.");
+        alert("Netzwerkfehler beim Speichern der Rechnung.\n" + error);
     }
 
     //doc.save("download/rechnung.pdf");
 
     const pdfData = doc.output("blob");
 
+
     const formData = new FormData();
     formData.append("file", pdfData, "rechnung.pdf");
-    formData.append("buchungsNr", '1');
+    formData.append("buchungsNr", buchungsNr);
 
     try {
         const response = await fetch("../../php/insert_rechnung.php", {
@@ -237,15 +241,15 @@ async function generateInvoice(buchungsNr) {
         })
             .then(response => response.json())
             .then(data => {
-                console.log(data.message);
+                console.log(data);
             });
-        if (response.ok) {
+        if (response) {
             alert("Rechnung wurde erfolgreich gespeichert!");
         } else {
             alert("Fehler beim Speichern der Rechnung.");
         }
     } catch (error) {
-        alert("Netzwerkfehler beim Speichern der Rechnung.");
+        alert("Netzwerkfehler beim Speichern der Rechnung.\n" + error);
     }
 }
 

@@ -28,6 +28,7 @@ function abmelden() {
     document.getElementById('verwalten').style.display = "none";
     document.getElementById('abmelden').style.display = "none";
     sessionStorage.clear();
+
 }
 
 function verwalten(){
