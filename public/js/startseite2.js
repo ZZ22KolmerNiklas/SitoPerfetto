@@ -36,9 +36,15 @@ function verwalten(){
 }
 
 function zimmerWahl(zimmer){
-    sessionStorage.setItem("zimmerArt", zimmer);
+    if(document.getElementById("login").style.display === "none"){
+        sessionStorage.setItem("zimmerArt", zimmer);
 
-    window.location.href = "../oberflächen/zimmerBuchen.html";
+        window.location.href = "../oberflächen/zimmerBuchen.html";
+    }else{
+        document.getElementById("errornachricht").innerText = 'Bitte anmelden.';
+        document.getElementById("popuperror").style.display = "block";
+    }
+
 }
 
 function register(action){
@@ -176,13 +182,13 @@ document.getElementById("registerForm").addEventListener("submit", async functio
 
 function schliessen() {
     document.getElementById('popuperror').style.display = "none";
-    document.getElementById('popuperror1stern').style.display = "none";
 }
 
 function bewertung(action, senden){
     if(senden === "senden"){
         if(stern === 0){
-            document.getElementById('popuperror1stern').style.display = "block";
+            document.getElementById("errornachricht").innerText = 'Wähle zwischen einem und fünf Sternen.';
+            document.getElementById("popuperror").style.display = "block";
         }
         let data = {
             zimmer: bewertungart,
@@ -204,11 +210,16 @@ function bewertung(action, senden){
         bewertungart = senden;
     }
 
-    let bewertung = document.getElementById("bewertungPopup");
-    if(action === 'show'){
-        bewertung.style.display = "block";
-    }else if (action === 'hide') {
-        bewertung.style.display = "none";
+    if(document.getElementById("login").style.display === "none") {
+        let bewertung = document.getElementById("bewertungPopup");
+        if (action === 'show') {
+            bewertung.style.display = "block";
+        } else if (action === 'hide') {
+            bewertung.style.display = "none";
+        }
+    } else {
+        document.getElementById("errornachricht").innerText = 'Bitte anmelden.';
+        document.getElementById("popuperror").style.display = "block";
     }
 }
 
