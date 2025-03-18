@@ -209,11 +209,16 @@ function bewertung(action, senden){
         bewertungart = senden;
     }
 
-    let bewertung = document.getElementById("bewertungPopup");
-    if(action === 'show'){
-        bewertung.style.display = "block";
-    }else if (action === 'hide') {
-        bewertung.style.display = "none";
+    if(document.getElementById("login").style.display === "none") {
+        let bewertung = document.getElementById("bewertungPopup");
+        if (action === 'show') {
+            bewertung.style.display = "block";
+        } else if (action === 'hide') {
+            bewertung.style.display = "none";
+        }
+    } else {
+        document.getElementById("errornachricht").innerText = 'Bitte anmelden.';
+        document.getElementById("popuperror").style.display = "block";
     }
 }
 
