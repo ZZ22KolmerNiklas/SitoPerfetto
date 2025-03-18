@@ -7,7 +7,7 @@ $data = json_decode(file_get_contents("php://input"), true);
 $buchungsnr = isset($data['buchungsnr']) ? intval($data['buchungsnr']) : 0;
 
 
-$stmt = $conn->prepare("SELECT bewertungID, Zimmer, bewertung, sterne FROM bewertung WHERE ueberprueft = 0");
+$stmt = $conn->prepare("SELECT bewertungID, Zimmer, bewertung, sterne FROM bewertung WHERE ueberprueft = 0 LIMIT 1");
 $stmt->execute();
 $stmt->store_result();
 

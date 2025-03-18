@@ -5,25 +5,103 @@ function home() {
     window.location.href = "../oberflächen/startseite.html";
 }
 function confirmReview() {
+    let bewertungid = Number(sessionStorage.getItem("bewertungId"));
+    let data = {
+        "bewertungId": bewertungid
+    };
+    console.log(data);
+    fetch("../../php/bewertungBestaetigt.php", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(data) // JSON-Daten senden
+    })
+        .then(response => response.text())
+        .catch(error => console.error("Fehler:", error));
+
+
     alert("Rezension bestätigt!");
+
+    getNaechsteBewertung();
 }
 function rejectReview() {
+    let bewertungid = Number(sessionStorage.getItem("bewertungId"));
+    let data = {
+        "bewertungId": bewertungid
+    };
+    fetch("../../php/bewertungLoeschen.php", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(data) // JSON-Daten senden
+    })
+        .then(response => response.text())
+        .catch(error => console.error("Fehler:", error));
+
     alert("Rezension abgelehnt!");
+    getNaechsteBewertung();
 }
 
-function Bewertungen_anzeigen (){
+function sterneAnzeigen(sterne){
+
+    switch (sterne) {
+        case 1:
+            document.getElementById('stern2').style.display = 'none';
+            document.getElementById('stern3').style.display = 'none';
+            document.getElementById('stern4').style.display = 'none';
+            document.getElementById('stern5').style.display = 'none';
+            break;
+        case 2:
+            document.getElementById('stern2').style.display = 'inline-block';
+            document.getElementById('stern3').style.display = 'none';
+            document.getElementById('stern4').style.display = 'none';
+            document.getElementById('stern5').style.display = 'none';
+            break;
+        case 3:
+            document.getElementById('stern2').style.display = 'inline-block';
+            document.getElementById('stern3').style.display = 'inline-block';
+            document.getElementById('stern4').style.display = 'none';
+            document.getElementById('stern5').style.display = 'none';
+            break;
+        case 4:
+            document.getElementById('stern2').style.display = 'inline-block';
+            document.getElementById('stern3').style.display = 'inline-block';
+            document.getElementById('stern4').style.display = 'inline-block';
+            document.getElementById('stern5').style.display = 'none';
+            break;
+        case 5:
+            document.getElementById('stern2').style.display = 'inline-block';
+            document.getElementById('stern3').style.display = 'inline-block';
+            document.getElementById('stern4').style.display = 'inline-block';
+            document.getElementById('stern5').style.display = 'inline-block';
+            break;
+    }
+}
+
+function getNaechsteBewertung(){
     fetch("../../php/get_bewertung.php")
         .then(response => response.json())
         .then(data => {
-            data.forEach(row => {
-
-            });
+            if(data.length === 0){
+                sterneAnzeigen(5);
+                document.getElementById('reviewBox').innerText = '\nHier erscheinen die neuen Rezension...'
+            } else{
+                data.forEach(row => {
+                    sterneAnzeigen(row.sterne);
+                    let bewertungid = row.bewertungid;
+                    sessionStorage.setItem("bewertungId", bewertungid)
+                    document.getElementById('reviewBox').innerText = '\n' + row.zimmer + '\n' + row.bewertung;
+                });
+            }
         })
         .catch(error => console.error("Fehler:", error));
 }
 
+
 window.onload = function(){
-    Bewertungen_anzeigen();
+    getNaechsteBewertung();
 
     let i = 1
     fetch("../../php/get_verwaltungTable1.php")
