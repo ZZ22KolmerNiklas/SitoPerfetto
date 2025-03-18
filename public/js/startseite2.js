@@ -181,7 +181,6 @@ document.getElementById("registerForm").addEventListener("submit", async functio
 
 function schliessen() {
     document.getElementById('popuperror').style.display = "none";
-    document.getElementById('popuperror1stern').style.display = "none";
 }
 
 function bewertung(action, senden){
