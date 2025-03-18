@@ -101,9 +101,11 @@
 <div class="preisVerwaltung" id="preisVerwaltungPopup">
     <b class="zimmerPreis">Zimmerpreis<br><br></b>
     <form action="">
-        <label>Standard: <input type="number" min="0" id="standardPreis">€<br><br></label>
-        <label>Premium: <input type="number" min="0" id="premiumPreis">€<br><br></label>
-        <label>Luxus: <input type="number" min="0" id="luxusPreis">€<br><br></label>
+        <label id="einzelzimmer" class="einzelzimmer">Einzelzimmer </label>
+        <label id="doppelzimmer" class="doppelzimmer">Doppelzimmer </label><br><br>
+        <label>Standard: <input class="standardPreisEinzel" type="number" min="0" id="standardPreisEinzel">€<input class="standardPreisDoppel" type="number" min="0" id="standardPreisDoppel">€<br><br></label>
+        <label>Premium: <input class="premiumPreisEinzel" type="number" min="0" id="premiumPreisEinzel">€<input class="premiumPreisDoppel" type="number" min="0" id="premiumPreisDoppel">€<br><br></label>
+        <label>Luxus: <input class="luxusPreisEinzel" type="number" min="0" id="luxusPreisEinzel">€<input class="luxusPreisDoppel" type="number" min="0" id="luxusPreisDoppel">€<br><br></label>
         <button class="preisBtn" type="submit" onclick="preisVerwalten('hide', 'senden')" style="font-size: 20px">Speichern</button>
         <button class="preisBtn" type="button" onclick="preisVerwalten('hide')" style="font-size: 20px">Abbrechen</button>
     </form>

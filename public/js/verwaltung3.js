@@ -172,6 +172,48 @@ function preisVerwalten(action, senden) {
     let verwaltung = document.getElementById("preisVerwaltungPopup");
     if (action === 'show') {
         verwaltung.style.display = "block";
+
+        fetch("../../php/get_zimmerpreis.php", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            }
+        })
+            .then(response => response.json())
+            .then(data => {
+                console.log(data)
+                data.forEach(row => {
+                    switch (row.art){
+                        case 'Standard':
+                            if (row.anzBett === 1){
+                                document.getElementById('standardPreisEinzel').value = row.preispronacht;
+                            }
+                            else if (row.anzBett === 2){
+                                document.getElementById('standardPreisDoppel').value = row.preispronacht;
+                            }
+                    }
+                    switch (row.art){
+                        case 'Premium':
+                            if (row.anzBett === 1){
+                                document.getElementById('premiumPreisEinzel').value = row.preispronacht;
+                            }
+                            else if (row.anzBett === 2){
+                                document.getElementById('premiumPreisDoppel').value = row.preispronacht;
+                            }
+                    }
+                    switch (row.art){
+                        case 'Luxus':
+                            if (row.anzBett === 1){
+                                document.getElementById('luxusPreisEinzel').value = row.preispronacht;
+                            }
+                            else if (row.anzBett === 2){
+                                document.getElementById('luxusPreisDoppel').value = row.preispronacht;
+                            }
+                    }
+                })
+            })
+            .catch(error => console.error("Fehler:", error));
+
     } else if (action === 'hide') {
         verwaltung.style.display = "none";
     }
