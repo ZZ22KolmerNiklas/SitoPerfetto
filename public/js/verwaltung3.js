@@ -222,6 +222,63 @@ function preisVerwalten(action, senden) {
     }
 }
 
+document.getElementById("preisSpeichern").addEventListener("submit", async function (event) {
+    event.preventDefault(); // Verhindert das Standard-Formular-Absenden
+
+    // Daten aus dem Formular holen
+    switch (row.art){
+        case 'Standard':
+            if (row.anzBett === 1){
+                document.getElementById('standardPreisEinzel').value = row.preispronacht;
+            }
+            else if (row.anzBett === 2){
+                document.getElementById('standardPreisDoppel').value = row.preispronacht;
+            }
+    }
+    switch (row.art){
+        case 'Premium':
+            if (row.anzBett === 1){
+                document.getElementById('premiumPreisEinzel').value = row.preispronacht;
+            }
+            else if (row.anzBett === 2){
+                document.getElementById('premiumPreisDoppel').value = row.preispronacht;
+            }
+    }
+    switch (row.art){
+        case 'Luxus':
+            if (row.anzBett === 1){
+                document.getElementById('luxusPreisEinzel').value = row.preispronacht;
+            }
+            else if (row.anzBett === 2){
+                document.getElementById('luxusPreisDoppel').value = row.preispronacht;
+            }
+    }
+
+    let art = document.getElementById("art").value;
+    let anzBett = document.getElementById("anzBett").value;
+    let preisProNacht = document.getElementById("preisProNacht").value;
+
+        // Daten als JSON-Objekt vorbereiten
+        let data = {
+            art: art,
+            anzBett: anzBett,
+            preisProNacht: preisProNacht
+        };
+
+        // Fetch-POST an PHP senden
+        fetch("../../php/update_preis.php", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(data) // JSON-Daten senden
+        })
+            .then(response => response.text())
+            .catch(error => console.error("Fehler:", error));
+        register('hide');
+
+});
+
 async function generateInvoice(buchungsNr) {
     const {jsPDF} = window.jspdf;
     const doc = new jsPDF();
