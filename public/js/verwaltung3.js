@@ -216,11 +216,6 @@ async function generateInvoice(buchungsNr) {
                     doc.text("Preis: " + gesamtpreisErmitteln(startDate, endDate, data.preisProNacht) + "€", 10, 100);
 
             });
-        if (response) {
-            alert("Rechnung wurde erfolgreich gespeichert!");
-        } else {
-            alert("Fehler beim Speichern der Rechnung.");
-        }
     } catch (error) {
         alert("Netzwerkfehler beim Speichern der Rechnung.\n" + error);
     }
@@ -242,6 +237,7 @@ async function generateInvoice(buchungsNr) {
             .then(response => response.json())
             .then(data => {
                 console.log(data);
+                return data;
             });
         if (response) {
             alert("Rechnung wurde erfolgreich gespeichert!");
