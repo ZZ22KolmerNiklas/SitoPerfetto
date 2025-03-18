@@ -4,6 +4,44 @@ window.onload = function(){
     let zimmerArt = sessionStorage.getItem("zimmerArt");
     document.getElementById('zimmerImg').src = `../img/${zimmerArt}.png`;
     dataChange();
+    kommentareAnzeigen();
+}
+
+function kommentareAnzeigen(){
+
+    let data = {
+        zimmer: sessionStorage.getItem("zimmerArt")
+    };
+
+    fetch("../../php/get_komentare.php", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(data) // JSON-Daten senden
+    })
+        .then(response => response.json())
+        .then(data => {
+                data.forEach(row => {
+                    switch (row.sterne) {
+                        case 1:
+                            document.getElementById("kommentarArea").value += "⭐";
+                        case 2:
+                            document.getElementById("kommentarArea").value += "⭐";
+                        case 3:
+                            document.getElementById("kommentarArea").value += "⭐";
+                        case 4:
+                            document.getElementById("kommentarArea").value += "⭐";
+                        case 5:
+                            document.getElementById("kommentarArea").value += "⭐";
+                            break;
+                    }
+
+                    document.getElementById("kommentarArea").value += ('\n' + row.bewertung + '\n\n');
+                });
+
+        })
+        .catch(error => console.error("Fehler:", error));
 }
 
 function changePopup(action){
