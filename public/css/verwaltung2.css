@@ -134,9 +134,45 @@ th {
     z-index: 1000;
     font-family: Arial, serif;
     font-size: 25px;
-    width: 30%;
-    height: 50%;
+    width: auto;
+    height: auto;
 }
+
+.einzelzimmer{
+    margin-left: 125px;
+}
+
+.doppelzimmer{
+    margin-left: 55px;
+}
+
+.standardPreisEinzel{
+    font-size: large;
+}
+.standardPreisDoppel{
+    margin-left: 20px;
+    font-size: large;
+}
+
+.premiumPreisEinzel{
+    font-size: large;
+}
+
+.premiumPreisDoppel{
+    margin-left: 20px;
+    font-size: large;
+}
+
+.luxusPreisEinzel{
+    margin-left: 33px;
+    font-size: large;
+}
+
+.luxusPreisDoppel{
+    margin-left: 20px;
+    font-size: large;
+}
+
 .preisBtn{
     padding: 8px 12px;
     background: #ff9800;
@@ -146,6 +182,7 @@ th {
     transition: 0.2s;
     border: none;
     border-radius: 8px;
+    margin-left: 120px;
 }
 .zimmerPreis{
     margin-left: 32%;

@@ -192,6 +192,48 @@ function preisVerwalten(action, senden) {
     let verwaltung = document.getElementById("preisVerwaltungPopup");
     if (action === 'show') {
         verwaltung.style.display = "block";
+
+        fetch("../../php/get_zimmerpreis.php", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            }
+        })
+            .then(response => response.json())
+            .then(data => {
+                console.log(data)
+                data.forEach(row => {
+                    switch (row.art){
+                        case 'Standard':
+                            if (row.anzBett === 1){
+                                document.getElementById('standardPreisEinzel').value = row.preispronacht;
+                            }
+                            else if (row.anzBett === 2){
+                                document.getElementById('standardPreisDoppel').value = row.preispronacht;
+                            }
+                    }
+                    switch (row.art){
+                        case 'Premium':
+                            if (row.anzBett === 1){
+                                document.getElementById('premiumPreisEinzel').value = row.preispronacht;
+                            }
+                            else if (row.anzBett === 2){
+                                document.getElementById('premiumPreisDoppel').value = row.preispronacht;
+                            }
+                    }
+                    switch (row.art){
+                        case 'Luxus':
+                            if (row.anzBett === 1){
+                                document.getElementById('luxusPreisEinzel').value = row.preispronacht;
+                            }
+                            else if (row.anzBett === 2){
+                                document.getElementById('luxusPreisDoppel').value = row.preispronacht;
+                            }
+                    }
+                })
+            })
+            .catch(error => console.error("Fehler:", error));
+
     } else if (action === 'hide') {
         verwaltung.style.display = "none";
     }
@@ -199,6 +241,55 @@ function preisVerwalten(action, senden) {
             /*an DB übergeben*/
     }
 }
+
+document.getElementById("preisVerwaltenForm").addEventListener("submit", async function (event) {
+    event.preventDefault(); // Verhindert das Standard-Formular-Absenden
+
+    // Daten als JSON-Objekt vorbereiten
+    let data = [
+        {
+            art: 'Standard',
+            anzBett: 1,
+            preisProNacht: document.getElementById('standardPreisEinzel').value
+        },
+        {
+            art: 'Standard',
+            anzBett: 2,
+            preisProNacht: document.getElementById('standardPreisDoppel').value
+        },
+        {
+            art: 'Premium',
+            anzBett: 1,
+            preisProNacht: document.getElementById('premiumPreisEinzel').value
+        },
+        {
+            art: 'Premium',
+            anzBett: 2,
+            preisProNacht: document.getElementById('premiumPreisDoppel').value
+        },
+        {
+            art: 'Luxus',
+            anzBett: 1,
+            preisProNacht: document.getElementById('luxusPreisEinzel').value
+        },
+        {
+            art: 'Luxus',
+            anzBett: 2,
+            preisProNacht: document.getElementById('luxusPreisDoppel').value
+        }];
+
+        // Fetch-POST an PHP senden
+        fetch("../../php/update_preis.php", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(data) // JSON-Daten senden
+        })
+            .then(response => response.text())
+            .catch(error => console.error("Fehler:", error));
+
+});
 
 async function generateInvoice(buchungsNr) {
     const {jsPDF} = window.jspdf;
