@@ -7,19 +7,18 @@ $data = json_decode(file_get_contents("php://input"), true);
 $zimmer = isset($data['zimmer']) ? trim($data['zimmer']) : '';
 
 
-$stmt = $conn->prepare("SELECT bewertungID, Zimmer, bewertung, sterne FROM bewertung WHERE ueberprueft = 0 LIMIT 1");
+$stmt = $conn->prepare("SELECT bewertung, sterne FROM bewertung WHERE Zimmer = ? AND ueberprueft = 1");
+$stmt->bind_param("s", $zimmer);
 $stmt->execute();
 $stmt->store_result();
 
 $stmt->bind_result(
-    $bewertungid, $zimmer, $bewertung, $sterne
+    $bewertung, $sterne
 );
 
 $data = [];
 while ($stmt->fetch()) {
     $data[] = [
-        "bewertungid" => $bewertungid,
-        "zimmer" => $zimmer,
         "bewertung" => $bewertung,
         "sterne" => $sterne
     ];
