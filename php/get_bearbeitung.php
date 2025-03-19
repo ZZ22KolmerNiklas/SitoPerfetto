@@ -33,6 +33,7 @@ $data = [];
 while ($stmt->fetch()) {
     $data[] = [
         "zimmernummer" => $zimmer_nr,
+        "benutzerid" => $benutzer_id,
         "vorname" => $vorname,
         "nachname" => $nachname,
         "stammkunde" => $stammkunde,

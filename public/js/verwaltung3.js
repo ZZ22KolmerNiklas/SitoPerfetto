@@ -123,6 +123,7 @@ window.onload = function(){
                 btn.addEventListener("click", function (){
                     document.getElementById('popupBearbeiten').style.display = "block";
                     console.log(btn.id);
+                    sessionStorage.setItem("buchungsNr", btn.id);
                     let data = {
                         buchungsnr: btn.id
                     };
@@ -135,7 +136,26 @@ window.onload = function(){
                         body: JSON.stringify(data) // JSON-Daten senden
                     })
                         .then(response => response.json())
-                        .then(data => console.log(data));
+                        .then(result => {
+                            result.forEach(row => {
+                                sessionStorage.setItem("zimmerNr", row.zimmernummer);
+                                sessionStorage.setItem("benutzer_id_bearbeitung", row.benutzerid);
+                                document.getElementById("zimmerNr").value = row.zimmernummer;
+                                document.getElementById("vorname").value = row.vorname;
+                                document.getElementById("nachname").value = row.nachname;
+                                document.getElementById("ankunft").value = row.von;
+                                document.getElementById("abreise").value = row.bis;
+                                document.getElementById("email").value = row.email;
+                                document.getElementById("bettanzahl").value = row.anzahlBetten;
+                                if(row.stammkunde === 1){
+                                    document.getElementById("ja").checked = "true";
+                                }else{
+                                    document.getElementById("nein").checked = "false";
+                                }
+                                console.log(result);
+                            })
+
+                        });
                 });
 
                 cell.appendChild(btn);
@@ -272,3 +292,34 @@ function istStammkunde(action) {
         nein.checked = true;
     }
 }
+
+document.getElementById("bearbeitungForm").addEventListener("submit", async function (event) {
+    event.preventDefault();
+
+    let stammkunde = document.getElementById("ja").checked ? 1 : 0;
+
+    let data = {
+        zimmerNr: sessionStorage.getItem("zimmerNr"),
+        vonDatum: document.getElementById("ankunft").value,
+        bisDatum: document.getElementById("abreise").value,
+        buchungsNr: sessionStorage.getItem("buchungsNr"),
+        benutzerId: sessionStorage.getItem("benutzer_id_bearbeitung"),
+        email: document.getElementById("email").value,
+        stammkunde: stammkunde
+    }
+    console.log(data);
+    fetch("../../php/update_buchung.php", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(data) // JSON-Daten senden
+    })
+        .then(response => {
+            abbrechen();
+            window.onload();
+        })
+        .catch(error => {
+            console.error("Fehler:", error);
+        });
+});

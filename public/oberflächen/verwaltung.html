@@ -78,10 +78,8 @@
                 <input name="zimmerNr" id="zimmerNr" size="14" required />
                 <input name="vorname" id="vorname" size="14" required /><br>
                 <input name="nachname" id="nachname" size="14" required /><br>
-                <input name="ankunft" id="ankunft"  class="datum" type="date" value="2025-02-06"
-                       min="2025-02-06" required/>
-                <input name="abreise" id="abreise"  class="datum" type="date"  value="2025-02-06"
-                       min="2025-02-06" required/>
+                <input name="ankunft" id="ankunft"  class="datum" type="date" required/>
+                <input name="abreise" id="abreise"  class="datum" type="date" required/>
                 <input name="email" id="email" size="14" required />
                 <input name="bettanzahl" id="bettanzahl" size="14" required />
                 <div class="stammkunde">
@@ -94,7 +92,7 @@
                         <input style="margin-left: 0" type="radio" id="nein" name="nein" onclick="istStammkunde('nein')"/>
                     </div>
                 </div>
-                <button class="beabtn" type="submit">Speichern</button>
+                <button class="beabtn" id="beabtn" type="submit">Speichern</button>
             </form>
         </div>
     </div>
