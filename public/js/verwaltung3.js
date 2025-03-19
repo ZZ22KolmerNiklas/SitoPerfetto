@@ -222,48 +222,41 @@ function preisVerwalten(action, senden) {
     }
 }
 
-document.getElementById("preisSpeichern").addEventListener("submit", async function (event) {
+document.getElementById("preisVerwaltenForm").addEventListener("submit", async function (event) {
     event.preventDefault(); // Verhindert das Standard-Formular-Absenden
 
-    // Daten aus dem Formular holen
-    switch (row.art){
-        case 'Standard':
-            if (row.anzBett === 1){
-                document.getElementById('standardPreisEinzel').value = row.preispronacht;
-            }
-            else if (row.anzBett === 2){
-                document.getElementById('standardPreisDoppel').value = row.preispronacht;
-            }
-    }
-    switch (row.art){
-        case 'Premium':
-            if (row.anzBett === 1){
-                document.getElementById('premiumPreisEinzel').value = row.preispronacht;
-            }
-            else if (row.anzBett === 2){
-                document.getElementById('premiumPreisDoppel').value = row.preispronacht;
-            }
-    }
-    switch (row.art){
-        case 'Luxus':
-            if (row.anzBett === 1){
-                document.getElementById('luxusPreisEinzel').value = row.preispronacht;
-            }
-            else if (row.anzBett === 2){
-                document.getElementById('luxusPreisDoppel').value = row.preispronacht;
-            }
-    }
-
-    let art = document.getElementById("art").value;
-    let anzBett = document.getElementById("anzBett").value;
-    let preisProNacht = document.getElementById("preisProNacht").value;
-
-        // Daten als JSON-Objekt vorbereiten
-        let data = {
-            art: art,
-            anzBett: anzBett,
-            preisProNacht: preisProNacht
-        };
+    // Daten als JSON-Objekt vorbereiten
+    let data = [
+        {
+            art: 'Standard',
+            anzBett: 1,
+            preisProNacht: document.getElementById('standardPreisEinzel').value
+        },
+        {
+            art: 'Standard',
+            anzBett: 2,
+            preisProNacht: document.getElementById('standardPreisDoppel').value
+        },
+        {
+            art: 'Premium',
+            anzBett: 1,
+            preisProNacht: document.getElementById('premiumPreisEinzel').value
+        },
+        {
+            art: 'Premium',
+            anzBett: 2,
+            preisProNacht: document.getElementById('premiumPreisDoppel').value
+        },
+        {
+            art: 'Luxus',
+            anzBett: 1,
+            preisProNacht: document.getElementById('luxusPreisEinzel').value
+        },
+        {
+            art: 'Luxus',
+            anzBett: 2,
+            preisProNacht: document.getElementById('luxusPreisDoppel').value
+        }];
 
         // Fetch-POST an PHP senden
         fetch("../../php/update_preis.php", {
@@ -275,7 +268,6 @@ document.getElementById("preisSpeichern").addEventListener("submit", async funct
         })
             .then(response => response.text())
             .catch(error => console.error("Fehler:", error));
-        register('hide');
 
 });
 

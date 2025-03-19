@@ -6,14 +6,17 @@ include 'database.php'; // Verbindung importieren
 $data = json_decode(file_get_contents("php://input"), true);
 
 if ($data) {
-    $art = $data["art"];
-    $anzBett = $data["anzBett"];
-    $preisProNacht = $data["preisProNacht"];
+    foreach ($data as $zimmer){
+        $art = $zimmer["art"];
+        $anzBett = $zimmer["anzBett"];
+        $preisProNacht = $zimmer["preisProNacht"];
 
-    // Preis ändern
-    $stmt = $conn->prepare("UPDATE zimmer SET preisProNacht = ? WHERE art = ? and anzBett = ?");
-    $stmt->bind_param("dsi", $preisProNacht, $art, $anzBett);
-    $stmt->execute();
+        // Preis ändern
+        $stmt = $conn->prepare("UPDATE zimmer SET preisProNacht = ? WHERE art = ? and anzBett = ?");
+        $stmt->bind_param("dsi", $preisProNacht, $art, $anzBett);
+        $stmt->execute();
+        $stmt->close();
+    }
 
     $stmt->close();
     $conn->close();
