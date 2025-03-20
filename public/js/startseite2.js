@@ -305,6 +305,8 @@ function bewertung(action, senden){
             bewertung.style.display = "block";
         } else if (action === 'hide') {
             bewertung.style.display = "none";
+            document.getElementsByName("rating").forEach(element => element.checked = false)
+            document.getElementById("textarea").value = '';
         }
     } else {
         document.getElementById("errornachricht").innerText = 'Bitte anmelden.';
