@@ -1,3 +1,11 @@
+body {
+    font-family: Arial, sans-serif; /* Einheitliche Schriftart */
+    background: linear-gradient(to bottom, #a2cffe, #076fa3); /* Farbverlauf */
+    min-height: 100vh; /* Damit die Seite immer die volle Höhe einnimmt */
+    background-repeat: no-repeat;
+    background-attachment: fixed; /* Effekt beim Scrollen */
+}
+
 .header{
     display: flex;
     justify-content: center;  /* Zentriert horizontal */
@@ -70,26 +78,28 @@ h1{
     width: 60%;
     margin-left: 20%;
     border-radius: 8px;
+    border: 2px solid black;
 }
 
 .art{
-    border: 1px solid black;
+    border: 2px solid black;
     border-radius: 8px;
     margin: auto;
     font-family: Arial, serif;
     padding: 5px;
     font-size: 20px;
     width: 59%;
-    background-color: gray;
+    background-color: #ffc58a;
 }
 
 .infos{
-    background-color: gray;
+    background-color: #ffc58a;
     border-radius: 8px;
     padding: 10px;
     margin:  auto 20px auto 10px;
     font-family: Arial, serif;
     font-size: 25px;
+    border: 2px solid black;
 }
 
 .checkContainer {
@@ -152,6 +162,7 @@ h1{
     pointer-events: none;
     resize: none;
     background-color: #f9f9f9;
+    border: 2px solid black;
 }
 
 .popup{

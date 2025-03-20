@@ -182,6 +182,7 @@ window.onload = function(){
                 const btn = document.createElement("button");
                 btn.id = row.buchungsnummer;
                 btn.innerText = `Bearbeiten`;
+                btn.style.backgroundColor = "#ff9800";
                 btn.addEventListener("click", function (){
                     document.getElementById('popupBearbeiten').style.display = "block";
                     console.log(btn.id);
@@ -227,6 +228,7 @@ window.onload = function(){
                 const btnR = document.createElement("button");
                 btnR.id = row.buchungsnummer;
                 btnR.innerText = `Erstellen`;
+                btnR.style.backgroundColor = "#ff9800";
                 btnR.addEventListener("click", function (){
                     generateInvoice(btnR.id);
                     console.log(btnR.id);

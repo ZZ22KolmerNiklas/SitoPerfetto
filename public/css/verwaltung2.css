@@ -1,3 +1,11 @@
+body {
+    font-family: Arial, sans-serif; /* Einheitliche Schriftart */
+    background: linear-gradient(to bottom, #a2cffe, #076fa3); /* Farbverlauf */
+    min-height: 100vh; /* Damit die Seite immer die volle Höhe einnimmt */
+    background-repeat: no-repeat;
+    background-attachment: fixed; /* Effekt beim Scrollen */
+}
+
 .header{
     display: flex;
     justify-content: center;  /* Zentriert horizontal */
@@ -81,8 +89,24 @@ th, td {
 th {
     position: sticky;
     top: 0;
-    background-color: #f4f4f4;
+    background-color: darkorange;
 }
+/* Tabellenüberschrift (Spaltennamen) */
+thead tr {
+    background-color: darkorange; /* Dunkles Orange */
+}
+
+/* Für gerade Zeilen */
+tbody tr:nth-child(even) {
+    background-color: #ffd9b3; /* Heller Orangeton */
+}
+
+/* Für ungerade Zeilen */
+tbody tr:nth-child(odd) {
+    background-color: #ffebcc; /* Noch hellerer Orangeton */
+}
+
+
 .verwaltungBtn{
     cursor: pointer;
     margin-left: 60%;
