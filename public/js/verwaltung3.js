@@ -1,8 +1,20 @@
-const ONE_DAY = 1000 * 60 * 60 * 24;
-
+/**
+ * Leitet den Benutzer auf die Startseite um, indem die aktuelle Fenster-URL geändert wird.
+ *
+ * @return {void} Gibt keinen Wert zurück.
+ */
 function home() {
     window.location.href = "../oberflächen/startseite.html";
 }
+
+/**
+ * Bestätigt eine Bewertung, indem die ID per POST-Anfrage an einen Server-Endpunkt gesendet wird.
+ * Die Bewertungs-ID wird aus dem Session-Storage abgerufen, in ein JSON-Objekt eingebettet
+ * und an ein PHP-Skript zur Verarbeitung gesendet. Nach erfolgreicher Verarbeitung wird eine
+ * Bestätigungsnachricht angezeigt und die nächste Bewertung wird abgerufen.
+ *
+ * @return {void} Gibt keinen Wert zurück.
+ */
 function confirmReview() {
     let bewertungid = Number(sessionStorage.getItem("bewertungId"));
     let data = {
@@ -24,6 +36,14 @@ function confirmReview() {
 
     getNaechsteBewertung();
 }
+
+/**
+ * Lehnt eine Bewertung ab, indem die Bewertungs-ID per POST-Anfrage an den Server gesendet wird.
+ * Die Bewertungs-ID wird aus dem Session-Storage abgerufen. Nach erfolgreicher Verarbeitung
+ * wird eine Nachricht angezeigt und die nächste Bewertung abgerufen.
+ *
+ * @return {void} Gibt keinen Wert zurück.
+ */
 function rejectReview() {
     let bewertungid = Number(sessionStorage.getItem("bewertungId"));
     let data = {
@@ -43,6 +63,12 @@ function rejectReview() {
     getNaechsteBewertung();
 }
 
+/**
+ * Passt die Anzeige der Sternelemente basierend auf der übergebenen Bewertung an.
+ *
+ * @param {number} sterne - Die Anzahl der anzuzeigenden Sterne (1 bis 5).
+ * @return {void} Gibt keinen Wert zurück. Die Funktion ändert die Sichtbarkeit der Sterne im DOM.
+ */
 function sterneAnzeigen(sterne){
 
     switch (sterne) {
@@ -79,6 +105,15 @@ function sterneAnzeigen(sterne){
     }
 }
 
+/**
+ * Ruft die nächste Bewertung vom Server ab und zeigt diese an, indem die DOM-Elemente aktualisiert werden.
+ *
+ * Die Methode führt eine asynchrone Anfrage aus, um Bewertungsdaten abzurufen. Wenn keine Bewertungen
+ * vorhanden sind, wird ein Standardinhalt angezeigt. Ansonsten wird die Bewertung einschließlich
+ * Sternebewertung und Bewertungstext im UI aktualisiert.
+ *
+ * @return {void} Gibt keinen Wert zurück.
+ */
 function getNaechsteBewertung(){
     fetch("../../php/get_bewertung.php")
         .then(response => response.json())
@@ -98,7 +133,35 @@ function getNaechsteBewertung(){
         .catch(error => console.error("Fehler:", error));
 }
 
-
+/**
+ * Dieser Code wird aufgerufen, sobald die Webseite vollständig geladen ist (Event `window.onload`).
+ *
+ * **getNaechsteBewertung()**:
+ *   Diese Funktion wird initial aufgerufen (vermutlich, um Bewertungen abzurufen oder anzuzeigen).
+ *
+ * **Abrufen und Anzeige von Verwaltungsdaten**:
+ *   Ein `fetch`-Request ruft Daten aus der Datei `get_verwaltungTable1.php` ab und wandelt sie in JSON um.
+ *   Die Daten werden im Tabellen-Body (`<tbody>`) der Tabelle mit der ID `dataTable` eingefügt.
+ *   Für jede Zeile in den Daten:
+ *     Start- und Enddatum der Buchung werden in `Date`-Objekte umgewandelt.
+ *     Der Gesamtpreis wird mithilfe der Funktion `gesamtpreisErmitteln` berechnet.
+ *     Zwei Buttons werden erstellt:
+ *       1. **Bearbeiten-Button**:
+ *          Öffnet beim Klicken ein Bearbeitungs-Popup.
+ *          Speichert die Buchungsnummer in der `sessionStorage`.
+ *          Sendet die Buchungsnummer per `fetch` an `get_bearbeitung.php`.
+ *          Die Antwortdaten (z. B. Vorname, Nachname, Ankunftsdatum) werden in die Eingabefelder des Popups eingetragen.
+ *       2. **Rechnung-Erstellen-Button**:
+ *          Ruft die Funktion `generateInvoice()` auf, um eine Rechnung anhand der Buchungsnummer zu erstellen.
+ *     Eine neue Tabellenzeile (`<tr>`) wird erstellt, die die Buchungsdetails und die Buttons enthält.
+ *
+ * **Benutzerinformationen anzeigen**:
+ *   Wenn der Benutzer in `sessionStorage` gespeichert ist:
+ *     Wird der Benutzername sichtbar gemacht und angezeigt.
+ *
+ * **Fehlerbehandlung**:
+ *   Fehler, die im Zuge der `fetch`-Operation auftreten, werden in der Konsole ausgegeben.
+ */
 window.onload = function(){
     getNaechsteBewertung();
 
@@ -187,7 +250,18 @@ window.onload = function(){
         document.getElementById('name').innerText = sessionStorage.getItem("username");
     }
 }
-function preisVerwalten(action, senden) {
+
+/**
+ * Verwalten der Anzeige und Datenbefüllung des Preisverwaltungs-Popups.
+ * Diese Funktion zeigt das Popup an oder blendet es aus und ruft bei Anzeige
+ * die Zimmerpreisdaten vom Server ab.
+ *
+ * @param {string} action Gibt an, welche Aktion ausgeführt werden soll.
+ *                        Kann 'show' sein, um das Popup anzuzeigen und Daten zu laden,
+ *                        oder 'hide', um das Popup zu schließen.
+ * @return {void} Gibt keinen Wert zurück.
+ */
+function preisVerwalten(action) {
     let verwaltung = document.getElementById("preisVerwaltungPopup");
     if (action === 'show') {
         verwaltung.style.display = "block";
@@ -236,11 +310,20 @@ function preisVerwalten(action, senden) {
     } else if (action === 'hide') {
         verwaltung.style.display = "none";
     }
-    if (senden === "senden") {
-            /*an DB übergeben*/
-    }
 }
 
+/**
+ * Dieser Event-Listener wird beim Absenden des Formulars "preisVerwaltenForm" ausgelöst.
+ * Es wird verhindert, dass das Standard-Submit-Verhalten des Formulars ausgeführt wird.
+ * Anschließend werden die Eingabedaten der Felder für Zimmerpreise in ein JSON-Format übernommen.
+ * Die Daten enthalten Angaben zu Zimmerart, Anzahl der Betten und Preis pro Nacht.
+ *
+ * Ein `fetch`-POST-Request sendet die Daten an die Server-Seite ("update_preis.php"),
+ * die für die Aktualisierung der Preise in der Datenbank zuständig ist.
+ *
+ * Nach erfolgreichem Abschluss wird eine Erfolgsmeldung angezeigt und das Popup
+ * zum Bearbeiten der Preise wird geschlossen.
+ */
 document.getElementById("preisVerwaltenForm").addEventListener("submit", async function (event) {
     event.preventDefault(); // Verhindert das Standard-Formular-Absenden
 
@@ -277,19 +360,28 @@ document.getElementById("preisVerwaltenForm").addEventListener("submit", async f
             preisProNacht: document.getElementById('luxusPreisDoppel').value
         }];
 
-        // Fetch-POST an PHP senden
-        fetch("../../php/update_preis.php", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify(data) // JSON-Daten senden
-        })
-            .then(response => response.text())
-            .catch(error => console.error("Fehler:", error));
-
+    // Fetch-POST an PHP senden
+    fetch("../../php/update_preis.php", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(data) // JSON-Daten senden
+    })
+        .then(response => response.text())
+        .catch(error => console.error("Fehler:", error));
+    alert("Preise wurden erfolgreich aktualisiert!");
+    preisVerwalten('hide');
 });
 
+/**
+ * Erstellt ein Rechnungs-PDF für eine gegebene Buchungsnummer und sendet es
+ * zur Speicherung an den Server.
+ *
+ * @param {string} buchungsNr - Die Buchungsnummer, für die die Rechnung erstellt wird.
+ * @return {Promise<void>} Ein Promise, das aufgelöst wird, wenn die Rechnung erfolgreich
+ * verarbeitet und gespeichert wurde, oder abgelehnt wird, falls ein Fehler auftritt.
+ */
 async function generateInvoice(buchungsNr) {
     const {jsPDF} = window.jspdf;
     const doc = new jsPDF();
@@ -330,8 +422,6 @@ async function generateInvoice(buchungsNr) {
         alert("Netzwerkfehler beim Speichern der Rechnung.\n" + error);
     }
 
-    //doc.save("download/rechnung.pdf");
-
     const pdfData = doc.output("blob");
 
 
@@ -359,6 +449,14 @@ async function generateInvoice(buchungsNr) {
     }
 }
 
+/**
+ * Berechnet den Gesamtpreis basierend auf dem Aufenthaltszeitraum und dem Preis pro Nacht.
+ *
+ * @param {Date} startDate - Das Startdatum des Aufenthalts.
+ * @param {Date} endDate - Das Enddatum des Aufenthalts.
+ * @param {number} preisProNacht - Der Preis pro Nacht in der gewünschten Währung.
+ * @return {number} Der Gesamtpreis für den Aufenthalt.
+ */
 function gesamtpreisErmitteln(startDate, endDate, preisProNacht){
     const diffInMs = endDate - startDate;
     const diffInDays = diffInMs / (1000 * 60 * 60 * 24);
@@ -366,10 +464,22 @@ function gesamtpreisErmitteln(startDate, endDate, preisProNacht){
     return gesamtPreis;
 }
 
+/**
+ * Blendet das HTML-Element mit der ID 'popupBearbeiten' aus, indem der
+ * Anzeige-Stil auf 'none' gesetzt wird.
+ *
+ * @return {void} Diese Methode gibt keinen Wert zurück.
+ */
 function abbrechen(){
     document.getElementById('popupBearbeiten').style.display = "none";
 }
 
+/**
+ * Aktualisiert den Status der Radio-Buttons basierend auf der Aktion des Kunden.
+ *
+ * @param {string} action - Gibt an, ob der Kunde ein Stammkunde ist ("ja") oder nicht ("nein").
+ * @return {void} Diese Funktion gibt keinen Wert zurück.
+ */
 function istStammkunde(action) {
     let ja = document.getElementById('ja');
     let nein = document.getElementById('nein');
@@ -383,6 +493,18 @@ function istStammkunde(action) {
     }
 }
 
+/**
+ * Dieser Event-Listener wird ausgelöst, wenn das Formular "bearbeitungForm" abgesendet wird.
+ *
+ * Das Standardverhalten des Formulars (Neuladen der Seite) wird via `event.preventDefault()` verhindert.
+ * Die Eingabedaten (Zimmernummer, Buchungszeitraum, Benutzerinformationen, Stammkundenstatus usw.)
+ *   werden gesammelt und in ein JSON-Objekt übertragen.
+ * Der Stammkundenstatus wird geprüft, indem festgestellt wird, ob das Radio-Button-Feld mit der ID "ja" ausgewählt wurde.
+ * Die gesammelten Daten werden in einer POST-Anfrage mithilfe von `fetch` an "update_buchung.php" gesendet,
+ *   um die Buchungsdaten auf der Serverseite zu aktualisieren.
+ * Nach erfolgreichem Abschluss wird die Seite aktualisiert (`window.onload()`), und die Abbruchfunktion wird aufgerufen.
+ * Im Falle eines Fehlers wird dieser in der Konsole protokolliert.
+ */
 document.getElementById("bearbeitungForm").addEventListener("submit", async function (event) {
     event.preventDefault();
 
@@ -403,7 +525,7 @@ document.getElementById("bearbeitungForm").addEventListener("submit", async func
         headers: {
             "Content-Type": "application/json"
         },
-        body: JSON.stringify(data) // JSON-Daten senden
+        body: JSON.stringify(data)
     })
         .then(response => {
             abbrechen();
