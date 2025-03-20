@@ -1,7 +1,7 @@
 window.onload = function(){
-    document.getElementById('art').innerHTML = sessionStorage.getItem("zimmerArt");
-    document.getElementById('name').innerText = sessionStorage.getItem("username");
     let zimmerArt = sessionStorage.getItem("zimmerArt");
+    document.getElementById('art').innerHTML = zimmerArt;
+    document.getElementById('name').innerText = sessionStorage.getItem("username");
     document.getElementById('zimmerImg').src = `../img/${zimmerArt}.png`;
     dataChange();
     kommentareAnzeigen();
@@ -24,15 +24,15 @@ function kommentareAnzeigen(){
         .then(data => {
                 data.forEach(row => {
                     switch (row.sterne) {
-                        case 1:
-                            document.getElementById("kommentarArea").value += "⭐";
-                        case 2:
-                            document.getElementById("kommentarArea").value += "⭐";
-                        case 3:
+                        case 5:
                             document.getElementById("kommentarArea").value += "⭐";
                         case 4:
                             document.getElementById("kommentarArea").value += "⭐";
-                        case 5:
+                        case 3:
+                            document.getElementById("kommentarArea").value += "⭐";
+                        case 2:
+                            document.getElementById("kommentarArea").value += "⭐";
+                        case 1:
                             document.getElementById("kommentarArea").value += "⭐";
                             break;
                     }
@@ -139,7 +139,6 @@ document.getElementById("buchenForm").addEventListener("submit", async function 
 });
 
 document.addEventListener("DOMContentLoaded", () => {
-    dataChange();
     const vonDatumInput = document.getElementById("vonDatum");
     const bisDatumInput = document.getElementById("bisDatum");
 
@@ -169,6 +168,7 @@ function updateMinDate() {
     if (new Date(bisDatumInput.value) < naechsterTag) {
         bisDatumInput.value = naechsterTag.toISOString().split('T')[0];
     }
+    dataChange();
 }
 
 function home() {
