@@ -149,6 +149,9 @@ h1{
     width: 60%;
     max-height: 6000px;
     min-height: 500px;
+    pointer-events: none;
+    resize: none;
+    background-color: #f9f9f9;
 }
 
 .popup{
