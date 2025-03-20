@@ -1,3 +1,13 @@
+/**
+ * Dieser Code wird ausgeführt, sobald die Webseite vollständig geladen ist (Event `window.onload`).
+ *
+ * Überprüft, ob ein Benutzername in `sessionStorage` gespeichert ist:
+ *   Wenn ein Benutzername vorhanden ist, wird der Name angezeigt, indem das entsprechende Element sichtbar gemacht und
+ *     sein Textinhalt aktualisiert wird (`sessionStorage.getItem("username")`).
+ *   Das Login-Element wird ausgeblendet und die Abmelden-Schaltfläche sichtbar gemacht.
+ * Überprüft, ob der Benutzer Admin-Rechte hat (`sessionStorage.getItem("admin") === '1'`):
+ *   Ist der Benutzer ein Admin, wird die Verwaltungsfunktion sichtbar gemacht.
+ */
 window.onload = function(){
     if(sessionStorage.getItem("username") !== null){
         document.getElementById('name').style.display =  "block";
@@ -10,6 +20,13 @@ window.onload = function(){
     }
 }
 
+/**
+ * Verwalte die Sichtbarkeit des Login-Popups und setze Eingabefelder zurück, wenn es ausgeblendet wird.
+ *
+ * @param {string} action - Bestimmt die auszuführende Aktion. Mit "show" wird das Login-Popup angezeigt,
+ *                          mit "hide" wird es verborgen und die Eingabefelder geleert.
+ * @return {void} Gibt keinen Wert zurück.
+ */
 function login(action){
     let popup = document.getElementById("popuplogin");
 
@@ -22,6 +39,11 @@ function login(action){
     }
 }
 
+/**
+ * Meldet den Benutzer ab, indem es die Sichtbarkeit der UI-Elemente ändert und den Session-Storage löscht.
+ *
+ * @return {void} Gibt keinen Wert zurück.
+ */
 function abmelden() {
     document.getElementById('login').style.display = "block";
     document.getElementById('name').style.display = "none";
@@ -31,10 +53,22 @@ function abmelden() {
 
 }
 
+/**
+ * Navigiert den Browser zur Seite "verwaltung.html" im Verzeichnis "oberflächen".
+ *
+ * @return {void} Gibt keinen Wert zurück.
+ */
 function verwalten(){
     window.location.href = "../oberflächen/verwaltung.html";
 }
 
+/**
+ * Führt die Auswahl eines Zimmers durch und leitet zur Buchungsseite weiter, wenn der Benutzer eingeloggt ist.
+ * Zeigt andernfalls eine Fehlermeldung an.
+ *
+ * @param {string} zimmer - Der vom Benutzer ausgewählte Zimmertyp.
+ * @return {void} Gibt keinen Wert zurück.
+ */
 function zimmerWahl(zimmer){
     if(document.getElementById("login").style.display === "none"){
         sessionStorage.setItem("zimmerArt", zimmer);
@@ -47,6 +81,12 @@ function zimmerWahl(zimmer){
 
 }
 
+/**
+ * Steuert die Sichtbarkeit des Registrierungs-Popups.
+ *
+ * @param {string} action - Die auszuführende Aktion. Akzeptiert "show", um das Popup anzuzeigen, oder "hide", um es zu verbergen.
+ * @return {void} Gibt keinen Wert zurück.
+ */
 function register(action){
     let popupReg = document.getElementById("popupregister");
     let popupLog = document.getElementById("popuplogin");
@@ -59,6 +99,12 @@ function register(action){
     }
 }
 
+/**
+ * Aktualisiert die Auswahl des Geschlechts basierend auf dem angegebenen Parameter.
+ *
+ * @param {string} action - Die Kennung des Geschlechts ('m' für männlich, 'w' für weiblich, 'd' für divers).
+ * @return {void} Gibt keinen Wert zurück.
+ */
 function changeGeschlecht(action) {
     let maennlich = document.getElementById('maennlich');
     let weiblich = document.getElementById('weiblich');
@@ -79,6 +125,23 @@ function changeGeschlecht(action) {
     }
 }
 
+/**
+ * Dieser Event-Listener wird beim Absenden des Login-Formulars "loginForm" ausgeführt.
+ *
+ * Verhindert das Standardverhalten des Formulars (Seitenneuladen) mittels `event.preventDefault()`.
+ * Liest die Werte der Eingabefelder für E-Mail und Passwort aus.
+ * Erstellt ein JSON-Objekt mit den Anmeldedaten (E-Mail und Passwort).
+ * Sendet die Anmeldedaten über einen `fetch`-POST-Request an den Server ("login.php").
+ * Verarbeitet die Serverantwort:
+ *   Bei erfolgreicher Anmeldung:
+ *     Speichert den Benutzernamen, die Benutzer-ID und den Admin-Status in `sessionStorage`.
+ *     Passt die Sichtbarkeit mehrerer UI-Elemente an (z. B. zeigt den Benutzernamen an
+ *       und blendet das Login-Formular aus).
+ *     Zeigt zusätzliche Verwaltungsoptionen an, wenn der Benutzer ein Admin ist.
+ *   Bei fehlgeschlagener Anmeldung:
+ *     Zeigt eine Fehlermeldung im Popup an.
+ * Eingabefelder (E-Mail und Passwort) werden nach erfolgreicher Anmeldung geleert.
+ */
 document.getElementById("loginForm").addEventListener("submit", async function (event){
     event.preventDefault(); // Verhindert das Standard-Formular-Absenden
 
@@ -122,6 +185,20 @@ document.getElementById("loginForm").addEventListener("submit", async function (
         });
 });
 
+/**
+ * Dieser Event-Listener wird beim Absenden des Registrierungsformulars "registerForm" ausgelöst.
+ *
+ * Verhindert das Standardverhalten des Formulars (Seitenneuladen) mit `event.preventDefault()`.
+ * Liest die eingegebenen Daten aus den Formularfeldern aus, einschließlich Vorname, Nachname,
+ *   Geschlecht, Adresse, Geburtsdatum, E-Mail und Passwort.
+ * Überprüft, ob das Passwort mit der Passwortwiederholung übereinstimmt und zeigt eine
+ *   Fehlermeldung an, falls dies nicht der Fall ist.
+ * Wenn die Passwörter übereinstimmen, wird ein Datenobjekt erstellt, das alle gesammelten
+ *   Informationen in ein JSON-Format umwandelt.
+ * Dieses JSON-Objekt wird über einen POST-Request mit `fetch` an den Server ("insert_kunde.php")
+ *   gesendet, um die Registrierungsdaten zu speichern.
+ * Nach erfolgreichem Senden wird das Registrierungs-Popup ausgeblendet.
+ */
 document.getElementById("registerForm").addEventListener("submit", async function (event) {
     event.preventDefault(); // Verhindert das Standard-Formular-Absenden
 
@@ -180,10 +257,22 @@ document.getElementById("registerForm").addEventListener("submit", async functio
     }
 });
 
+/**
+ * Blendet das Element 'popuperror' aus.
+ *
+ * @return {void} Gibt keinen Wert zurück.
+ */
 function schliessen() {
     document.getElementById('popuperror').style.display = "none";
 }
 
+/**
+ * Verarbeitet die Anzeige, das Verbergen oder die Übermittlung von Bewertungsdaten.
+ *
+ * @param {string} action - Bestimmt, ob das Bewertungs-Popup angezeigt ("show") oder ausgeblendet ("hide") wird.
+ * @param {string} senden - Bestimmt den Kontext, z. B. "senden" für Datenübermittlung.
+ * @return {void} Gibt keinen Wert zurück.
+ */
 function bewertung(action, senden){
     if(senden === "senden"){
         if(stern === 0){
@@ -226,6 +315,12 @@ function bewertung(action, senden){
 let stern = 0;
 let bewertungart = "";
 
+/**
+ * Setzt den Wert von `stern` auf die angegebene Nummer.
+ *
+ * @param {number} anzahl - Die Nummer, die `stern` zugewiesen werden soll.
+ * @return {void} - Diese Funktion gibt keinen Wert zurück.
+ */
 function sterne(anzahl){
     stern = anzahl;
 }
