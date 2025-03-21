@@ -6,10 +6,11 @@ body {
     background-attachment: fixed;
 }
 
-.header{
+.header {
     display: flex;
     justify-content: center;
     align-items: center;
+}
 
 h1{
     border: 2px solid black;
@@ -137,6 +138,8 @@ tbody tr:nth-child(odd) {
     background-color: #f9f9f9;
     transform-origin: center; /* Transformationsursprung ist die Mitte */
     transition: all 0.3s ease-in-out; /* Transition für sanfte Übergänge */
+}
+
 .button-container {
     margin-top: 1%;
 }

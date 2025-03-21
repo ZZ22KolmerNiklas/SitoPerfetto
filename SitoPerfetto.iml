@@ -7,5 +7,7 @@
     <orderEntry type="library" name="jspdf" level="application" />
     <orderEntry type="library" name="jspdf" level="application" />
     <orderEntry type="library" name="canvas-confetti" level="application" />
+    <orderEntry type="library" name="canvas-confetti" level="application" />
+    <orderEntry type="library" name="jspdf" level="application" />
   </component>
 </module>
