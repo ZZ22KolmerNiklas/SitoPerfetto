@@ -1,15 +1,15 @@
 body {
-    font-family: Arial, sans-serif; /* Einheitliche Schriftart */
-    background: linear-gradient(to bottom, #a2cffe, #076fa3); /* Farbverlauf */
-    min-height: 100vh; /* Damit die Seite immer die volle Höhe einnimmt */
+    font-family: Arial, sans-serif;
+    background: linear-gradient(to bottom, #a2cffe, #076fa3);
+    min-height: 100vh;
     background-repeat: no-repeat;
-    background-attachment: fixed; /* Effekt beim Scrollen */
+    background-attachment: fixed;
 }
 
 .header{
     display: flex;
-    justify-content: center;  /* Zentriert horizontal */
-    align-items: center;  /* Zentriert vertikal */
+    justify-content: center;
+    align-items: center;
 }
 h1{
     border: 2px solid black;
@@ -64,6 +64,8 @@ h1{
     font-size: 20px;
     padding: 0;
     word-wrap:break-word;
+    text-align: center;
+    border-radius: 10px;
 }
 
 .grid{
