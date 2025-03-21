@@ -8,129 +8,139 @@
     <link rel="stylesheet" href="../css/startseite.css">
 </head>
 <body>
-    <div class="header">
-        <h1>
-            <p class="funrest">FUNREST Hotel</p>
-            <p class="berlin">Berlin</p>
-        </h1>
-        <button class="login" id="login" onclick="login('show')" type="submit">Login</button>
-        <p class="name" id="name"></p>
+<div class="header">
+    <h1>
+        <p class="funrest">FUNREST Hotel</p>
+        <p class="berlin">Berlin</p>
+    </h1>
+    <button class="login" id="login" onclick="login('show')" type="submit">Login</button>
+    <p class="name" id="name"></p>
+    <div>
         <button class="abmelden" id="abmelden" onclick="abmelden()">Abmelden</button>
-        <button id="verwalten" onclick="verwalten()" class="verwalten" type="submit">Verwalten</button>
-    </div>
-
-    <div class="popup" id="popuplogin">
-        <div class="popupinput">
-            <div class="inputdaten">
-                <label>E-Mail:</label><br>
-                <label>Passwort:</label><br>
-                <button type="submit" onclick="register('show')">Registrieren</button>
-            </div>
-            <div class="inputdaten">
-                <form name="loginForm" id="loginForm">
-                    <input name="loginemail" id="loginemail" size="14" required />
-                    <input name="loginpw" id="loginpw" type="password" size="14" required />
-                    <button type="submit">Login</button>
-                    <button type="button" onclick="login('hide')">Schließen</button>
-                </form>
-            </div>
+        <!-- Animierte Hand -->
+        <div id="hand" class="hand" style="display: none;">
+            🖐️
         </div>
     </div>
 
-    <div class="popup" id="popuperror" style="z-index: 1001">
-        <label id="errornachricht"></label><br>
-        <button onclick="schliessen()">OK</button>
-    </div>
+    <button id="verwalten" onclick="verwalten()" class="verwalten" type="submit">Verwalten</button>
+</div>
 
-    <div class="popup" id="popupregister">
-        <div class="popupinput">
-            <div class="inputdaten">
-                <label>Vorname:</label><br>
-                <label>Nachname:</label><br>
-                <label>Geschlecht:</label><br>
-                <label>Straße:</label><br>
-                <label>Hausnummer:</label><br>
-                <label>PLZ:</label><br>
-                <label>Ort:</label><br>
-                <label>Land:</label><br>
-                <label>Geburtsdatum:</label><br>
-                <label>E-Mail:</label><br>
-                <label>Passwort:</label><br>
-                <label>Passwort Wdh:</label><br>
-                <button type="button" onclick="register('hide')">Schließen</button>
-            </div>
-            <div class="inputdaten">
-                <form name="registerForm" id="registerForm">
-                    <input name="vorname" id="vorname" size="14" required /><br>
-                    <input name="nachname" id="nachname" size="14" required /><br>
-                    <div class="geschlecht">
-                        <div>
-                            <label>M</label>
-                            <input style="margin-left: 0" type="radio" id="maennlich" name="maennlich" onclick="changeGeschlecht('m')"/>
-                        </div>
-                        <div>
-                            <label>W</label>
-                            <input style="margin-left: 0" type="radio" id="weiblich" name="weiblich" onclick="changeGeschlecht('w')"/>
-                        </div>
-                        <div>
-                            <label>D</label>
-                            <input style="margin-left: 0" type="radio" id="divers" name="divers" onclick="changeGeschlecht('d')"/>
-                        </div>
+
+
+
+<div class="popup" id="popuplogin">
+    <div class="popupinput">
+        <div class="inputdaten">
+            <label>E-Mail:</label><br>
+            <label>Passwort:</label><br>
+            <button type="submit" onclick="register('show')">Registrieren</button>
+        </div>
+        <div class="inputdaten">
+            <form name="loginForm" id="loginForm">
+                <input name="loginemail" id="loginemail" size="14" required />
+                <input name="loginpw" id="loginpw" type="password" size="14" required />
+                <button type="submit">Login</button>
+                <button type="button" onclick="login('hide')">Schließen</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div class="popup" id="popuperror" style="z-index: 1001">
+    <label id="errornachricht"></label><br>
+    <button onclick="schliessen()">OK</button>
+</div>
+
+<div class="popup" id="popupregister">
+    <div class="popupinput">
+        <div class="inputdaten">
+            <label>Vorname:</label><br>
+            <label>Nachname:</label><br>
+            <label>Geschlecht:</label><br>
+            <label>Straße:</label><br>
+            <label>Hausnummer:</label><br>
+            <label>PLZ:</label><br>
+            <label>Ort:</label><br>
+            <label>Land:</label><br>
+            <label>Geburtsdatum:</label><br>
+            <label>E-Mail:</label><br>
+            <label>Passwort:</label><br>
+            <label>Passwort Wdh:</label><br>
+            <button type="button" onclick="register('hide')">Schließen</button>
+        </div>
+        <div class="inputdaten">
+            <form name="registerForm" id="registerForm">
+                <input name="vorname" id="vorname" size="14" required /><br>
+                <input name="nachname" id="nachname" size="14" required /><br>
+                <div class="geschlecht">
+                    <div>
+                        <label>M</label>
+                        <input style="margin-left: 0" type="radio" id="maennlich" name="maennlich" onclick="changeGeschlecht('m')"/>
                     </div>
-                    <input name="straße" id="straße" size="14" required />
-                    <input name="hausnr" id="hausnr" size="14" required />
-                    <input name="plz" id="plz" size="14" required />
-                    <input name="ort" id="ort" size="14" required />
-                    <input name="land" id="land" size="14" required />
-                    <input class="reginput" type="date" name="gebdate" id="gebdate" size="14" required />
-                    <input name="registeremail" id="registeremail" size="14" required />
-                    <input name="passwort" id="registerpw" type="password" size="14" required />
-                    <input name="passwortwdh" id="registerpwwdh" type="password" size="14" required />
-                    <button type="submit">Registrieren</button>
-                </form>
-            </div>
+                    <div>
+                        <label>W</label>
+                        <input style="margin-left: 0" type="radio" id="weiblich" name="weiblich" onclick="changeGeschlecht('w')"/>
+                    </div>
+                    <div>
+                        <label>D</label>
+                        <input style="margin-left: 0" type="radio" id="divers" name="divers" onclick="changeGeschlecht('d')"/>
+                    </div>
+                </div>
+                <input name="straße" id="straße" size="14" required />
+                <input name="hausnr" id="hausnr" size="14" required />
+                <input name="plz" id="plz" size="14" required />
+                <input name="ort" id="ort" size="14" required />
+                <input name="land" id="land" size="14" required />
+                <input class="reginput" type="date" name="gebdate" id="gebdate" size="14" required />
+                <input name="registeremail" id="registeremail" size="14" required />
+                <input name="passwort" id="registerpw" type="password" size="14" required />
+                <input name="passwortwdh" id="registerpwwdh" type="password" size="14" required />
+                <button type="submit">Registrieren</button>
+            </form>
         </div>
     </div>
+</div>
 
-    <div class="zimmer" id="zimmerBtn">
-        <div class="standard">
-            <div class="art">Standard</div>
-            <img class="standardzimmer bild" src="../img/Standard.png" alt="standard">
-            <p></p>
-            <button class="buchen weiterButton" onclick="zimmerWahl('Standard')">Buchen</button>
-            <button class="bewerten weiterButton" onclick="bewertung('show', 'Standard')" type="submit">Bewerten</button>
-        </div>
-        <div class="premium">
-            <div class="art">Premium</div>
-            <img class="premiumzimmer bild" src="../img/Premium.png" alt="premium">
-            <p></p>
-            <button class="buchen weiterButton" onclick="zimmerWahl('Premium')">Buchen</button>
-            <button class="bewerten weiterButton" onclick="bewertung('show', 'Premium')" type="submit">Bewerten</button>
-        </div>
-        <div class="luxus">
-            <div class="art">Luxus</div>
-            <img class="luxuszimmer bild" src="../img/Luxus.png" alt="luxus">
-            <p></p>
-            <button class="buchen weiterButton" onclick="zimmerWahl('Luxus')">Buchen</button>
-            <button class="bewerten weiterButton" onclick="bewertung('show', 'Luxus')" type="submit">Bewerten</button>
-        </div>
+<div class="zimmer" id="zimmerBtn">
+    <div class="standard">
+        <div class="art">Standard</div>
+        <img class="standardzimmer bild" src="../img/Standard.png" alt="standard">
+        <p></p>
+        <button class="buchen weiterButton" onclick="zimmerWahl('Standard')">Buchen</button>
+        <button class="bewerten weiterButton" onclick="bewertung('show', 'Standard')" type="submit">Bewerten</button>
     </div>
+    <div class="premium">
+        <div class="art">Premium</div>
+        <img class="premiumzimmer bild" src="../img/Premium.png" alt="premium">
+        <p></p>
+        <button class="buchen weiterButton" onclick="zimmerWahl('Premium')">Buchen</button>
+        <button class="bewerten weiterButton" onclick="bewertung('show', 'Premium')" type="submit">Bewerten</button>
+    </div>
+    <div class="luxus">
+        <div class="art">Luxus</div>
+        <img class="luxuszimmer bild" src="../img/Luxus.png" alt="luxus">
+        <p></p>
+        <button class="buchen weiterButton" onclick="zimmerWahl('Luxus')">Buchen</button>
+        <button class="bewerten weiterButton" onclick="bewertung('show', 'Luxus')" type="submit">Bewerten</button>
+    </div>
+</div>
 
-    <div class="bewertungen" id="bewertungPopup">
-        <label>Deine Erfahrungen:<br><br></label>
-        <span class="star-rating">
+<div class="bewertungen" id="bewertungPopup">
+    <label class="headerRez">Deine Erfahrungen:<br></label>
+    <span class="star-rating">
           <input type="radio" name="rating" value="1" onclick="sterne(1)"><i></i>
           <input type="radio" name="rating" value="2" onclick="sterne(2)"><i></i>
           <input type="radio" name="rating" value="3" onclick="sterne(3)"><i></i>
           <input type="radio" name="rating" value="4" onclick="sterne(4)"><i></i>
           <input type="radio" name="rating" value="5" onclick="sterne(5)"><i></i>
         </span>
-        <label style="color: white"><br>  Mixmax</label>
-        <textarea class="bewertungArea" maxlength="255" id="textarea"></textarea>
-        <br><br>
-        <button type="button" onclick="bewertung('hide', 'senden')" style="font-size: 20px; float: right">Abschicken</button>
-        <button type="button" onclick="bewertung('hide')" style="font-size: 20px; float: right; margin-right: 10px">Abbrechen</button>
-    </div>
+    <label style="color: white"><br>  Mixmax</label>
+    <textarea class="bewertungArea" maxlength="255" id="textarea"></textarea>
+    <br><br>
+    <button class="buttonBewerten" type="button" onclick="bewertung('hide', 'senden')" style="font-size: 20px; float: right">Abschicken</button>
+    <button class="buttonBewerten" type="button" onclick="bewertung('hide')" style="font-size: 20px; float: right; margin-right: 10px">Abbrechen</button>
+</div>
 
 </body>
 </html>

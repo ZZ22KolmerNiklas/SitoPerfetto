@@ -58,6 +58,18 @@ function rejectReview() {
     })
         .then(response => response.text())
         .catch(error => console.error("Fehler:", error));
+    // Element referenzieren
+    const container = document.querySelector(".review-box");
+
+    // Klassennamen oder direkte Styles anpassen, um die Animation zu starten
+    container.style.animation = "papierKnuellen 0.8s ease-in-out forwards";
+
+    // Nach der Animation den Container wiederherstellen
+    setTimeout(() => {
+        container.style.animation = ""; // Animation entfernen
+        container.style.transform = "scale(1, 1) rotate(0deg)"; // Zurücksetzen
+        container.style.opacity = "1"; // Sichtbar machen
+    }, 2000); // Zeit in Millisekunden: Dauer der Animation
 
     alert("Rezension abgelehnt!");
     getNaechsteBewertung();
@@ -166,7 +178,7 @@ window.onload = function(){
     getNaechsteBewertung();
 
     let i = 1
-    fetch("../../php/get_verwaltungTable1.php")
+    fetch("../../php/get_verwaltungTable.php")
         .then(response => response.json())
         .then(data => {
             const tableBody = document.querySelector("#dataTable tbody");
@@ -178,12 +190,21 @@ window.onload = function(){
                 const gesamtPreis = gesamtpreisErmitteln(startDate, endDate, row.preisProNacht);
 
                 const cell = document.createElement("td");
+                cell.classList.add("button-container");
 
                 const btn = document.createElement("button");
                 btn.id = row.buchungsnummer;
                 btn.innerText = `Bearbeiten`;
+                btn.style.backgroundColor = "#ff9800";
+                btn.style.color = "white";
+                btn.style.fontSize = "16px";
+                btn.style.width = "100px";
+                btn.style.height = "30px";
+                btn.style.lineHeight = "0px";
                 btn.addEventListener("click", function (){
                     document.getElementById('popupBearbeiten').style.display = "block";
+                    // Zahnrad anzeigen
+                    document.getElementById('zahnrad').style.display = "block";
                     console.log(btn.id);
                     sessionStorage.setItem("buchungsNr", btn.id);
                     let data = {
@@ -223,13 +244,19 @@ window.onload = function(){
                 cell.appendChild(btn);
 
                 const cellR = document.createElement("td");
+                cellR.classList.add("button-container");
 
                 const btnR = document.createElement("button");
                 btnR.id = row.buchungsnummer;
                 btnR.innerText = `Erstellen`;
+                btnR.style.backgroundColor = "#ff9800";
+                btnR.style.color = "white";
+                btnR.style.fontSize = "16px";
+                btnR.style.width = "100px";
+                btnR.style.height = "30px";
+                btnR.style.lineHeight = "0px";
                 btnR.addEventListener("click", function (){
                     generateInvoice(btnR.id);
-                    console.log(btnR.id);
                 });
 
                 cellR.appendChild(btnR);
@@ -370,7 +397,7 @@ document.getElementById("preisVerwaltenForm").addEventListener("submit", async f
     })
         .then(response => response.text())
         .catch(error => console.error("Fehler:", error));
-    alert("Preise wurden erfolgreich aktualisiert!");
+    starteGelddusche();
     preisVerwalten('hide');
 });
 
@@ -401,21 +428,21 @@ async function generateInvoice(buchungsNr) {
         })
             .then(response => response.json())
             .then(data => {
-                    console.log(data);
-                    const startDate = new Date(data.von);
-                    const endDate = new Date(data.bis);
-                    const diffInMs = endDate - startDate;
-                    const diffInDays = diffInMs / (1000 * 60 * 60 * 24);
-                    const rechnungsNr = Number(data.rechnungsnr) + 1;
-                    doc.text("FUNREST Hotel", 10, 10);
-                    doc.text("Funstraße 1, 12345 Berlin", 10, 20);
-                    doc.text("RechnungNr: " + rechnungsNr, 10, 40);
-                    doc.text("BuchungsNr: " + buchungsNr, 10, 50)
-                    doc.text("Von: " + startDate.toLocaleDateString(), 10, 60);
-                    doc.text("Bis: " + endDate.toLocaleDateString(), 10, 70);
-                    doc.text("Zeitraum: " + diffInDays + " Nächte", 10, 80);
-                    doc.text("Zimmerart: " + data.zimmerart, 10, 90);
-                    doc.text("Preis: " + gesamtpreisErmitteln(startDate, endDate, data.preisProNacht) + "€", 10, 100);
+                console.log(data);
+                const startDate = new Date(data.von);
+                const endDate = new Date(data.bis);
+                const diffInMs = endDate - startDate;
+                const diffInDays = diffInMs / (1000 * 60 * 60 * 24);
+                const rechnungsNr = Number(data.rechnungsnr) + 1;
+                doc.text("FUNREST Hotel", 10, 10);
+                doc.text("Funstraße 1, 12345 Berlin", 10, 20);
+                doc.text("RechnungNr: " + rechnungsNr, 10, 40);
+                doc.text("BuchungsNr: " + buchungsNr, 10, 50)
+                doc.text("Von: " + startDate.toLocaleDateString(), 10, 60);
+                doc.text("Bis: " + endDate.toLocaleDateString(), 10, 70);
+                doc.text("Zeitraum: " + diffInDays + " Nächte", 10, 80);
+                doc.text("Zimmerart: " + data.zimmerart, 10, 90);
+                doc.text("Preis: " + gesamtpreisErmitteln(startDate, endDate, data.preisProNacht) + "€", 10, 100);
 
             });
     } catch (error) {
@@ -472,6 +499,7 @@ function gesamtpreisErmitteln(startDate, endDate, preisProNacht){
  */
 function abbrechen(){
     document.getElementById('popupBearbeiten').style.display = "none";
+    document.getElementById('zahnrad').style.display = "none";
 }
 
 /**
@@ -529,9 +557,39 @@ document.getElementById("bearbeitungForm").addEventListener("submit", async func
     })
         .then(response => {
             abbrechen();
+            alert("Buchung wurde erfolgreich aktualisiert!");
             window.onload();
         })
         .catch(error => {
             console.error("Fehler:", error);
         });
 });
+
+function starteGelddusche() {
+    const container = document.getElementById("geldAnimation"); // Container für Geldanimation
+    const anzahlGeld = 100; // Anzahl der Geldemojis
+    const emojis = ["💸", "💵", "💶", "💴"]; // Unterschiedliche Geldsymbole
+
+    // Kassensound abspielen (extern)
+    const sound = document.getElementById("kassenSound");
+    sound.currentTime = 0; // Startet von vorne
+    sound.play(); // Spielt den Sound ab
+
+    for (let i = 0; i < anzahlGeld; i++) {
+        // Geld-Emoji erzeugen
+        const geld = document.createElement("div");
+        geld.classList.add("geldEmoji");
+        geld.innerText = emojis[Math.floor(Math.random() * emojis.length)]; // Zufälliges Emoji
+
+        // Zufällige Startposition und Größe bestimmen
+        geld.style.left = Math.random() * 100 + "vw"; // Zufällige horizontale Position
+        geld.style.animationDelay = Math.random() * 2 + "s"; // Zufällige Verzögerung
+        geld.style.fontSize = Math.random() * (50 - 20) + 20 + "px"; // Zufällige Größe
+
+        // Emoji zum Container hinzufügen
+        container.appendChild(geld);
+
+        // Nach der Animation entfernen
+        geld.addEventListener("animationend", () => geld.remove());
+    }
+}

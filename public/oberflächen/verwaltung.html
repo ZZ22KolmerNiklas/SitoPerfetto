@@ -36,12 +36,12 @@
         </thead>
         <tbody>
         <tbody>
-    </tbody>
+        </tbody>
     </table>
 </div>
 
 <div class="review-container">
-    <label>Neue Rezension:</label>
+    <label class="rez">Neue Rezension:</label>
     <div class="review-box">
         <label id="stern1">⭐</label>
         <label id="stern2">⭐</label>
@@ -57,8 +57,6 @@
         <button class="verwaltungBtn" onclick="preisVerwalten('show')">Preis verwalten</button>
     </div>
 </div>
-
-
 
 <div class="popup" id="popupBearbeiten">
     <div class="popupinput">
@@ -97,6 +95,10 @@
         </div>
     </div>
 </div>
+<div id="zahnrad" class="zahnrad" style="display: none;">
+    ⚙️
+</div>
+
 <div class="preisVerwaltung" id="preisVerwaltungPopup">
     <b class="zimmerPreis">Zimmerpreis<br><br></b>
     <form id="preisVerwaltenForm">
@@ -109,5 +111,9 @@
         <button class="preisBtn" type="button" onclick="preisVerwalten('hide')" style="font-size: 20px">Abbrechen</button>
     </form>
 </div>
+<div id="geldAnimation"></div>
+<audio id="kassenSound">
+    <source src="../sound/cash.mp3" type="audio/mpeg">
+</audio>
 </body>
 </html>
