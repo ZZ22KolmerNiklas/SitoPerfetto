@@ -48,23 +48,23 @@ function kommentareAnzeigen(){
     })
         .then(response => response.json())
         .then(data => {
-                data.forEach(row => {
-                    switch (row.sterne) {
-                        case 5:
-                            document.getElementById("kommentarArea").value += "⭐";
-                        case 4:
-                            document.getElementById("kommentarArea").value += "⭐";
-                        case 3:
-                            document.getElementById("kommentarArea").value += "⭐";
-                        case 2:
-                            document.getElementById("kommentarArea").value += "⭐";
-                        case 1:
-                            document.getElementById("kommentarArea").value += "⭐";
-                            break;
-                    }
+            data.forEach(row => {
+                switch (row.sterne) {
+                    case 5:
+                        document.getElementById("kommentarArea").value += "⭐";
+                    case 4:
+                        document.getElementById("kommentarArea").value += "⭐";
+                    case 3:
+                        document.getElementById("kommentarArea").value += "⭐";
+                    case 2:
+                        document.getElementById("kommentarArea").value += "⭐";
+                    case 1:
+                        document.getElementById("kommentarArea").value += "⭐";
+                        break;
+                }
 
-                    document.getElementById("kommentarArea").value += ('\n' + row.bewertung + '\n\n');
-                });
+                document.getElementById("kommentarArea").value += ('\n' + row.bewertung + '\n\n');
+            });
 
         })
         .catch(error => console.error("Fehler:", error));
@@ -186,7 +186,6 @@ document.getElementById("buchenForm").addEventListener("submit", async function 
         vonDatum: document.getElementById("vonDatum").value,
         bisDatum: document.getElementById("bisDatum").value
     }
-    changePopup('show');
     fetch("../../php/buchen.php", {
         method: "POST",
         headers: {
@@ -198,11 +197,18 @@ document.getElementById("buchenForm").addEventListener("submit", async function 
         .then(result => {
             console.log(result);
             if(document.getElementById("anzZimmer").innerText !== '0'){
-                document.getElementById("buchungText").innerText = 'Buchung erfolgeich. Die Rechnung wird an Ihre E-mail geschickt.';
-                console.log('ja');
+                alert("Buchung erfolgeich. Die Rechnung wird an Ihre E-mail geschickt.")
+                // Konfetti starten
+                confetti({
+                    particleCount: 2000, // Anzahl der Konfetti-Teilchen
+                    spread: 500,         // Breite der Streuung
+                    origin: {
+                        x: 0.5, // Horizontale Startposition (zentriert)
+                        y: 0.5  // Vertikale Startposition (Mitte des Formulars)
+                    }
+                });
             }else{
-                document.getElementById("buchungText").innerText = 'Kein freies Zimmer gefunden. Bitte anderen Zeitraum wählen.';
-                console.log('nein');
+                alert("Kein freies Zimmer gefunden. Bitte anderen Zeitraum wählen.")
             }
         })
         .catch(error => {
@@ -223,7 +229,7 @@ document.getElementById("buchenForm").addEventListener("submit", async function 
  * Schränkt die Eingabefelder so ein, dass kein Datum vor den angegebenen
  *   Minimumwerten ("heute" bzw. "morgen") ausgewählt werden kann.
  */
- 
+
 document.addEventListener("DOMContentLoaded", () => {
     const vonDatumInput = document.getElementById("vonDatum");
     const bisDatumInput = document.getElementById("bisDatum");
