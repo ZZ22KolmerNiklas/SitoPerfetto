@@ -275,7 +275,6 @@ document.getElementById("registerForm").addEventListener("submit", async functio
     }
 });
 
-/**
  * Verarbeitet die Anzeige, das Verbergen oder die Übermittlung von Bewertungsdaten.
  *
  * @param {string} action - Bestimmt, ob das Bewertungs-Popup angezeigt ("show") oder ausgeblendet ("hide") wird.
