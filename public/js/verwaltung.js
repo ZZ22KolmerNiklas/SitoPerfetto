@@ -140,7 +140,7 @@ function getNaechsteBewertung(){
  *   Diese Funktion wird initial aufgerufen (vermutlich, um Bewertungen abzurufen oder anzuzeigen).
  *
  * **Abrufen und Anzeige von Verwaltungsdaten**:
- *   Ein `fetch`-Request ruft Daten aus der Datei `get_verwaltungTable1.php` ab und wandelt sie in JSON um.
+ *   Ein `fetch`-Request ruft Daten aus der Datei `get_verwaltungTable.php` ab und wandelt sie in JSON um.
  *   Die Daten werden im Tabellen-Body (`<tbody>`) der Tabelle mit der ID `dataTable` eingefügt.
  *   Für jede Zeile in den Daten:
  *     Start- und Enddatum der Buchung werden in `Date`-Objekte umgewandelt.
