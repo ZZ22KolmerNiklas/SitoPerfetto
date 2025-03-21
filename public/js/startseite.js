@@ -45,13 +45,6 @@ function login(action){
  * @return {void} Gibt keinen Wert zurück.
  */
 function abmelden() {
-    // Hand anzeigen
-    const hand = document.getElementById("hand");
-    hand.style.display = "inline-block";
-    // Optional: Nach einer Verzögerung Hand ausblenden (z. B. nach 3 Sekunden)
-    setTimeout(() => {
-        hand.style.display = "none";
-    }, 3000); // Zeigt die Hand 3 Sekunden lang
     document.getElementById('login').style.display = "block";
     document.getElementById('name').style.display = "none";
     document.getElementById('verwalten').style.display = "none";
@@ -82,7 +75,8 @@ function zimmerWahl(zimmer){
 
         window.location.href = "../oberflächen/zimmerBuchen.html";
     }else{
-        alert("Anmeldung erforderlich.");
+        document.getElementById("errornachricht").innerText = 'Bitte anmelden.';
+        document.getElementById("popuperror").style.display = "block";
     }
 
 }
@@ -102,20 +96,6 @@ function register(action){
         popupLog.style.display = "none"
     } else if (action === "hide") {
         popupReg.style.display = "none";
-        document.getElementById('registeremail').value = '';
-        document.getElementById('registerpw').value = '';
-        document.getElementById('registerpwwdh').value = '';
-        document.getElementById('vorname').value = '';
-        document.getElementById('nachname').value = '';
-        document.getElementById('maennlich').checked = false;
-        document.getElementById('weiblich').checked = false;
-        document.getElementById('divers').checked = false;
-        document.getElementById('straße').value = '';
-        document.getElementById('hausnr').value = '';
-        document.getElementById('plz').value = '';
-        document.getElementById('ort').value = '';
-        document.getElementById('land').value = '';
-        document.getElementById('gebdate').value = '';
     }
 }
 
@@ -199,7 +179,8 @@ document.getElementById("loginForm").addEventListener("submit", async function (
                     document.getElementById('verwalten').style.display = "block";
                 }
             }else{
-                alert(result.message);
+                document.getElementById('errornachricht').innerText = result.message;
+                document.getElementById('popuperror').style.display = "block";
             }
         });
 });
@@ -244,7 +225,8 @@ document.getElementById("registerForm").addEventListener("submit", async functio
     }
 
     if(passwort !== passwortWdh){
-        alert("Passwörter stimmen nicht überein!")
+        document.getElementById('errornachricht').innerText = 'Passwörter stimmen nicht überein!';
+        document.getElementById('popuperror').style.display = "block";
     }else{
         // Daten als JSON-Objekt vorbereiten
         let data = {
@@ -275,6 +257,16 @@ document.getElementById("registerForm").addEventListener("submit", async functio
     }
 });
 
+/**
+ * Blendet das Element 'popuperror' aus.
+ *
+ * @return {void} Gibt keinen Wert zurück.
+ */
+function schliessen() {
+    document.getElementById('popuperror').style.display = "none";
+}
+
+/**
  * Verarbeitet die Anzeige, das Verbergen oder die Übermittlung von Bewertungsdaten.
  *
  * @param {string} action - Bestimmt, ob das Bewertungs-Popup angezeigt ("show") oder ausgeblendet ("hide") wird.
@@ -284,26 +276,25 @@ document.getElementById("registerForm").addEventListener("submit", async functio
 function bewertung(action, senden){
     if(senden === "senden"){
         if(stern === 0){
-            alert("Wähle zwischen einem und fünf Sternen.");
-            return;
-        }else{
-            let data = {
-                zimmer: bewertungart,
-                benutzer: sessionStorage.getItem("user_id"),
-                bewertung: document.getElementById("textarea").value,
-                sterne: stern}
-
-            fetch("../../php/bewertung.php", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify(data) // JSON-Daten senden
-            })
-                .then(response => response.text())
-                .catch(error => console.error("Fehler:", error));
-            console.log(data);
+            document.getElementById("errornachricht").innerText = 'Wähle zwischen einem und fünf Sternen.';
+            document.getElementById("popuperror").style.display = "block";
         }
+        let data = {
+            zimmer: bewertungart,
+            benutzer: sessionStorage.getItem("user_id"),
+            bewertung: document.getElementById("textarea").value,
+            sterne: stern}
+
+        fetch("../../php/bewertung.php", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(data) // JSON-Daten senden
+        })
+            .then(response => response.text())
+            .catch(error => console.error("Fehler:", error));
+        console.log(data);
     } else {
         bewertungart = senden;
     }
@@ -314,11 +305,10 @@ function bewertung(action, senden){
             bewertung.style.display = "block";
         } else if (action === 'hide') {
             bewertung.style.display = "none";
-            document.getElementsByName("rating").forEach(element => element.checked = false)
-            document.getElementById("textarea").value = '';
         }
     } else {
-        alert("Anmeldung erforderlich.");
+        document.getElementById("errornachricht").innerText = 'Bitte anmelden.';
+        document.getElementById("popuperror").style.display = "block";
     }
 }
 
