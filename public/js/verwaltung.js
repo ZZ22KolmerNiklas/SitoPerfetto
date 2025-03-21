@@ -71,8 +71,6 @@ function rejectReview() {
         container.style.opacity = "1"; // Sichtbar machen
     }, 2000); // Zeit in Millisekunden: Dauer der Animation
 
-
-
     alert("Rezension abgelehnt!");
     getNaechsteBewertung();
 }
@@ -595,4 +593,3 @@ function starteGelddusche() {
         geld.addEventListener("animationend", () => geld.remove());
     }
 }
-

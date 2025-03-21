@@ -10,7 +10,7 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-}
+
 h1{
     border: 2px solid black;
     border-radius: 8px;
@@ -107,8 +107,7 @@ tbody tr:nth-child(even) {
 tbody tr:nth-child(odd) {
     background-color: #ffebcc; /* Noch hellerer Orangeton */
 }
-
-
+  
 .verwaltungBtn{
     cursor: pointer;
     margin-left: 60%;
@@ -138,8 +137,6 @@ tbody tr:nth-child(odd) {
     background-color: #f9f9f9;
     transform-origin: center; /* Transformationsursprung ist die Mitte */
     transition: all 0.3s ease-in-out; /* Transition für sanfte Übergänge */
-
-}
 .button-container {
     margin-top: 1%;
 }
@@ -159,7 +156,6 @@ td.button-container button {
     margin: auto;
     display: inline-block; /* Wichtig für die Flexbox-Ausrichtung */
 }
-
 .preisVerwaltung{
     display: none;
     position: fixed;
@@ -367,6 +363,4 @@ td.button-container button {
         transform: scale(0, 0) rotate(360deg); /* Komplett zusammengeknüllt */
         opacity: 0; /* Unsichtbar */
     }
-}
-
-
+  }
