@@ -1,8 +1,15 @@
+body {
+    font-family: Arial, sans-serif;
+    background: linear-gradient(to bottom, #a2cffe, #076fa3);
+    min-height: 100vh;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+
 .header{
     display: flex;
-    justify-content: center;  /* Zentriert horizontal */
-    align-items: center;  /* Zentriert vertikal */
-}
+    justify-content: center;
+    align-items: center;
 h1{
     border: 2px solid black;
     border-radius: 8px;
@@ -56,6 +63,8 @@ h1{
     font-size: 20px;
     padding: 0;
     word-wrap:break-word;
+    text-align: center;
+    border-radius: 10px;
 }
 
 .grid{
@@ -70,26 +79,28 @@ h1{
     width: 60%;
     margin-left: 20%;
     border-radius: 8px;
+    border: 2px solid black;
 }
 
 .art{
-    border: 1px solid black;
+    border: 2px solid black;
     border-radius: 8px;
     margin: auto;
     font-family: Arial, serif;
     padding: 5px;
     font-size: 20px;
     width: 59%;
-    background-color: gray;
+    background-color: #ffc58a;
 }
 
 .infos{
-    background-color: gray;
+    background-color: #ffc58a;
     border-radius: 8px;
     padding: 10px;
     margin:  auto 20px auto 10px;
     font-family: Arial, serif;
     font-size: 25px;
+    border: 2px solid black;
 }
 
 .checkContainer {
@@ -149,6 +160,10 @@ h1{
     width: 60%;
     max-height: 6000px;
     min-height: 500px;
+    pointer-events: none;
+    resize: none;
+    background-color: #f9f9f9;
+    border: 2px solid black;
 }
 
 .popup{
