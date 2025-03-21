@@ -1,11 +1,3 @@
-body {
-    font-family: Arial, sans-serif;
-    background: linear-gradient(to bottom, #a2cffe, #076fa3);
-    min-height: 100vh;
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-}
-
 .header{
     display: flex;
     justify-content: center;
@@ -78,8 +70,6 @@ body {
     right: 0.5%;
     top: 1%;
     display: none;
-    text-align: center;
-    border-radius: 10px;
 }
 
 .verwalten{
@@ -159,35 +149,24 @@ p{
     text-align: center;
 }
 
-.buchen, .bewerten{
+.buchen{
+    font-family: Arial, serif;
+    font-size: large;
+    margin: 0;
+}
+
+.bewerten{
     font-family: Arial, serif;
     font-size: large;
     margin: 0;
 }
 
 .art{
-    font-family: Playfair Display, serif;
-    font-size: 85px;
-    color: orange; /* Schriftfarbe Orange */
-    text-shadow:
-            -1px -1px 0 black,
-            1px -1px 0 black,
-            -1px 1px 0 black,
-            1px 1px 0 black;
+    font-family: Arial, serif;
+    font-size: 80px;
 }
 
-.headerRez{
-    font-family: Playfair Display, serif;
-    font-size: 55px;
-    color: orange; /* Schriftfarbe Orange */
-    text-shadow:
-            -1px -1px 0 black,
-            1px -1px 0 black,
-            -1px 1px 0 black,
-            1px 1px 0 black;
-}
-
-.weiterButton, .buttonBewerten {
+.weiterButton {
     width: 35%;
     height: 10%;
     background: #ff9800;
@@ -201,11 +180,11 @@ p{
     transition: 0.2s;
 }
 
-.weiterButton:hover, .buttonBewerten:hover {
+.weiterButton:hover {
     opacity: 0.8;
 }
 
-.weiterButton:active, .buttonBewerten:active {
+.weiterButton:active {
     box-shadow: 0 2px #c77700;
     transform: translateY(3px);
 }
@@ -259,7 +238,6 @@ p{
     font-size: 25px;
     width: 50%;
     height: 50%;
-    border: 2px solid black;
 }
 
 .bewertungArea{
@@ -322,34 +300,3 @@ p{
         width: 100%;
     }
 }
-
-/* Styling der Hand */
-.hand {
-    position: absolute;
-    right: 2.5%;
-    display: inline-block; /* Neben dem Abmelden-Button positionieren */
-    font-size: 50px; /* Größe der Hand */
-    animation: winken 1.5s ease-in-out infinite; /* Winken-Animation */
-    transform-origin: bottom center; /* Drehpunkt der Animation */
-}
-
-
-/* Winken-Animation */
-@keyframes winken {
-    0% {
-        transform: rotate(0deg);
-    }
-    25% {
-        transform: rotate(20deg);
-    }
-    50% {
-        transform: rotate(0deg);
-    }
-    75% {
-        transform: rotate(-20deg);
-    }
-    100% {
-        transform: rotate(0deg);
-    }
-}
-

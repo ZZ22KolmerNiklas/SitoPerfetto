@@ -7,7 +7,7 @@ CREATE TABLE Zimmer(
 	ZimmerNr int PRIMARY KEY,
 	Art varchar(255),
 	anzBett int,
-	PreisProNacht double
+	PreisProNacht varchar(255)
 );
 
 CREATE TABLE Rechnung(
@@ -85,29 +85,17 @@ VALUES (2, 2, 'Max', 'Mustermann', 'm', '2000-01-01', 'muster@mail.com', 0, 0);
 
 
 INSERT INTO Zimmer (ZimmerNr, art, anzbett, PreisProNacht)
-VALUES (101, 'Standard', 2, '70');
+VALUES (101, 'standard', 2, '70');
 INSERT INTO Zimmer (ZimmerNr, art, anzbett, PreisProNacht)
-VALUES (201, 'Premium', 2, '100');
+VALUES (201, 'standard', 2, '100');
 INSERT INTO Zimmer (ZimmerNr, art, anzbett, PreisProNacht)
-VALUES (301, 'Luxus', 2, '130');
+VALUES (301, 'standard', 2, '130');
 INSERT INTO Zimmer (ZimmerNr, art, anzbett, PreisProNacht)
-VALUES (102, 'Standard', 1, '50');
+VALUES (102, 'standard', 1, '50');
 INSERT INTO Zimmer (ZimmerNr, art, anzbett, PreisProNacht)
-VALUES (202, 'Premium', 1, '70');
+VALUES (202, 'standard', 1, '70');
 INSERT INTO Zimmer (ZimmerNr, art, anzbett, PreisProNacht)
-VALUES (302, 'Luxus', 1, '90');
-INSERT INTO Zimmer (ZimmerNr, art, anzbett, PreisProNacht)
-VALUES (103, 'Standard', 2, '70');
-INSERT INTO Zimmer (ZimmerNr, art, anzbett, PreisProNacht)
-VALUES (203, 'Premium', 2, '100');
-INSERT INTO Zimmer (ZimmerNr, art, anzbett, PreisProNacht)
-VALUES (303, 'Luxus', 2, '130');
-INSERT INTO Zimmer (ZimmerNr, art, anzbett, PreisProNacht)
-VALUES (104, 'Standard', 1, '50');
-INSERT INTO Zimmer (ZimmerNr, art, anzbett, PreisProNacht)
-VALUES (204, 'Premium', 1, '70');
-INSERT INTO Zimmer (ZimmerNr, art, anzbett, PreisProNacht)
-VALUES (304, 'Luxus', 1, '90');
+VALUES (302, 'standard', 1, '90');
 
 INSERT INTO Buchung (zimmer, benutzer, vondatum, bisdatum)
 VALUES (101, 2, '2024-12-24', '2024-12-26');
