@@ -4,61 +4,61 @@ CREATE DATABASE SitoPerfetto;
 USE SitoPerfetto;
 
 CREATE TABLE Zimmer(
-	ZimmerNr int PRIMARY KEY,
-	Art varchar(255),
-	anzBett int,
-	PreisProNacht varchar(255)
+                       ZimmerNr int PRIMARY KEY,
+                       Art varchar(255),
+                       anzBett int,
+                       PreisProNacht double
 );
 
 CREATE TABLE Rechnung(
-	RechnungsNr int AUTO_INCREMENT PRIMARY KEY,
-	Buchung int,
-	Dateiname varchar(255),
-	Dateipfad varchar(255)
+                         RechnungsNr int AUTO_INCREMENT PRIMARY KEY,
+                         Buchung int,
+                         Dateiname varchar(255),
+                         Dateipfad varchar(255)
 );
 
 CREATE TABLE Buchung(
-	BuchungsNr int AUTO_INCREMENT PRIMARY KEY,
-	Zimmer int,
-	Benutzer int,
-	vonDatum date,
-	bisDatum date
+                        BuchungsNr int AUTO_INCREMENT PRIMARY KEY,
+                        Zimmer int,
+                        Benutzer int,
+                        vonDatum date,
+                        bisDatum date
 );
 
 CREATE TABLE Bewertung(
-	BewertungID int AUTO_INCREMENT PRIMARY KEY,
-	Benutzer int,
-	Zimmer varchar(20),
-	Bewertung varchar(255),
-	Sterne int,
-	ueberprueft boolean
+                          BewertungID int AUTO_INCREMENT PRIMARY KEY,
+                          Benutzer int,
+                          Zimmer varchar(20),
+                          Bewertung varchar(255),
+                          Sterne int,
+                          ueberprueft boolean
 );
 
 CREATE TABLE Benutzer(
-	BenutzerID int AUTO_INCREMENT PRIMARY KEY,
-	Passwort int,
-	Adresse int,
-	Vorname varchar(255),
-	Nachname varchar(255),
-	Geschlecht char,
-	Geburtsdatum date,
-	EMail varchar(255),
-	Stammkunde boolean,
-	Mitarbeiter boolean
+                         BenutzerID int AUTO_INCREMENT PRIMARY KEY,
+                         Passwort int,
+                         Adresse int,
+                         Vorname varchar(255),
+                         Nachname varchar(255),
+                         Geschlecht char,
+                         Geburtsdatum date,
+                         EMail varchar(255),
+                         Stammkunde boolean,
+                         Mitarbeiter boolean
 );
 
 CREATE TABLE Adresse(
-	AdresseID int AUTO_INCREMENT PRIMARY KEY,
-	Straße varchar(255),
-	Hausnummer varchar(5),
-	Plz varchar(5),
-	Ort varchar(255),
-	Land varchar(255)
+                        AdresseID int AUTO_INCREMENT PRIMARY KEY,
+                        Straße varchar(255),
+                        Hausnummer varchar(5),
+                        Plz varchar(5),
+                        Ort varchar(255),
+                        Land varchar(255)
 );
 
 CREATE TABLE Passwort(
-	PasswortID int AUTO_INCREMENT PRIMARY KEY,
-	Passwort varchar(255)
+                         PasswortID int AUTO_INCREMENT PRIMARY KEY,
+                         Passwort varchar(255)
 );
 
 ALTER TABLE Rechnung ADD FOREIGN KEY (Buchung) REFERENCES Buchung(BuchungsNr);
@@ -85,17 +85,29 @@ VALUES (2, 2, 'Max', 'Mustermann', 'm', '2000-01-01', 'muster@mail.com', 0, 0);
 
 
 INSERT INTO Zimmer (ZimmerNr, art, anzbett, PreisProNacht)
-VALUES (101, 'standard', 2, '70');
+VALUES (101, 'Standard', 2, '70');
 INSERT INTO Zimmer (ZimmerNr, art, anzbett, PreisProNacht)
-VALUES (201, 'standard', 2, '100');
+VALUES (201, 'Premium', 2, '100');
 INSERT INTO Zimmer (ZimmerNr, art, anzbett, PreisProNacht)
-VALUES (301, 'standard', 2, '130');
+VALUES (301, 'Luxus', 2, '130');
 INSERT INTO Zimmer (ZimmerNr, art, anzbett, PreisProNacht)
-VALUES (102, 'standard', 1, '50');
+VALUES (102, 'Standard', 1, '50');
 INSERT INTO Zimmer (ZimmerNr, art, anzbett, PreisProNacht)
-VALUES (202, 'standard', 1, '70');
+VALUES (202, 'Premium', 1, '70');
 INSERT INTO Zimmer (ZimmerNr, art, anzbett, PreisProNacht)
-VALUES (302, 'standard', 1, '90');
+VALUES (302, 'Luxus', 1, '90');
+INSERT INTO Zimmer (ZimmerNr, art, anzbett, PreisProNacht)
+VALUES (103, 'Standard', 2, '70');
+INSERT INTO Zimmer (ZimmerNr, art, anzbett, PreisProNacht)
+VALUES (203, 'Premium', 2, '100');
+INSERT INTO Zimmer (ZimmerNr, art, anzbett, PreisProNacht)
+VALUES (303, 'Luxus', 2, '130');
+INSERT INTO Zimmer (ZimmerNr, art, anzbett, PreisProNacht)
+VALUES (104, 'Standard', 1, '50');
+INSERT INTO Zimmer (ZimmerNr, art, anzbett, PreisProNacht)
+VALUES (204, 'Premium', 1, '70');
+INSERT INTO Zimmer (ZimmerNr, art, anzbett, PreisProNacht)
+VALUES (304, 'Luxus', 1, '90');
 
 INSERT INTO Buchung (zimmer, benutzer, vondatum, bisdatum)
 VALUES (101, 2, '2024-12-24', '2024-12-26');
